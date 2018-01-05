@@ -167,6 +167,7 @@ class AjaxNodeTreeController extends AbstractAjaxController
     {
         $model = new TreeNodeModel($node, $this->getContainer());
         $nodeArray = $model->toArray();
+        $nodeArray['children'] = [];
 
         /*
          * Display children only if node is note a stack and
