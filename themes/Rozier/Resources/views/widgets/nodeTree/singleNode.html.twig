@@ -168,9 +168,11 @@ type|lower,
                             </p>
                             <p><a class="publish-all-node" title="{% trans %}publish_node_offspring{% endtrans %}" href="{{ path('nodesPublishAllAction', {nodeId : node.id}) }}"><i class="uk-icon-rz-published-mini"></i> {% trans %}publish_node_offspring{% endtrans %}</a></p>
                         {% endif %}
-                        <p>
-                            <a data-action="duplicate" class="duplicate-node" title="{% trans %}node.duplicate{% endtrans %}" href="#"><i class="uk-icon-rz-duplicate"></i> {% trans %}node.duplicate{% endtrans %}</a>
-                        </p>
+                        {% if not node.Locked %}
+                            <p>
+                                <a data-action="duplicate" class="duplicate-node" title="{% trans %}node.duplicate{% endtrans %}" href="#"><i class="uk-icon-rz-duplicate"></i> {% trans %}node.duplicate{% endtrans %}</a>
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             </nav>

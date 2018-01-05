@@ -33,13 +33,20 @@ use RZ\Roadiz\Core\Entities\Document;
 use RZ\Roadiz\Core\Entities\NodesSources;
 use RZ\Roadiz\Core\Entities\Tag;
 use RZ\Roadiz\Utils\UrlGenerators\DocumentUrlGenerator;
+use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Translation\Translator;
 
 class TreeNodeModel extends NodeModel
 {
     public function toArray()
     {
+        /** @var Translator $trans */
+        $trans = $this->container->offsetGet('translator');
         /** @var NodesSources $source */
         $source = $this->node->getNodeSources()->first();
+        /** @var UrlGenerator $urlGenerator */
+        $urlGenerator = $this->container->offsetGet('urlGenerator');
+
         $nodeArray = [
             'id' => $this->node->getId(),
             'type' => [
@@ -62,8 +69,42 @@ class TreeNodeModel extends NodeModel
                 'deleted' => $this->node->isDeleted(),
                 'archived' => $this->node->isArchived(),
                 'publishable' => $this->node->getNodeType()->isPublishable(),
+            ],
+            'actions' => [
+                [
+                    'icon'=> 'rz-plus',
+                    'url'=> $urlGenerator->generate('nodesAddChildPage', ['nodeId' => $this->node->getId()]),
+                    'label'=> $trans->trans("add.node.%name%.child", ['%name%' => $source->getTitle()]),
+                ],
+                [
+                    'icon'=> 'rz-pencil',
+                    'url'=> $urlGenerator->generate('nodesEditSourcePage', [
+                        'nodeId' => $this->node->getId(),
+                        'translationId' => $source->getTranslation()->getId(),
+                    ]),
+                    'label'=> $trans->trans("edit.node.%name%", ['%name%' => $source->getTitle()]),
+                ],
             ]
         ];
+
+        if ($this->container->offsetGet('securityAuthorizationChecker')->isGranted('ROLE_ACCESS_NODES_STATUS')) {
+            $nodeArray['actions'][] = [
+                'icon'=> 'rz-published-mini',
+                'url'=> $urlGenerator->generate('nodesPublishAllAction', [
+                    'nodeId' => $this->node->getId()
+                ]),
+                'label'=> $trans->trans("publish_node_offspring"),
+            ];
+        }
+
+        if ($this->container->offsetGet('securityAuthorizationChecker')->isGranted('ROLE_ACCESS_NODES_DELETE') &&
+            !$this->node->isLocked()) {
+            $nodeArray['actions'][] = [
+                'icon'=> 'rz-trash-o',
+                'url'=> $urlGenerator->generate('nodesDeletePage', ['nodeId' => $this->node->getId()]),
+                'label'=> $trans->trans("delete.node.%name%", ['%name%' => $source->getTitle()]),
+            ];
+        }
 
         if ($this->node->getNodeType()->isPublishable() && null !== $source->getPublishedAt()) {
             $nodeArray['published_at'] = $source->getPublishedAt()->format('c');
