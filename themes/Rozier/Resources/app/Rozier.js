@@ -323,7 +323,7 @@ export default class Rozier {
                             $currentNodeTree.replaceWith(data.nodeTree)
                             $currentNodeTree = $('#tree-container').find('.nodetree-widget')
                             $currentNodeTree.fadeIn()
-                            this.initNestables()
+                            // this.initNestables()
                             this.bindMainTrees()
                             this.resize()
                             this.lazyload.bindAjaxLink()
@@ -507,7 +507,7 @@ export default class Rozier {
                 })
             })
             .fail(data => {
-                console.err(data)
+                console.error(data)
             })
     }
 
@@ -587,7 +587,7 @@ export default class Rozier {
                 })
             })
             .fail(data => {
-                console.err(data)
+                console.error(data)
             })
     }
 
@@ -666,7 +666,7 @@ export default class Rozier {
                 })
             })
             .fail(data => {
-                console.err(data)
+                console.error(data)
             })
     }
 

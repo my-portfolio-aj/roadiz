@@ -139,7 +139,7 @@ export default class ChildrenNodesField {
                             $nodeTree.replaceWith(data.nodeTree)
 
                             $nodeTree = $tempContainer.find('.nodetree-widget')
-                            window.Rozier.initNestables()
+                            // window.Rozier.initNestables()
                             window.Rozier.bindMainTrees()
                             window.Rozier.lazyload.bindAjaxLink()
                             $nodeTree.fadeIn()

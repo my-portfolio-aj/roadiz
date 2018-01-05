@@ -39,19 +39,19 @@ import NodeTypeFieldsPosition from './components/node-type-fields/NodeTypeFields
 import NodeTypeFieldEdit from './components/node-type-fields/NodeTypeFieldEdit'
 import CustomFormFieldsPosition from './components/custom-form-fields/CustomFormFieldsPosition'
 import CustomFormFieldEdit from './components/custom-form-fields/CustomFormFieldEdit'
-import NodeTreeContextActions from './components/trees/NodeTreeContextActions'
+// import NodeTreeContextActions from './components/trees/NodeTreeContextActions'
 import Import from './components/import/Import'
 import NodeEditSource from './components/node/NodeEditSource'
 import InputLengthWatcher from './widgets/InputLengthWatcher'
 import ChildrenNodesField from './widgets/ChildrenNodesField'
 import GeotagField from './widgets/GeotagField'
 import MultiGeotagField from './widgets/MultiGeotagField'
-import StackNodeTree from './widgets/StackNodeTree'
+// import StackNodeTree from './widgets/StackNodeTree'
 import SaveButtons from './widgets/SaveButtons'
 import TagAutocomplete from './widgets/TagAutocomplete'
 import FolderAutocomplete from './widgets/FolderAutocomplete'
 import SettingsSaveButtons from './widgets/SettingsSaveButtons'
-import NodeTree from './widgets/NodeTree'
+// import NodeTree from './widgets/NodeTree'
 import NodeStatuses from './widgets/NodeStatuses'
 import YamlEditor from './widgets/YamlEditor'
 import MarkdownEditor from './widgets/MarkdownEditor'
@@ -271,7 +271,7 @@ export default class Lazyload {
         this.childrenNodesFields = new ChildrenNodesField()
         new GeotagField()
         new MultiGeotagField()
-        this.stackNodeTrees = new StackNodeTree()
+        // this.stackNodeTrees = new StackNodeTree()
 
         if (isMobile.any() === null) {
             new SaveButtons()
@@ -281,11 +281,11 @@ export default class Lazyload {
         new FolderAutocomplete()
         new NodeTypeFieldsPosition()
         new CustomFormFieldsPosition()
-        new NodeTreeContextActions()
+        // new NodeTreeContextActions()
         new SettingsSaveButtons()
         new NodeTypeFieldEdit()
         new NodeEditSource()
-        this.nodeTree = new NodeTree()
+        // this.nodeTree = new NodeTree()
         new CustomFormFieldEdit()
 
         /*
@@ -309,8 +309,8 @@ export default class Lazyload {
             TweenLite.to('.actions-menu', 0.5, {right: 0, delay: 0.4, ease: Expo.easeOut})
         }
 
-        window.Rozier.initNestables()
-        window.Rozier.bindMainTrees()
+        // window.Rozier.initNestables()
+        // window.Rozier.bindMainTrees()
         window.Rozier.nodeStatuses = new NodeStatuses()
 
         // Switch checkboxes

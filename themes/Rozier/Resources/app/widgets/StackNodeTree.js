@@ -205,8 +205,8 @@ export default class StackNodeTree {
                             $nodeTree.replaceWith(data.nodeTree)
                             $nodeTree = this.$page.find('.nodetree-widget')
 
-                            window.Rozier.initNestables()
-                            window.Rozier.bindMainTrees()
+                            // window.Rozier.initNestables()
+                            // window.Rozier.bindMainTrees()
                             window.Rozier.lazyload.bindAjaxLink()
                             $nodeTree.fadeIn()
                             window.Rozier.resize()
