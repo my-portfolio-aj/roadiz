@@ -22,29 +22,27 @@
   - be used in advertising or otherwise to promote the sale, use or other dealings
   - in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
   -
-  - @file NodeTree.vue
+  - @file NodeTreeContextualMenuComponent.vue
   - @author Adrien Scholaert <adrien@rezo-zero.com>
   -->
 
 <template>
-    <div>
-        <node-tree-list-component name="tree-list" :data="list" :is-child="false" @change="onChange" />
+    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown">
+        <div class="tree-contextualmenu-button uk-button uk-button-mini">
+            <i class="uk-icon-caret-down"></i>
+        </div>
     </div>
 </template>
 <script>
     export default {
-        name: 'node-tree-component',
-        computed: {
-            list: {
-                get () {
-                    return this.$store.state.list
-                }
-            }
-        },
-        methods: {
-            onChange () {
-                this.$store.commit('updateList', this.list)
-            }
-        }
+        name: 'node-tree-contextual-menu-component'
     }
 </script>
+<style lang="scss" scoped>
+    .nodetree-contextualmenu {
+        position: absolute;
+        right: 22px;
+        top: 5px;
+        opacity: 0;
+    }
+</style>

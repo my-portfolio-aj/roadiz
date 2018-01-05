@@ -22,29 +22,28 @@
   - be used in advertising or otherwise to promote the sale, use or other dealings
   - in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
   -
-  - @file NodeTree.vue
+  - @file NodeTreeLinkComponent.vue
   - @author Adrien Scholaert <adrien@rezo-zero.com>
   -->
 
 <template>
-    <div>
-        <node-tree-list-component name="tree-list" :data="list" :is-child="false" @change="onChange" />
+    <div class="tree-element-name nodetree-element-name">
+        <a href="#">{{ text }}</a>
     </div>
 </template>
 <script>
     export default {
-        name: 'node-tree-component',
-        computed: {
-            list: {
-                get () {
-                    return this.$store.state.list
-                }
-            }
-        },
-        methods: {
-            onChange () {
-                this.$store.commit('updateList', this.list)
+        name: 'node-tree-link-component',
+        props: {
+            text: {
+                type: String
             }
         }
     }
 </script>
+<style lang="scss" scoped>
+    .tree-element-name a {
+        color: #4D4D4D;
+        padding: 0;
+    }
+</style>

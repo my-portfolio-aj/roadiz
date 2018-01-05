@@ -85,13 +85,16 @@
                 }
             }
         },
+        mounted () {
+            this.$body = $('body')
+        },
         methods: {
             onEnd () {
                 this.$emit('change')
-                $('body').removeClass('on-drag')
+                this.$body.removeClass('on-drag')
             },
             onDragStart () {
-                $('body').addClass('on-drag')
+                this.$body.addClass('on-drag')
             }
         }
     }

@@ -30,18 +30,26 @@
     <div
         class="page nodetree-element rz-nestable-item"
         :class="{ 'has-children rz-parent': data.children.length > 0 }">
-        <div class="nodetree-element-inner rz-nestable-panel archived-node locked-node">
-            <div class="uk-nestable-handle rz-handle"></div>
-            <div class="tree-element-name nodetree-element-name">
-                <a href="#">{{ data.text }}</a>
-            </div>
+        <div class="nodetree-element-inner rz-nestable-panel">
+            <node-tree-icon-component />
+            <node-tree-link-component :text="data.text" />
+            <node-tree-contextual-menu-component />
         </div>
         <node-tree-list-component v-if="data.children" name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
     </div>
 </template>
 <script>
+    import NodeTreeIconComponent from './NodeTreeIconComponent.vue'
+    import NodeTreeLinkComponent from './NodeTreeLinkComponent.vue'
+    import NodeTreeContextualMenuComponent from './NodeTreeContextualMenuComponent.vue'
+
     export default {
         name: 'node-tree-item-component',
+        components: {
+            NodeTreeIconComponent,
+            NodeTreeLinkComponent,
+            NodeTreeContextualMenuComponent
+        },
         props: {
             data: {
                 type: Object
@@ -100,10 +108,11 @@
         margin-left: 13px;
         height: 18px;
         padding-top: 4px;
-    }
 
-    .tree-element-name a {
-        color: #4D4D4D;
-        padding: 0;
+        &:hover {
+            .nodetree-contextualmenu {
+                opacity: 1;
+            }
+        }
     }
 </style>

@@ -22,29 +22,15 @@
   - be used in advertising or otherwise to promote the sale, use or other dealings
   - in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
   -
-  - @file NodeTree.vue
+  - @file NodeTreeIconComponent.vue
   - @author Adrien Scholaert <adrien@rezo-zero.com>
   -->
 
 <template>
-    <div>
-        <node-tree-list-component name="tree-list" :data="list" :is-child="false" @change="onChange" />
-    </div>
+    <div class="uk-nestable-handle rz-handle"></div>
 </template>
 <script>
     export default {
-        name: 'node-tree-component',
-        computed: {
-            list: {
-                get () {
-                    return this.$store.state.list
-                }
-            }
-        },
-        methods: {
-            onChange () {
-                this.$store.commit('updateList', this.list)
-            }
-        }
+        name: 'node-tree-icon-component'
     }
 </script>
