@@ -27,22 +27,57 @@
   -->
 
 <template>
-    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown">
-        <div class="tree-contextualmenu-button uk-button uk-button-mini">
+    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isHover }">
+        <div class="tree-contextualmenu-button uk-button uk-button-mini" v-if="isHover" @click="onClick">
             <i class="uk-icon-caret-down"></i>
         </div>
     </div>
 </template>
 <script>
+    import { mapActions } from 'vuex'
+    import ContextualMenuComponent from '../context-menu/ContextualMenuComponent.vue'
+
     export default {
-        name: 'node-tree-contextual-menu-component'
+        name: 'node-tree-contextual-menu-component',
+        components: {
+            ContextualMenuComponent
+        },
+        data () {
+            return {
+                isHover: true,
+                selected: false
+            }
+        },
+        props: {
+            data: {
+                type: Object
+            }
+        },
+        methods: {
+            ...mapActions([
+                'nodesTreeSelectNode'
+            ]),
+            onClick () {
+                this.selected = !this.selected
+
+                if (this.selected) {
+                    this.nodesTreeSelectNode(this.data)
+                } else {
+                    this.nodesTreeSelectNode(null)
+                }
+            }
+        }
     }
 </script>
 <style lang="scss" scoped>
     .nodetree-contextualmenu {
         position: absolute;
         right: 22px;
-        top: 5px;
-        opacity: 0;
+        top: 3px;
+        opacity: 1;
+    }
+
+    .context-menu-open {
+        z-index: 22;
     }
 </style>

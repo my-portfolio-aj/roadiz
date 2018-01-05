@@ -5530,6 +5530,121 @@ exports.default = TagsBulk;
 
 /***/ }),
 
+/***/ "../Resources/app/components/context-menu/ContextualMenuComponent.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_ContextualMenuComponent_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_ContextualMenuComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_ContextualMenuComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_44725cde_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_ContextualMenuComponent_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-44725cde\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_44725cde_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_ContextualMenuComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_44725cde_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_ContextualMenuComponent_vue__);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue")
+}
+var normalizeComponent = __webpack_require__("../node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-44725cde"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_ContextualMenuComponent_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_44725cde_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_ContextualMenuComponent_vue___default.a,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "Resources/app/components/context-menu/ContextualMenuComponent.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44725cde", Component.options)
+  } else {
+    hotAPI.reload("data-v-44725cde", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "../Resources/app/components/context-menu/ContextualMenuScript.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ContextualMenu = undefined;
+
+var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__("vuex");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ContextualMenu = exports.ContextualMenu = {
+    name: 'contextual-menu-component',
+    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+        node: function node(state) {
+            return state.nodesTree.selectedNode;
+        }
+    }))
+}; /*
+    * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is furnished
+    * to do so, subject to the following conditions:
+    * The above copyright notice and this permission notice shall be included in all
+    * copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+    * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    * IN THE SOFTWARE.
+    *
+    * Except as contained in this notice, the name of the ROADIZ shall not
+    * be used in advertising or otherwise to promote the sale, use or other dealings
+    * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+    *
+    * @file ContextualMenuScript.js
+    * @author Adrien Scholaert <adrien@rezo-zero.com>
+    */
+
+/***/ }),
+
 /***/ "../Resources/app/components/custom-form-fields/CustomFormFieldEdit.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8833,37 +8948,6 @@ var _defineProperty2 = __webpack_require__("../node_modules/babel-runtime/helper
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _mutations; /*
-                 * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
-                 *
-                 * Permission is hereby granted, free of charge, to any person obtaining a copy
-                 * of this software and associated documentation files (the "Software"), to deal
-                 * in the Software without restriction, including without limitation the rights
-                 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                 * copies of the Software, and to permit persons to whom the Software is furnished
-                 * to do so, subject to the following conditions:
-                 * The above copyright notice and this permission notice shall be included in all
-                 * copies or substantial portions of the Software.
-                 *
-                 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-                 * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-                 * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-                 * IN THE SOFTWARE.
-                 *
-                 * Except as contained in this notice, the name of the ROADIZ shall not
-                 * be used in advertising or otherwise to promote the sale, use or other dealings
-                 * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
-                 *
-                 * @file index.js
-                 * @author Adrien Scholaert <adrien@rezo-zero.com>
-                 */
-
-// Modules
-
-
 var _vuex = __webpack_require__("vuex");
 
 var _vuex2 = _interopRequireDefault(_vuex);
@@ -8898,15 +8982,40 @@ var _BlanchetteEditorStoreModule = __webpack_require__("../Resources/app/store/m
 
 var _BlanchetteEditorStoreModule2 = _interopRequireDefault(_BlanchetteEditorStoreModule);
 
-var _NodeTreeApi = __webpack_require__("../Resources/app/api/NodeTreeApi.js");
+var _NodesTreeStoreModule = __webpack_require__("../Resources/app/store/modules/NodesTreeStoreModule.js");
 
-var NodeTreeApi = _interopRequireWildcard(_NodeTreeApi);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _NodesTreeStoreModule2 = _interopRequireDefault(_NodesTreeStoreModule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var UPDATE_LIST = 'updateList';
+// Modules
+/*
+ * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ *
+ * Except as contained in this notice, the name of the ROADIZ shall not
+ * be used in advertising or otherwise to promote the sale, use or other dealings
+ * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+ *
+ * @file index.js
+ * @author Adrien Scholaert <adrien@rezo-zero.com>
+ */
 
 exports.default = new _vuex2.default.Store({
     modules: {
@@ -8916,67 +9025,21 @@ exports.default = new _vuex2.default.Store({
         drawers: _DrawersStoreModule2.default,
         tags: _TagsStoreModule2.default,
         documentPreview: _DocumentPreviewStoreModule2.default,
-        blanchetteEditor: _BlanchetteEditorStoreModule2.default
+        blanchetteEditor: _BlanchetteEditorStoreModule2.default,
+        nodesTree: _NodesTreeStoreModule2.default
     },
     state: {
         translations: window.RozierRoot.messages,
-        connected: true,
-        list: []
-        // list: [{
-        //     text: 'main-menu',
-        //     id: 0,
-        //     children: [{
-        //         text: 'Lorem ipsum 1',
-        //         id: 1,
-        //         children: [{
-        //             text: 'Emma watson',
-        //             id: 3,
-        //             children: []
-        //         }, {
-        //             text: 'Paul jackson',
-        //             id: 4,
-        //             children: []
-        //         }]
-        //     }, {
-        //         text: 'Lorem ipsum 2',
-        //         id: 2,
-        //         children: []
-        //     }, {
-        //         text: 'Lorem ipsum 1',
-        //         id: 5,
-        //         children: [{
-        //             text: 'Emma watson',
-        //             id: 6,
-        //             children: []
-        //         }, {
-        //             text: 'Paul jackson',
-        //             id: 7,
-        //             children: []
-        //         }]
-        //     }, {
-        //         text: 'Lorem ipsum 2',
-        //         id: 8,
-        //         children: []
-        //     }]
-        // }]
+        connected: true
     },
-    mutations: (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
+    mutations: (0, _defineProperty3.default)({}, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
         state.connected = false;
-    }), (0, _defineProperty3.default)(_mutations, UPDATE_LIST, function (state, values) {
-        state.list = values;
-    }), _mutations),
+    }),
     actions: {
         escape: function escape(_ref) {
             var commit = _ref.commit;
 
             commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
-        },
-        getNodesTree: function getNodesTree(_ref2) {
-            var commit = _ref2.commit;
-
-            NodeTreeApi.getNodesTree().then(function (data) {
-                commit(UPDATE_LIST, data.items);
-            });
         }
     }
 });
@@ -10211,6 +10274,111 @@ exports.default = {
 
 /***/ }),
 
+/***/ "../Resources/app/store/modules/NodesTreeStoreModule.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = __webpack_require__("../node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _mutations; /*
+                 * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+                 *
+                 * Permission is hereby granted, free of charge, to any person obtaining a copy
+                 * of this software and associated documentation files (the "Software"), to deal
+                 * in the Software without restriction, including without limitation the rights
+                 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                 * copies of the Software, and to permit persons to whom the Software is furnished
+                 * to do so, subject to the following conditions:
+                 * The above copyright notice and this permission notice shall be included in all
+                 * copies or substantial portions of the Software.
+                 *
+                 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+                 * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+                 * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+                 * IN THE SOFTWARE.
+                 *
+                 * Except as contained in this notice, the name of the ROADIZ shall not
+                 * be used in advertising or otherwise to promote the sale, use or other dealings
+                 * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+                 *
+                 * @file NodesTreeStoreModule.js
+                 * @author Adrien Scholaert <adrien@rezo-zero.com>
+                 */
+
+var _NodeTreeApi = __webpack_require__("../Resources/app/api/NodeTreeApi.js");
+
+var NodeTreeApi = _interopRequireWildcard(_NodeTreeApi);
+
+var _mutationTypes = __webpack_require__("../Resources/app/types/mutationTypes.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Module state
+ */
+var state = {
+    list: [],
+    selectedNode: null
+
+    /**
+     * Getters
+     */
+};var getters = {};
+
+/**
+ * Actions
+ */
+var actions = {
+    nodesTreeGetAll: function nodesTreeGetAll(_ref) {
+        var commit = _ref.commit;
+
+        NodeTreeApi.getNodesTree().then(function (data) {
+            commit(_mutationTypes.NODES_TREE_UPDATE_LIST, data.items);
+        });
+    },
+    nodesTreeUpdateList: function nodesTreeUpdateList(_ref2, values) {
+        var commit = _ref2.commit;
+
+        commit(_mutationTypes.NODES_TREE_UPDATE_LIST, values);
+    },
+    nodesTreeSelectNode: function nodesTreeSelectNode(_ref3, node) {
+        var commit = _ref3.commit;
+
+        commit(_mutationTypes.NODES_TREE_SELECT_NODE, node);
+    }
+};
+
+/**
+ * Mutations
+ */
+var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.NODES_TREE_UPDATE_LIST, function (state, values) {
+    state.list = values;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.NODES_TREE_SELECT_NODE, function (state, node) {
+    state.selectedNode = node;
+}), _mutations);
+
+exports.default = {
+    state: state,
+    getters: getters,
+    actions: actions,
+    mutations: mutations
+};
+
+/***/ }),
+
 /***/ "../Resources/app/store/modules/TagsStoreModule.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10406,6 +10574,12 @@ var TAG_ENTITY = exports.TAG_ENTITY = 'tag';
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+/**
+ * Nodes Tree
+ */
+var NODES_TREE_UPDATE_LIST = exports.NODES_TREE_UPDATE_LIST = 'NODES_TREE_UPDATE_LIST';
+var NODES_TREE_SELECT_NODE = exports.NODES_TREE_SELECT_NODE = 'NODES_TREE_SELECT_NODE';
+
 /**
  * Nodes Search Widget
  */
@@ -37596,46 +37770,43 @@ exports.default = {
 
 /***/ }),
 
-/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/trees/NodeTreeComponent.vue":
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+var _ContextualMenuScript = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuScript.js");
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _vuex = __webpack_require__("vuex");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-    name: 'node-tree-component',
-    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
-        list: function list(state) {
-            return state.list;
-        }
-    })),
-    mounted: function mounted() {
-        this.getNodesTree();
-    },
-
-    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['getNodesTree']), {
-        onChange: function onChange() {
-            this.$store.commit('updateList', this.list);
-        }
-    }),
-    watch: {
-        list: function list(newValues) {
-            console.log('newValues', newValues);
-        }
-    }
-}; //
+exports.default = _ContextualMenuScript.ContextualMenu; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37671,7 +37842,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/trees/NodeTreeContextualMenuComponent.vue":
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/trees/NodeTreeComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37680,6 +37851,20 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__("vuex");
+
+var _ContextualMenuComponent = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+
+var _ContextualMenuComponent2 = _interopRequireDefault(_ContextualMenuComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
 //
 //
 //
@@ -37717,7 +37902,115 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    name: 'node-tree-contextual-menu-component'
+    components: { ContextualMenuComponent: _ContextualMenuComponent2.default },
+    name: 'node-tree-component',
+    compontents: {
+        ContextualMenuComponent: _ContextualMenuComponent2.default
+    },
+    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+        list: function list(state) {
+            return state.nodesTree.list;
+        }
+    })),
+    mounted: function mounted() {
+        this.nodesTreeGetAll();
+    },
+
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['nodesTreeGetAll', 'nodesTreeUpdateList']), {
+        onChange: function onChange() {
+            this.nodesTreeUpdateList(this.list);
+        }
+    })
+};
+
+/***/ }),
+
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/trees/NodeTreeContextualMenuComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__("vuex");
+
+var _ContextualMenuComponent = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+
+var _ContextualMenuComponent2 = _interopRequireDefault(_ContextualMenuComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    name: 'node-tree-contextual-menu-component',
+    components: {
+        ContextualMenuComponent: _ContextualMenuComponent2.default
+    },
+    data: function data() {
+        return {
+            isHover: true,
+            selected: false
+        };
+    },
+
+    props: {
+        data: {
+            type: Object
+        }
+    },
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['nodesTreeSelectNode']), {
+        onClick: function onClick() {
+            this.selected = !this.selected;
+
+            if (this.selected) {
+                this.nodesTreeSelectNode(this.data);
+            } else {
+                this.nodesTreeSelectNode(null);
+            }
+        }
+    })
 };
 
 /***/ }),
@@ -37862,48 +38155,59 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _AjaxLink = __webpack_require__("../Resources/app/components/AjaxLink.vue");
+
+var _AjaxLink2 = _interopRequireDefault(_AjaxLink);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     name: 'node-tree-link-component',
+    components: {
+        AjaxLink: _AjaxLink2.default
+    },
     props: {
-        text: {
+        title: {
+            type: String
+        },
+        url: {
             type: String
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -40481,6 +40785,99 @@ if (false) {
 
 /***/ }),
 
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-44725cde\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var render = function render() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm.node ? _c("nav", {
+    staticClass: "uk-dropdown uk-dropdown-small uk-dropdown-flip uk-dropdown-bottom"
+  }, [_vm._m(0, false, false), _vm._v(" "), _vm._m(1, false, false)]) : _vm._e();
+};
+var staticRenderFns = [function () {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "vertical-nodetype" }, [_c("p", { staticClass: "text" }, [_vm._v("Page")])]);
+}, function () {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "uk-nav uk-nav-dropdown" }, [_c("p", { staticClass: "add-child" }, [_c("a", {
+    attrs: {
+      title: "Ajouter un nœud enfant à «bonjour-roadiz»",
+      href: "/dev.php/rz-admin/nodes/add-child/4"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-plus" }), _vm._v(" Ajouter un nœud enfant")])]), _vm._v(" "), _c("div", { staticClass: "wrapper" }, [_c("header", { staticClass: "uk-nav-header" }, [_vm._v("Actions")]), _vm._v(" "), _c("p", [_c("a", {
+    attrs: {
+      title: "bonjour-roadiz",
+      href: "/dev.php/rz-admin/nodes/edit/4"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-pencil" }), _vm._v(" Éditer le nœud")])]), _vm._v(" "), _c("p", [_c("a", {
+    staticClass: "move-node-first-position smaller-text",
+    attrs: { title: "Déplacer en début de liste", href: "#" }
+  }, [_c("i", { staticClass: "uk-icon-arrow-up" }), _vm._v(" Déplacer en début de liste\n                ")])]), _vm._v(" "), _c("p", [_c("a", {
+    staticClass: "move-node-last-position smaller-text",
+    attrs: { title: "Déplacer en fin de liste", href: "#" }
+  }, [_c("i", { staticClass: "uk-icon-arrow-down" }), _vm._v(" Déplacer en fin de liste\n                ")])]), _vm._v(" "), _c("p", [_c("a", {
+    attrs: {
+      title: "Supprimer le nœud «bonjour-roadiz»",
+      href: "/dev.php/rz-admin/nodes/delete/4?referer=http%3A//roadiz.local/dev.php/rz-admin/nodes/edit/9/source/1"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-trash-o" }), _vm._v(" Supprimer le nœud                                ")])])]), _c("div", { staticClass: "wrapper node-actions" }, [_c("header", { staticClass: "uk-nav-header" }, [_vm._v("Statuts")]), _c("p", [_c("a", {
+    staticClass: "hide-node",
+    attrs: {
+      "data-action": "hide",
+      "data-status": "visible",
+      "data-value": "0",
+      title: "Cacher",
+      href: "#"
+    }
+  }, [_c("i", { staticClass: "uk-icon-eye-slash" }), _vm._v(" Cacher")])]), _c("p", [_c("a", {
+    staticClass: "unpublish-node",
+    attrs: {
+      "data-action": "unpublish",
+      "data-status": "status",
+      "data-value": "10",
+      title: "Dépublier",
+      href: "#"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-draft-nodes" }), _vm._v(" Dépublier")])]), _c("p", [_c("a", {
+    staticClass: "publish-all-node",
+    attrs: {
+      title: "Publier la descendance",
+      href: "/dev.php/rz-admin/nodes/publish-all/4"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-published-mini" }), _vm._v(" Publier la descendance")])]), _c("p", [_c("a", {
+    staticClass: "duplicate-node",
+    attrs: {
+      "data-action": "duplicate",
+      title: "Dupliquer",
+      href: "#"
+    }
+  }, [_c("i", { staticClass: "uk-icon-rz-duplicate" }), _vm._v(" Dupliquer")])])])]);
+}];
+render._withStripped = true;
+var esExports = { render: render, staticRenderFns: staticRenderFns };
+exports.default = esExports;
+
+if (false) {
+  module.hot.accept();
+  if (module.hot.data) {
+    require("vue-hot-reload-api").rerender("data-v-44725cde", esExports);
+  }
+}
+
+/***/ }),
+
 /***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-456280cc\",\"hasScoped\":false,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/FilterExplorerButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40614,7 +41011,11 @@ var render = function render() {
   return _c("div", {
     staticClass: "page nodetree-element rz-nestable-item",
     class: { "has-children rz-parent": _vm.data.children }
-  }, [_c("div", { staticClass: "nodetree-element-inner rz-nestable-panel" }, [_c("node-tree-icon-component"), _vm._v(" "), _c("node-tree-link-component", { attrs: { text: _vm.data.title } }), _vm._v(" "), _c("node-tree-contextual-menu-component")], 1), _vm._v(" "), _c("node-tree-list-component", {
+  }, [_c("div", { staticClass: "nodetree-element-inner rz-nestable-panel" }, [_c("node-tree-icon-component"), _vm._v(" "), _c("node-tree-link-component", {
+    attrs: { title: _vm.data.title, url: _vm.data.url }
+  }), _vm._v(" "), _c("node-tree-contextual-menu-component", {
+    attrs: { data: _vm.data }
+  })], 1), _vm._v(" "), _c("node-tree-list-component", {
     attrs: {
       name: "sub-tree-list",
       "is-child": true,
@@ -40838,7 +41239,7 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "tree-element-name nodetree-element-name" }, [_c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.text))])]);
+  return _c("div", { staticClass: "tree-element-name nodetree-element-name" }, [_c("ajax-link", { attrs: { title: _vm.title, href: _vm.url } })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -41107,10 +41508,10 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", [_c("node-tree-list-component", {
+  return _c("div", [_c("transition", { attrs: { name: "fade" } }, [_vm.list.length > 0 ? _c("node-tree-list-component", {
     attrs: { name: "tree-list", data: _vm.list, "is-child": false },
     on: { change: _vm.onChange }
-  })], 1);
+  }) : _vm._e()], 1), _vm._v(" "), _c("contextual-menu-component")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -41139,18 +41540,15 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _vm._m(0, false, false);
-};
-var staticRenderFns = [function () {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
   return _c("div", {
-    staticClass: "tree-contextualmenu nodetree-contextualmenu uk-button-dropdown"
-  }, [_c("div", {
-    staticClass: "tree-contextualmenu-button uk-button uk-button-mini"
-  }, [_c("i", { staticClass: "uk-icon-caret-down" })])]);
-}];
+    staticClass: "tree-contextualmenu nodetree-contextualmenu uk-button-dropdown",
+    class: { "context-menu-open": _vm.isHover }
+  }, [_vm.isHover ? _c("div", {
+    staticClass: "tree-contextualmenu-button uk-button uk-button-mini",
+    on: { click: _vm.onClick }
+  }, [_c("i", { staticClass: "uk-icon-caret-down" })]) : _vm._e()]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 var esExports = { render: render, staticRenderFns: staticRenderFns };
 exports.default = esExports;
@@ -61088,6 +61486,21 @@ exports.push([module.i, "\n.blanchette-editor[data-v-3c56d8a1] {\n  margin-botto
 
 /***/ }),
 
+/***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.uk-dropdown[data-v-44725cde] {\n  position: fixed;\n  display: block !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-64ce3886\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/trees/NodeTreeItemComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -61096,7 +61509,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.rz-nestable-item[data-v-64ce3886] {\n  position: relative;\n  margin-left: -6px;\n}\n.rz-nestable-item[data-v-64ce3886]:before {\n    content: '';\n    position: absolute;\n    top: -3px;\n    left: 0;\n    bottom: 0;\n    width: 1px;\n    background-color: #aaa;\n}\n.rz-nestable-item[data-v-64ce3886]:last-of-type {\n    border-left: none;\n}\n.rz-nestable-item[data-v-64ce3886]:last-of-type:before {\n      content: '';\n      position: absolute;\n      top: -3px;\n      left: 0;\n      height: 17px;\n      width: 1px;\n      background-color: #aaa;\n}\n.rz-nestable-item[data-v-64ce3886]:after {\n    content: '';\n    position: absolute;\n    top: 13px;\n    left: 0;\n    height: 1px;\n    width: 13px;\n    background-color: #aaa;\n}\n.nodetree-element-inner[data-v-64ce3886] {\n  position: relative;\n  z-index: 2;\n  margin-left: 13px;\n  height: 18px;\n  padding-top: 4px;\n}\n.nodetree-element-inner:hover .nodetree-contextualmenu[data-v-64ce3886] {\n    opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n.rz-nestable-item[data-v-64ce3886] {\n  position: relative;\n  margin-left: -6px;\n}\n.rz-nestable-item[data-v-64ce3886]:before {\n    content: '';\n    position: absolute;\n    top: -3px;\n    left: 0;\n    bottom: 0;\n    width: 1px;\n    background-color: #aaa;\n}\n.rz-nestable-item[data-v-64ce3886]:last-of-type {\n    border-left: none;\n}\n.rz-nestable-item[data-v-64ce3886]:last-of-type:before {\n      content: '';\n      position: absolute;\n      top: -3px;\n      left: 0;\n      height: 17px;\n      width: 1px;\n      background-color: #aaa;\n}\n.rz-nestable-item[data-v-64ce3886]:after {\n    content: '';\n    position: absolute;\n    top: 13px;\n    left: 0;\n    height: 1px;\n    width: 13px;\n    background-color: #aaa;\n}\n.nodetree-element-inner[data-v-64ce3886] {\n  position: relative;\n  z-index: 2;\n  margin-left: 13px;\n  height: 18px;\n  padding-top: 4px;\n}\n", ""]);
 
 // exports
 
@@ -61141,7 +61554,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.nodetree-contextualmenu[data-v-af095040] {\n  position: absolute;\n  right: 22px;\n  top: 5px;\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.nodetree-contextualmenu[data-v-af095040] {\n  position: absolute;\n  right: 22px;\n  top: 3px;\n  opacity: 1;\n}\n.context-menu-open[data-v-af095040] {\n  z-index: 22;\n}\n", ""]);
 
 // exports
 
@@ -83797,6 +84210,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3c56d8a1\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./BlanchetteEditorContainer.vue", function() {
      var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3c56d8a1\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./BlanchetteEditorContainer.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/vue-style-loader/lib/addStylesClient.js")("00231304", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ContextualMenuComponent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44725cde\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ContextualMenuComponent.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

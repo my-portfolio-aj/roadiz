@@ -32,8 +32,8 @@
         :class="{ 'has-children rz-parent': data.children }">
         <div class="nodetree-element-inner rz-nestable-panel">
             <node-tree-icon-component />
-            <node-tree-link-component :text="data.title" />
-            <node-tree-contextual-menu-component />
+            <node-tree-link-component :title="data.title" :url="data.url" />
+            <node-tree-contextual-menu-component :data="data" />
         </div>
         <node-tree-list-component name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
     </div>
@@ -108,11 +108,5 @@
         margin-left: 13px;
         height: 18px;
         padding-top: 4px;
-
-        &:hover {
-            .nodetree-contextualmenu {
-                opacity: 1;
-            }
-        }
     }
 </style>

@@ -1,4 +1,10 @@
 /**
+ * Nodes Tree
+ */
+export const NODES_TREE_UPDATE_LIST = 'NODES_TREE_UPDATE_LIST'
+export const NODES_TREE_SELECT_NODE = 'NODES_TREE_SELECT_NODE'
+
+/**
  * Nodes Search Widget
  */
 export const NODES_SEARCH_REQUEST = 'NODES_SEARCH_REQUEST'

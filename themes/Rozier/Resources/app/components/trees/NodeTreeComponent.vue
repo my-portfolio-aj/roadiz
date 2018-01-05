@@ -28,38 +28,37 @@
 
 <template>
     <div>
-        <node-tree-list-component name="tree-list" :data="list" :is-child="false" @change="onChange" />
+        <transition name="fade">
+            <node-tree-list-component v-if="list.length > 0" name="tree-list" :data="list" :is-child="false" @change="onChange" />
+        </transition>
+        <contextual-menu-component />
     </div>
 </template>
 <script>
     import { mapActions, mapState } from 'vuex'
+    import ContextualMenuComponent from '../context-menu/ContextualMenuComponent.vue'
 
     export default {
+        components: {ContextualMenuComponent},
         name: 'node-tree-component',
+        compontents: {
+            ContextualMenuComponent
+        },
         computed: {
             ...mapState({
-                list: state => state.list
+                list: state => state.nodesTree.list
             })
-            // list: {
-            //     get () {
-            //         return this.$store.state.list
-            //     }
-            // }
         },
         mounted () {
-            this.getNodesTree()
+            this.nodesTreeGetAll()
         },
         methods: {
             ...mapActions([
-                'getNodesTree'
+                'nodesTreeGetAll',
+                'nodesTreeUpdateList'
             ]),
             onChange () {
-                this.$store.commit('updateList', this.list)
-            }
-        },
-        watch: {
-            list (newValues) {
-                console.log('newValues', newValues)
+                this.nodesTreeUpdateList(this.list)
             }
         }
     }

@@ -28,14 +28,22 @@
 
 <template>
     <div class="tree-element-name nodetree-element-name">
-        <a href="#">{{ text }}</a>
+        <ajax-link :title="title" :href="url" />
     </div>
 </template>
 <script>
+    import AjaxLink from '../AjaxLink.vue'
+
     export default {
         name: 'node-tree-link-component',
+        components: {
+            AjaxLink
+        },
         props: {
-            text: {
+            title: {
+                type: String
+            },
+            url: {
                 type: String
             }
         }
