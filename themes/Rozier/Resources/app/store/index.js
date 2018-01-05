@@ -41,6 +41,8 @@ import tags from './modules/TagsStoreModule'
 import documentPreview from './modules/DocumentPreviewStoreModule'
 import blanchetteEditor from './modules/BlanchetteEditorStoreModule'
 
+import * as NodeTreeApi from '../api/NodeTreeApi'
+
 const UPDATE_LIST = 'updateList'
 
 export default new Vuex.Store({
@@ -56,58 +58,63 @@ export default new Vuex.Store({
     state: {
         translations: window.RozierRoot.messages,
         connected: true,
-        list: [{
-            text: 'main-menu',
-            id: 0,
-            children: [{
-                text: 'Lorem ipsum 1',
-                id: 1,
-                children: [{
-                    text: 'Emma watson',
-                    id: 3,
-                    children: []
-                }, {
-                    text: 'Paul jackson',
-                    id: 4,
-                    children: []
-                }]
-            }, {
-                text: 'Lorem ipsum 2',
-                id: 2,
-                children: []
-            }, {
-                text: 'Lorem ipsum 1',
-                id: 5,
-                children: [{
-                    text: 'Emma watson',
-                    id: 6,
-                    children: []
-                }, {
-                    text: 'Paul jackson',
-                    id: 7,
-                    children: []
-                }]
-            }, {
-                text: 'Lorem ipsum 2',
-                id: 8,
-                children: []
-            }]
-        }]
+        list: []
+        // list: [{
+        //     text: 'main-menu',
+        //     id: 0,
+        //     children: [{
+        //         text: 'Lorem ipsum 1',
+        //         id: 1,
+        //         children: [{
+        //             text: 'Emma watson',
+        //             id: 3,
+        //             children: []
+        //         }, {
+        //             text: 'Paul jackson',
+        //             id: 4,
+        //             children: []
+        //         }]
+        //     }, {
+        //         text: 'Lorem ipsum 2',
+        //         id: 2,
+        //         children: []
+        //     }, {
+        //         text: 'Lorem ipsum 1',
+        //         id: 5,
+        //         children: [{
+        //             text: 'Emma watson',
+        //             id: 6,
+        //             children: []
+        //         }, {
+        //             text: 'Paul jackson',
+        //             id: 7,
+        //             children: []
+        //         }]
+        //     }, {
+        //         text: 'Lorem ipsum 2',
+        //         id: 8,
+        //         children: []
+        //     }]
+        // }]
     },
     mutations: {
         [LOGIN_CHECK_DISCONNECTED] (state) {
             state.connected = false
         },
         [UPDATE_LIST] (state, values) {
-            this.list = values
+            state.list = values
         }
     },
     actions: {
         escape ({ commit }) {
             commit(KEYBOARD_EVENT_ESCAPE)
         },
-        updateList ({ commit }, values) {
-            console.log(values)
+        getNodesTree ({ commit }) {
+            NodeTreeApi
+                .getNodesTree()
+                .then(data => {
+                    commit(UPDATE_LIST, data.items)
+                })
         }
     }
 })

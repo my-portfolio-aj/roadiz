@@ -29,13 +29,13 @@
 <template>
     <div
         class="page nodetree-element rz-nestable-item"
-        :class="{ 'has-children rz-parent': data.children.length > 0 }">
+        :class="{ 'has-children rz-parent': data.children }">
         <div class="nodetree-element-inner rz-nestable-panel">
             <node-tree-icon-component />
-            <node-tree-link-component :text="data.text" />
+            <node-tree-link-component :text="data.title" />
             <node-tree-contextual-menu-component />
         </div>
-        <node-tree-list-component v-if="data.children" name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
+        <node-tree-list-component name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
     </div>
 </template>
 <script>

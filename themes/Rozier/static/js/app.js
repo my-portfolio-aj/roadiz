@@ -3132,6 +3132,82 @@ function getNodes(_ref2) {
 
 /***/ }),
 
+/***/ "../Resources/app/api/NodeTreeApi.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getNodesTree = getNodesTree;
+
+var _axios = __webpack_require__("../node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Fetch Nodes Tree.
+ *
+ * @return Promise
+ */
+function getNodesTree() {
+    var postData = {
+        query: {
+            translate_id: null,
+            tag_id: null,
+            parent_id: null
+        }
+    };
+
+    return (0, _axios2.default)({
+        method: 'GET',
+        url: window.RozierRoot.routes.nodesTreeJson,
+        params: postData
+    }).then(function (response) {
+        if (typeof response.data !== 'undefined') {
+            return response.data;
+        } else {
+            return [];
+        }
+    }).catch(function (error) {
+        // TODO
+        // Log request error or display a message
+        throw new Error(error);
+    });
+} /*
+   * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is furnished
+   * to do so, subject to the following conditions:
+   * The above copyright notice and this permission notice shall be included in all
+   * copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+   * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+   * IN THE SOFTWARE.
+   *
+   * Except as contained in this notice, the name of the ROADIZ shall not
+   * be used in advertising or otherwise to promote the sale, use or other dealings
+   * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+   *
+   * @file NodeTreeApi.js
+   * @author Adrien Scholaert <adrien@rezo-zero.com>
+   */
+
+/***/ }),
+
 /***/ "../Resources/app/api/NodeTypeApi.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8822,6 +8898,12 @@ var _BlanchetteEditorStoreModule = __webpack_require__("../Resources/app/store/m
 
 var _BlanchetteEditorStoreModule2 = _interopRequireDefault(_BlanchetteEditorStoreModule);
 
+var _NodeTreeApi = __webpack_require__("../Resources/app/api/NodeTreeApi.js");
+
+var NodeTreeApi = _interopRequireWildcard(_NodeTreeApi);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UPDATE_LIST = 'updateList';
@@ -8839,48 +8921,49 @@ exports.default = new _vuex2.default.Store({
     state: {
         translations: window.RozierRoot.messages,
         connected: true,
-        list: [{
-            text: 'main-menu',
-            id: 0,
-            children: [{
-                text: 'Lorem ipsum 1',
-                id: 1,
-                children: [{
-                    text: 'Emma watson',
-                    id: 3,
-                    children: []
-                }, {
-                    text: 'Paul jackson',
-                    id: 4,
-                    children: []
-                }]
-            }, {
-                text: 'Lorem ipsum 2',
-                id: 2,
-                children: []
-            }, {
-                text: 'Lorem ipsum 1',
-                id: 5,
-                children: [{
-                    text: 'Emma watson',
-                    id: 6,
-                    children: []
-                }, {
-                    text: 'Paul jackson',
-                    id: 7,
-                    children: []
-                }]
-            }, {
-                text: 'Lorem ipsum 2',
-                id: 8,
-                children: []
-            }]
-        }]
+        list: []
+        // list: [{
+        //     text: 'main-menu',
+        //     id: 0,
+        //     children: [{
+        //         text: 'Lorem ipsum 1',
+        //         id: 1,
+        //         children: [{
+        //             text: 'Emma watson',
+        //             id: 3,
+        //             children: []
+        //         }, {
+        //             text: 'Paul jackson',
+        //             id: 4,
+        //             children: []
+        //         }]
+        //     }, {
+        //         text: 'Lorem ipsum 2',
+        //         id: 2,
+        //         children: []
+        //     }, {
+        //         text: 'Lorem ipsum 1',
+        //         id: 5,
+        //         children: [{
+        //             text: 'Emma watson',
+        //             id: 6,
+        //             children: []
+        //         }, {
+        //             text: 'Paul jackson',
+        //             id: 7,
+        //             children: []
+        //         }]
+        //     }, {
+        //         text: 'Lorem ipsum 2',
+        //         id: 8,
+        //         children: []
+        //     }]
+        // }]
     },
     mutations: (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
         state.connected = false;
     }), (0, _defineProperty3.default)(_mutations, UPDATE_LIST, function (state, values) {
-        this.list = values;
+        state.list = values;
     }), _mutations),
     actions: {
         escape: function escape(_ref) {
@@ -8888,10 +8971,12 @@ exports.default = new _vuex2.default.Store({
 
             commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
         },
-        updateList: function updateList(_ref2, values) {
+        getNodesTree: function getNodesTree(_ref2) {
             var commit = _ref2.commit;
 
-            console.log(values);
+            NodeTreeApi.getNodesTree().then(function (data) {
+                commit(UPDATE_LIST, data.items);
+            });
         }
     }
 });
@@ -37520,55 +37605,69 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__("vuex");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     name: 'node-tree-component',
-    computed: {
-        list: {
-            get: function get() {
-                return this.$store.state.list;
-            }
+    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+        list: function list(state) {
+            return state.list;
         }
+    })),
+    mounted: function mounted() {
+        this.getNodesTree();
     },
-    methods: {
+
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['getNodesTree']), {
         onChange: function onChange() {
             this.$store.commit('updateList', this.list);
         }
+    }),
+    watch: {
+        list: function list(newValues) {
+            console.log('newValues', newValues);
+        }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -40514,15 +40613,15 @@ var render = function render() {
   var _c = _vm._self._c || _h;
   return _c("div", {
     staticClass: "page nodetree-element rz-nestable-item",
-    class: { "has-children rz-parent": _vm.data.children.length > 0 }
-  }, [_c("div", { staticClass: "nodetree-element-inner rz-nestable-panel" }, [_c("node-tree-icon-component"), _vm._v(" "), _c("node-tree-link-component", { attrs: { text: _vm.data.text } }), _vm._v(" "), _c("node-tree-contextual-menu-component")], 1), _vm._v(" "), _vm.data.children ? _c("node-tree-list-component", {
+    class: { "has-children rz-parent": _vm.data.children }
+  }, [_c("div", { staticClass: "nodetree-element-inner rz-nestable-panel" }, [_c("node-tree-icon-component"), _vm._v(" "), _c("node-tree-link-component", { attrs: { text: _vm.data.title } }), _vm._v(" "), _c("node-tree-contextual-menu-component")], 1), _vm._v(" "), _c("node-tree-list-component", {
     attrs: {
       name: "sub-tree-list",
       "is-child": true,
       data: _vm.data.children
     },
     on: { change: _vm.onChange }
-  }) : _vm._e()], 1);
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

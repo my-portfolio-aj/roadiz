@@ -32,18 +32,34 @@
     </div>
 </template>
 <script>
+    import { mapActions, mapState } from 'vuex'
+
     export default {
         name: 'node-tree-component',
         computed: {
-            list: {
-                get () {
-                    return this.$store.state.list
-                }
-            }
+            ...mapState({
+                list: state => state.list
+            })
+            // list: {
+            //     get () {
+            //         return this.$store.state.list
+            //     }
+            // }
+        },
+        mounted () {
+            this.getNodesTree()
         },
         methods: {
+            ...mapActions([
+                'getNodesTree'
+            ]),
             onChange () {
                 this.$store.commit('updateList', this.list)
+            }
+        },
+        watch: {
+            list (newValues) {
+                console.log('newValues', newValues)
             }
         }
     }
