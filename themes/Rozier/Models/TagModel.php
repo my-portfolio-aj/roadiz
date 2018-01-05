@@ -63,19 +63,12 @@ class TagModel implements ModelInterface
 
     public function toArray()
     {
-        $firstTrans = $this->tag->getTranslatedTags()->first();
-        $name = $this->tag->getTagName();
-
-        if ($firstTrans) {
-            $name = $firstTrans->getName();
-        }
-
         /** @var UrlGenerator $urlGenerator */
         $urlGenerator = $this->container->offsetGet('urlGenerator');
 
         $result = [
             'id' => $this->tag->getId(),
-            'name' => $name,
+            'name' => $this->getTagDisplayName($this->tag),
             'tagName' => $this->tag->getTagName(),
             'color' => $this->tag->getColor(),
             'parent' => $this->getTagParents($this->tag),
@@ -95,16 +88,12 @@ class TagModel implements ModelInterface
     private function getTagParents($tag, $slash = false)
     {
         $result = '';
+        /** @var Tag $parent */
         $parent = $tag->getParent();
 
         if ($parent) {
             $superParent = $this->getTagParents($parent, true);
-            $firstTrans = $parent->getTranslatedTags()->first();
-            $name = $parent->getTagName();
-
-            if ($firstTrans) {
-                $name = $firstTrans->getName();
-            }
+            $name = $this->getTagDisplayName($parent);
 
             $result = $superParent . $name;
 
@@ -114,5 +103,20 @@ class TagModel implements ModelInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param Tag $tag
+     * @return string
+     */
+    private function getTagDisplayName(Tag $tag)
+    {
+        $firstTrans = $tag->getTranslatedTags()->first();
+
+        if ($firstTrans && $firstTrans->getName() != '') {
+            return $firstTrans->getName();
+        }
+
+        return $tag->getTagName();
     }
 }

@@ -31,6 +31,7 @@ namespace Themes\Rozier\Models;
 
 use Pimple\Container;
 use RZ\Roadiz\Core\Entities\Node;
+use RZ\Roadiz\Core\Entities\NodesSources;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 /**
@@ -41,14 +42,21 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 class NodeModel implements ModelInterface
 {
     public static $thumbnailArray;
+
     /**
      * @var Node
      */
-    private $node;
+    protected $node;
+
     /**
      * @var Container
      */
-    private $container;
+    protected $container;
+
+    /**
+     * @var NodeTypeModel
+     */
+    protected $nodeTypeModel;
 
     /**
      * NodeModel constructor.
@@ -59,26 +67,21 @@ class NodeModel implements ModelInterface
     {
         $this->node = $node;
         $this->container = $container;
+        $this->nodeTypeModel = new NodeTypeModel($this->node->getNodeType(), $container);
     }
 
     public function toArray()
     {
-        /** @var UrlGenerator $urlGenerator */
-        $urlGenerator = $this->container->offsetGet('urlGenerator');
-
         $result = [
             'id' => $this->node->getId(),
             'title' => $this->node->getNodeSources()->first()->getTitle(),
             'nodeName' => $this->node->getNodeName(),
             'isPublished' => $this->node->isPublished(),
-            'nodesEditPage' => $urlGenerator->generate('nodesEditPage', [
-                'nodeId' => $this->node->getId()
-            ]),
-            'nodeType' => [
-                'color' => $this->node->getNodeType()->getColor()
-            ]
+            'nodesEditPage' => $this->getSingleNodeUrl($this->node->getNodeSources()->first()),
+            'nodeType' => $this->nodeTypeModel->toArray(),
         ];
 
+        /** @var Node $parent */
         $parent = $this->node->getParent();
 
         if ($parent) {
@@ -87,6 +90,7 @@ class NodeModel implements ModelInterface
             ];
 
             if ($parent->getParent()) {
+                /** @var Node $subparent */
                 $subparent = $parent->getParent();
 
                 $result['subparent'] = [
@@ -96,5 +100,27 @@ class NodeModel implements ModelInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param NodesSources $nodesSources
+     * @return string
+     */
+    protected function getSingleNodeUrl(NodesSources $nodesSources)
+    {
+        /** @var UrlGenerator $urlGenerator */
+        $urlGenerator = $this->container->offsetGet('urlGenerator');
+
+        if ($nodesSources->getNode()->isHidingChildren()) {
+            return $urlGenerator->generate('nodesTreePage', [
+                'nodeId' => $nodesSources->getNode()->getId(),
+                'translationId' => $nodesSources->getTranslation()->getId(),
+            ]);
+        }
+
+        return $urlGenerator->generate('nodesEditSourcePage', [
+            'nodeId' => $nodesSources->getNode()->getId(),
+            'translationId' => $nodesSources->getTranslation()->getId(),
+        ]);
     }
 }
