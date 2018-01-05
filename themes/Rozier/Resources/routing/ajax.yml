@@ -23,6 +23,8 @@ nodesStatusesAjax:
     defaults:
         _controller: Themes\Rozier\AjaxControllers\AjaxNodesController::statusesAction
         _format: json
+
+
 nodesTreeAjax:
     path:     /nodes/tree/{translationId}
     methods: [GET]
@@ -31,6 +33,15 @@ nodesTreeAjax:
         translationId: null
         _format: json
     requirements: { translationId : "[0-9]+" }
+
+nodesTreeJson:
+    path:     /nodes/tree.json
+    methods: [GET]
+    defaults:
+        _controller: Themes\Rozier\AjaxControllers\AjaxNodeTreeController::jsonTreeAction
+        _format: json
+
+
 nodesQuickAddAjax:
     path:     /nodes/add
     defaults:

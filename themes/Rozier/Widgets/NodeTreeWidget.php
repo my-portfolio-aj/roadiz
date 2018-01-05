@@ -77,7 +77,7 @@ class NodeTreeWidget extends AbstractWidget
         }
 
         $this->availableTranslations = $this->getController()->get('em')
-             ->getRepository('RZ\Roadiz\Core\Entities\Translation')
+             ->getRepository(Translation::class)
              ->findAll();
     }
 
@@ -163,7 +163,7 @@ class NodeTreeWidget extends AbstractWidget
          * Manage get request to filter list
          */
         $listManager = $this->controller->createEntityListManager(
-            'RZ\Roadiz\Core\Entities\Node',
+            Node::class,
             $criteria,
             $ordering
         );

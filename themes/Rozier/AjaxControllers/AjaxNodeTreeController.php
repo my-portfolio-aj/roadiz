@@ -30,9 +30,13 @@
  */
 namespace Themes\Rozier\AjaxControllers;
 
+use RZ\Roadiz\Core\Entities\Node;
+use RZ\Roadiz\Core\Entities\Tag;
+use RZ\Roadiz\Core\Entities\Translation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Themes\Rozier\Models\TreeNodeModel;
 use Themes\Rozier\Widgets\NodeTreeWidget;
 
 /**
@@ -40,6 +44,179 @@ use Themes\Rozier\Widgets\NodeTreeWidget;
  */
 class AjaxNodeTreeController extends AbstractAjaxController
 {
+    /**
+     * @param Request $request
+     * @return Translation
+     */
+    protected function getTranslationFromRequest(Request $request)
+    {
+        if ($request->query->has('translation_id')) {
+            $translation = $this->get('em')
+                ->find(
+                    Translation::class,
+                    (int) $request->query->get('translation_id')
+                );
+
+            if (null !== $translation) {
+                return $translation;
+            }
+        }
+
+        return $this->get('defaultTranslation');
+    }
+
+    /**
+     * @param Request $request
+     * @return Tag|null
+     */
+    protected function getTagFromRequest(Request $request)
+    {
+        if ($request->query->has('tag_id')) {
+            $tag = $this->get('em')
+                ->find(
+                    Tag::class,
+                    (int) $request->query->get('tag_id')
+                );
+
+            if (null !== $tag) {
+                return $tag;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param Request $request
+     * @return Node|null
+     */
+    protected function getParentLeafFromRequest(Request $request)
+    {
+        if ($request->query->has('parent_id')) {
+            $parentLeaf = $this->get('em')
+                ->find(
+                    Node::class,
+                    (int) $request->query->get('parent_id')
+                );
+
+            if (null !== $parentLeaf) {
+                return $parentLeaf;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function jsonTreeAction(Request $request)
+    {
+        $this->validateAccessForRole('ROLE_ACCESS_NODES');
+
+        $translation = $this->getTranslationFromRequest($request);
+        $parentNode = $this->getParentLeafFromRequest($request);
+        $tag = $this->getTagFromRequest($request);
+
+        if (null === $parentNode && null !== $this->getUser()) {
+            $parentNode = $this->getUser()->getChroot();
+        }
+
+        $nodeTree = new NodeTreeWidget(
+            $this->getRequest(),
+            $this,
+            $parentNode,
+            $translation
+        );
+        if (null !== $tag) {
+            $nodeTree->setTag($tag);
+        }
+        if (true === (boolean) $request->get('stack_tree')) {
+            $nodeTree->setStackTree(true);
+        }
+
+        return $this->renderJson([
+            'name' => '',
+            'type' => 'node-tree',
+            'items' => $this->getNodesArray($nodeTree),
+            'langs' => $this->getAvailableTranslationsUrl($nodeTree),
+            'statuses' => [
+                'can_reorder' => $nodeTree->getCanReorder(),
+            ]
+        ]);
+    }
+
+    protected function getNodesArray(NodeTreeWidget $nodeTreeWidget)
+    {
+        $items = [];
+        $firstNodes = $nodeTreeWidget->getChildrenNodes($nodeTreeWidget->getRootNode());
+        foreach ($firstNodes as $node) {
+            $items[] = $this->getSingleNodeArray($node, $nodeTreeWidget);
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param Node $node
+     * @param NodeTreeWidget $nodeTreeWidget
+     * @return array
+     */
+    protected function getSingleNodeArray(Node $node, NodeTreeWidget $nodeTreeWidget)
+    {
+        $model = new TreeNodeModel($node, $this->getContainer());
+        $nodeArray = $model->toArray();
+
+        /*
+         * Display children only if node is note a stack and
+         * its node-type does not hide children
+         */
+        if (!$node->isHidingChildren() && !$node->getNodeType()->isHidingNodes()) {
+            $children = $nodeTreeWidget->getChildrenNodes($node);
+            if (count($children) > 0) {
+                $childrenArray = [];
+                foreach ($children as $child) {
+                    $childrenArray[] = $this->getSingleNodeArray($child, $nodeTreeWidget);
+                }
+
+                $nodeArray['children'] = $childrenArray;
+            }
+        }
+
+        return $nodeArray;
+    }
+
+    /**
+     * @param NodeTreeWidget $nodeTreeWidget
+     * @return array
+     */
+    protected function getAvailableTranslationsUrl(NodeTreeWidget $nodeTreeWidget)
+    {
+        $langs = [];
+        $baseParams = [];
+
+        if (null !== $nodeTreeWidget->getRootNode()) {
+            $baseParams['parent_id'] = $nodeTreeWidget->getRootNode()->getId();
+        }
+        if (null !== $nodeTreeWidget->getTag()) {
+            $baseParams['tag_id'] = $nodeTreeWidget->getTag()->getId();
+        }
+        /** @var Translation $availableTranslation */
+        foreach ($nodeTreeWidget->getAvailableTranslations() as $availableTranslation) {
+            $langs[] = [
+                'name' => $availableTranslation->getName(),
+                'locale' => $availableTranslation->getPreferredLocale(),
+                'url' => $this->generateUrl('nodesTreeJson', array_merge([
+                    'translation_id' => $availableTranslation->getId(),
+                ], $baseParams)),
+            ];
+        }
+
+        return $langs;
+    }
+
+
     /**
      * @param Request $request
      * @param null $translationId
