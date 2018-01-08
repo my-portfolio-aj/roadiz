@@ -1,4 +1,10 @@
 /**
+ * Contextual Menu
+ */
+export const CONTEXTUAL_MENU_TOGGLE = 'CONTEXTUAL_MENU_TOGGLE'
+export const CONTEXTUAL_MENU_CLOSE = 'CONTEXTUAL_MENU_CLOSE'
+
+/**
  * Nodes Tree
  */
 export const NODES_TREE_UPDATE_LIST = 'NODES_TREE_UPDATE_LIST'

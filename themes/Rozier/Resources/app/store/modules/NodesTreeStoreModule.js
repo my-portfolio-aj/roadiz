@@ -59,8 +59,8 @@ const actions = {
     nodesTreeUpdateList ({ commit }, values) {
         commit(NODES_TREE_UPDATE_LIST, values)
     },
-    nodesTreeSelectNode ({ commit }, node) {
-        commit(NODES_TREE_SELECT_NODE, node)
+    nodesTreeSelectNode ({ commit }, { event, node }) {
+        commit(NODES_TREE_SELECT_NODE, { event, node })
     }
 }
 
@@ -71,8 +71,12 @@ const mutations = {
     [NODES_TREE_UPDATE_LIST] (state, values) {
         state.list = values
     },
-    [NODES_TREE_SELECT_NODE] (state, node) {
-        state.selectedNode = node
+    [NODES_TREE_SELECT_NODE] (state, { event, node }) {
+        if (!event || !node) {
+            state.selectedNode = null
+        } else {
+            state.selectedNode = { event, node }
+        }
     }
 }
 

@@ -48,6 +48,7 @@ import ModalContainer from './containers/ModalContainer.vue'
 // Components
 import Overlay from './components/Overlay.vue'
 import NodeTreeComponent from './components/trees/NodeTreeComponent.vue'
+import ContextualMenuComponent from './components/context-menu/ContextualMenuComponent.vue'
 
 import {
     KEYBOARD_EVENT_ESCAPE
@@ -76,7 +77,8 @@ export default class AppVue {
             TagsEditorContainer,
             DocumentPreviewContainer,
             BlanchetteEditorContainer,
-            ModalContainer
+            ModalContainer,
+            ContextualMenuComponent
         }
 
         this.registeredComponents = {

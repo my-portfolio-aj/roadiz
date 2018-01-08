@@ -35,13 +35,9 @@
 </template>
 <script>
     import { mapActions } from 'vuex'
-    import ContextualMenuComponent from '../context-menu/ContextualMenuComponent.vue'
 
     export default {
         name: 'node-tree-contextual-menu-component',
-        components: {
-            ContextualMenuComponent
-        },
         data () {
             return {
                 isHover: true,
@@ -55,16 +51,10 @@
         },
         methods: {
             ...mapActions([
-                'nodesTreeSelectNode'
+                'contextualMenuToggle'
             ]),
-            onClick () {
-                this.selected = !this.selected
-
-                if (this.selected) {
-                    this.nodesTreeSelectNode(this.data)
-                } else {
-                    this.nodesTreeSelectNode(null)
-                }
+            onClick (e) {
+                this.contextualMenuToggle({ event: e, el: this.data })
             }
         }
     }

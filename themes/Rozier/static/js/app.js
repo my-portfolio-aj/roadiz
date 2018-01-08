@@ -151,6 +151,10 @@ var _NodeTreeComponent = __webpack_require__("../Resources/app/components/trees/
 
 var _NodeTreeComponent2 = _interopRequireDefault(_NodeTreeComponent);
 
+var _ContextualMenuComponent = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuComponent.vue");
+
+var _ContextualMenuComponent2 = _interopRequireDefault(_ContextualMenuComponent);
+
 var _mutationTypes = __webpack_require__("../Resources/app/types/mutationTypes.js");
 
 var _NodeTreeListComponent = __webpack_require__("../Resources/app/components/trees/NodeTreeListComponent.vue");
@@ -158,6 +162,17 @@ var _NodeTreeListComponent = __webpack_require__("../Resources/app/components/tr
 var _NodeTreeListComponent2 = _interopRequireDefault(_NodeTreeListComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Containers
+
+
+// Services
+_vue2.default.component('node-tree-list-component', _NodeTreeListComponent2.default);
+
+/**
+ * Root entry for VueJS App.
+ */
+
 
 // Components
 /*
@@ -188,18 +203,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author Adrien Scholaert <adrien@rezo-zero.com>
  */
 
-_vue2.default.component('node-tree-list-component', _NodeTreeListComponent2.default);
-
-/**
- * Root entry for VueJS App.
- */
-
-
-// Containers
-
-
-// Services
-
 var AppVue = function () {
     function AppVue() {
         (0, _classCallCheck3.default)(this, AppVue);
@@ -218,7 +221,8 @@ var AppVue = function () {
             TagsEditorContainer: _TagsEditorContainer2.default,
             DocumentPreviewContainer: _DocumentPreviewContainer2.default,
             BlanchetteEditorContainer: _BlanchetteEditorContainer2.default,
-            ModalContainer: _ModalContainer2.default
+            ModalContainer: _ModalContainer2.default,
+            ContextualMenuComponent: _ContextualMenuComponent2.default
         };
 
         this.registeredComponents = {
@@ -5604,44 +5608,170 @@ var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/exten
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _utils = __webpack_require__("../Resources/app/utils/index.js");
+
 var _vuex = __webpack_require__("vuex");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*
+ * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ *
+ * Except as contained in this notice, the name of the ROADIZ shall not
+ * be used in advertising or otherwise to promote the sale, use or other dealings
+ * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+ *
+ * @file ContextualMenuScript.js
+ * @author Adrien Scholaert <adrien@rezo-zero.com>
+ */
+
 var ContextualMenu = exports.ContextualMenu = {
     name: 'contextual-menu-component',
-    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
-        node: function node(state) {
-            return state.nodesTree.selectedNode;
+    props: {
+        id: {
+            type: String,
+            default: 'default-ctx'
         }
-    }))
-}; /*
-    * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
-    *
-    * Permission is hereby granted, free of charge, to any person obtaining a copy
-    * of this software and associated documentation files (the "Software"), to deal
-    * in the Software without restriction, including without limitation the rights
-    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    * copies of the Software, and to permit persons to whom the Software is furnished
-    * to do so, subject to the following conditions:
-    * The above copyright notice and this permission notice shall be included in all
-    * copies or substantial portions of the Software.
-    *
-    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-    * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    * IN THE SOFTWARE.
-    *
-    * Except as contained in this notice, the name of the ROADIZ shall not
-    * be used in advertising or otherwise to promote the sale, use or other dealings
-    * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
-    *
-    * @file ContextualMenuScript.js
-    * @author Adrien Scholaert <adrien@rezo-zero.com>
-    */
+    },
+    watch: {
+        ctxVisible: function ctxVisible(newVal, oldVal) {
+            if (oldVal === true && newVal === false) {
+                this.bodyClickListener.stop(function (e) {
+                    // console.log('context menu sequence finished', e)
+                    // this.locals = {}
+                });
+            } else {
+                this.open();
+            }
+        },
+        ctxEvent: function ctxEvent(newVal, oldVal) {
+            if (oldVal && !newVal) {
+                this.bodyClickListener.stop(function (e) {});
+            } else {
+                this.open();
+            }
+        }
+    },
+    data: function data() {
+        var _this = this;
+
+        return {
+            ctxTop: 0,
+            ctxLeft: 0,
+            ctxVisible: false,
+            bodyClickListener: (0, _utils.createBodyClickListener)(function (e) {
+                var isOpen = !!_this.ctxVisible;
+                var outsideClick = isOpen && !_this.$el.contains(e.target);
+
+                if (outsideClick) {
+                    if (e.which !== 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    } else {
+                        _this.cancel();
+                    }
+                } else {
+                    _this.close();
+                }
+            })
+        };
+    },
+
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['contextualMenuClose']), {
+        close: function close() {
+            this.ctxVisible = false;
+            this.contextualMenuClose();
+            this.$emit('ctx-close', this.locals);
+        },
+        cancel: function cancel() {
+            this.ctxVisible = false;
+            this.contextualMenuClose();
+            this.$emit('ctx-cancel', this.locals);
+        },
+
+
+        /*
+         * this function handles some cross-browser compat issues
+         * thanks to https://github.com/callmenick/Custom-Context-Menu
+         */
+        setPositionFromEvent: function setPositionFromEvent(e) {
+            var _this2 = this;
+
+            e = e || window.event;
+
+            var scrollingElement = document.scrollingElement || document.documentElement;
+
+            if (e.pageX || e.pageY) {
+                this.ctxLeft = e.pageX;
+                this.ctxTop = e.pageY - scrollingElement.scrollTop;
+            } else if (e.clientX || e.clientY) {
+                this.ctxLeft = e.clientX + scrollingElement.scrollLeft;
+                this.ctxTop = e.clientY + scrollingElement.scrollTop;
+            }
+
+            this.$nextTick(function () {
+                var menu = _this2.$el;
+                var minHeight = (menu.style.minHeight || menu.style.height).replace('px', '') || 32;
+                var minWidth = (menu.style.minWidth || menu.style.width).replace('px', '') || 32;
+                var scrollHeight = menu.scrollHeight || minHeight;
+                var scrollWidth = menu.scrollWidth || minWidth;
+
+                var largestHeight = window.innerHeight - scrollHeight - 25;
+                var largestWidth = window.innerWidth - scrollWidth - 25;
+
+                if (_this2.ctxTop > largestHeight) _this2.ctxTop = largestHeight;
+                if (_this2.ctxLeft > largestWidth) _this2.ctxLeft = largestWidth;
+            });
+
+            return e;
+        },
+        open: function open(e, data) {
+            if (this.ctxVisible) this.ctxVisible = false;
+            if (!e && this.ctxEvent) e = this.ctxEvent;
+            this.ctxVisible = true;
+            if (!data && this.ctxEl) data = this.ctxEl;
+            this.$emit('ctx-open', this.locals = data || {});
+            this.setPositionFromEvent(e);
+            this.$el.setAttribute('tab-index', -1);
+            this.bodyClickListener.start();
+            return this;
+        }
+    }),
+    computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+        ctxEvent: function ctxEvent(state) {
+            return state.contextMenu.data.event;
+        },
+        ctxEl: function ctxEl(state) {
+            return state.contextMenu.data.el;
+        }
+    }), {
+        ctxStyle: function ctxStyle() {
+            return {
+                'display': this.ctxVisible ? 'block' : 'none',
+                'top': (this.ctxTop || 0) + 'px',
+                'left': (this.ctxLeft || 0) + 'px'
+            };
+        }
+    })
+};
 
 /***/ }),
 
@@ -8986,7 +9116,39 @@ var _NodesTreeStoreModule = __webpack_require__("../Resources/app/store/modules/
 
 var _NodesTreeStoreModule2 = _interopRequireDefault(_NodesTreeStoreModule);
 
+var _ContextualMenuStoreModule = __webpack_require__("../Resources/app/store/modules/ContextualMenuStoreModule.js");
+
+var _ContextualMenuStoreModule2 = _interopRequireDefault(_ContextualMenuStoreModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = new _vuex2.default.Store({
+    modules: {
+        nodesSourceSearch: _NodesSourceSearchStoreModule2.default,
+        explorer: _ExplorerStoreModule2.default,
+        filterExplorer: _FilterExplorerStoreModule2.default,
+        drawers: _DrawersStoreModule2.default,
+        tags: _TagsStoreModule2.default,
+        documentPreview: _DocumentPreviewStoreModule2.default,
+        blanchetteEditor: _BlanchetteEditorStoreModule2.default,
+        nodesTree: _NodesTreeStoreModule2.default,
+        contextMenu: _ContextualMenuStoreModule2.default
+    },
+    state: {
+        translations: window.RozierRoot.messages,
+        connected: true
+    },
+    mutations: (0, _defineProperty3.default)({}, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
+        state.connected = false;
+    }),
+    actions: {
+        escape: function escape(_ref) {
+            var commit = _ref.commit;
+
+            commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
+        }
+    }
+});
 
 // Modules
 /*
@@ -9016,33 +9178,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @file index.js
  * @author Adrien Scholaert <adrien@rezo-zero.com>
  */
-
-exports.default = new _vuex2.default.Store({
-    modules: {
-        nodesSourceSearch: _NodesSourceSearchStoreModule2.default,
-        explorer: _ExplorerStoreModule2.default,
-        filterExplorer: _FilterExplorerStoreModule2.default,
-        drawers: _DrawersStoreModule2.default,
-        tags: _TagsStoreModule2.default,
-        documentPreview: _DocumentPreviewStoreModule2.default,
-        blanchetteEditor: _BlanchetteEditorStoreModule2.default,
-        nodesTree: _NodesTreeStoreModule2.default
-    },
-    state: {
-        translations: window.RozierRoot.messages,
-        connected: true
-    },
-    mutations: (0, _defineProperty3.default)({}, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
-        state.connected = false;
-    }),
-    actions: {
-        escape: function escape(_ref) {
-            var commit = _ref.commit;
-
-            commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
-        }
-    }
-});
 
 /***/ }),
 
@@ -9191,6 +9326,114 @@ var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mut
     var path = _ref9.path;
 
     state.originalUrl = path;
+}), _mutations);
+
+exports.default = {
+    state: state,
+    actions: actions,
+    mutations: mutations
+};
+
+/***/ }),
+
+/***/ "../Resources/app/store/modules/ContextualMenuStoreModule.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = __webpack_require__("../node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _mutations; /*
+                 * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+                 *
+                 * Permission is hereby granted, free of charge, to any person obtaining a copy
+                 * of this software and associated documentation files (the "Software"), to deal
+                 * in the Software without restriction, including without limitation the rights
+                 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                 * copies of the Software, and to permit persons to whom the Software is furnished
+                 * to do so, subject to the following conditions:
+                 * The above copyright notice and this permission notice shall be included in all
+                 * copies or substantial portions of the Software.
+                 *
+                 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+                 * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+                 * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+                 * IN THE SOFTWARE.
+                 *
+                 * Except as contained in this notice, the name of the ROADIZ shall not
+                 * be used in advertising or otherwise to promote the sale, use or other dealings
+                 * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+                 *
+                 * @file ContextualMenuStoreModule.js
+                 * @author Adrien Scholaert <adrien@rezo-zero.com>
+                 */
+
+var _mutationTypes = __webpack_require__("../Resources/app/types/mutationTypes.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ *  State
+ */
+var state = {
+    isOpen: false,
+    data: {
+        event: null,
+        el: null
+    }
+
+    /**
+     *  Actions
+     */
+};var actions = {
+    contextualMenuToggle: function contextualMenuToggle(_ref, _ref2) {
+        var commit = _ref.commit;
+        var event = _ref2.event,
+            el = _ref2.el;
+
+        commit(_mutationTypes.CONTEXTUAL_MENU_TOGGLE, { event: event, el: el });
+    },
+    contextualMenuClose: function contextualMenuClose(_ref3) {
+        var commit = _ref3.commit;
+
+        commit(_mutationTypes.CONTEXTUAL_MENU_CLOSE);
+    }
+};
+
+/**
+ *  Mutations
+ */
+var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.CONTEXTUAL_MENU_TOGGLE, function (state, _ref4) {
+    var event = _ref4.event,
+        el = _ref4.el;
+
+    if (event) {
+        state.data.event = event;
+    } else {
+        state.data.event = null;
+    }
+
+    if (el) {
+        state.data.el = el;
+    } else {
+        state.data.el = null;
+    }
+
+    state.isOpen = !!(event || el);
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.CONTEXTUAL_MENU_CLOSE, function (state) {
+    state.data.event = null;
+    state.data.el = null;
+    state.isOpen = false;
 }), _mutations);
 
 exports.default = {
@@ -10354,10 +10597,12 @@ var actions = {
 
         commit(_mutationTypes.NODES_TREE_UPDATE_LIST, values);
     },
-    nodesTreeSelectNode: function nodesTreeSelectNode(_ref3, node) {
+    nodesTreeSelectNode: function nodesTreeSelectNode(_ref3, _ref4) {
         var commit = _ref3.commit;
+        var event = _ref4.event,
+            node = _ref4.node;
 
-        commit(_mutationTypes.NODES_TREE_SELECT_NODE, node);
+        commit(_mutationTypes.NODES_TREE_SELECT_NODE, { event: event, node: node });
     }
 };
 
@@ -10366,8 +10611,15 @@ var actions = {
  */
 var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.NODES_TREE_UPDATE_LIST, function (state, values) {
     state.list = values;
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.NODES_TREE_SELECT_NODE, function (state, node) {
-    state.selectedNode = node;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.NODES_TREE_SELECT_NODE, function (state, _ref5) {
+    var event = _ref5.event,
+        node = _ref5.node;
+
+    if (!event || !node) {
+        state.selectedNode = null;
+    } else {
+        state.selectedNode = { event: event, node: node };
+    }
 }), _mutations);
 
 exports.default = {
@@ -10575,6 +10827,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /**
+ * Contextual Menu
+ */
+var CONTEXTUAL_MENU_TOGGLE = exports.CONTEXTUAL_MENU_TOGGLE = 'CONTEXTUAL_MENU_TOGGLE';
+var CONTEXTUAL_MENU_CLOSE = exports.CONTEXTUAL_MENU_CLOSE = 'CONTEXTUAL_MENU_CLOSE';
+
+/**
  * Nodes Tree
  */
 var NODES_TREE_UPDATE_LIST = exports.NODES_TREE_UPDATE_LIST = 'NODES_TREE_UPDATE_LIST';
@@ -10683,6 +10941,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.dataURItoBlob = dataURItoBlob;
+exports.createBodyClickListener = createBodyClickListener;
 /*
  * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
  *
@@ -10723,6 +10982,52 @@ function dataURItoBlob(dataURI) {
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
     return new Blob([new Uint8Array(array)], { type: mimeString });
+}
+
+/**
+ * When listening for an outside click, we set useCapture = true.
+ * This way, we can prevent other click listeners from firing when performing the 'click-out'.
+ * If useCapture is set to false, the handlers fire backwards
+ */
+function createBodyClickListener(fn) {
+    var isListening = false;
+
+    /**
+     * Public api
+     */
+    return {
+        get isListening() {
+            return isListening;
+        },
+
+        start: function start(cb) {
+            window.addEventListener('click', _onclick, true);
+            window.addEventListener('keyup', _onescape, true);
+            isListening = true;
+            if (typeof cb === 'function') cb();
+        },
+        stop: function stop(cb) {
+            window.removeEventListener('click', _onclick, true);
+            window.removeEventListener('keyup', _onescape, true);
+            isListening = false;
+            if (typeof cb === 'function') cb();
+        }
+    };
+
+    /**
+     * @private
+     */
+    function _onclick(e) {
+        e.preventDefault();
+        if (typeof fn === 'function') fn(e);
+    }
+
+    /**
+     * @private
+     */
+    function _onescape(e) {
+        if (e.keyCode === 27) _onclick(e);
+    }
 }
 
 /***/ }),
@@ -37839,6 +38144,13 @@ exports.default = _ContextualMenuScript.ContextualMenu; //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -37858,55 +38170,10 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 var _vuex = __webpack_require__("vuex");
 
-var _ContextualMenuComponent = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuComponent.vue");
-
-var _ContextualMenuComponent2 = _interopRequireDefault(_ContextualMenuComponent);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 exports.default = {
-    components: { ContextualMenuComponent: _ContextualMenuComponent2.default },
     name: 'node-tree-component',
-    compontents: {
-        ContextualMenuComponent: _ContextualMenuComponent2.default
-    },
     computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
         list: function list(state) {
             return state.nodesTree.list;
@@ -37921,7 +38188,41 @@ exports.default = {
             this.nodesTreeUpdateList(this.list);
         }
     })
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -37941,53 +38242,10 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 var _vuex = __webpack_require__("vuex");
 
-var _ContextualMenuComponent = __webpack_require__("../Resources/app/components/context-menu/ContextualMenuComponent.vue");
-
-var _ContextualMenuComponent2 = _interopRequireDefault(_ContextualMenuComponent);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     name: 'node-tree-contextual-menu-component',
-    components: {
-        ContextualMenuComponent: _ContextualMenuComponent2.default
-    },
     data: function data() {
         return {
             isHover: true,
@@ -38000,18 +38258,46 @@ exports.default = {
             type: Object
         }
     },
-    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['nodesTreeSelectNode']), {
-        onClick: function onClick() {
-            this.selected = !this.selected;
-
-            if (this.selected) {
-                this.nodesTreeSelectNode(this.data);
-            } else {
-                this.nodesTreeSelectNode(null);
-            }
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['contextualMenuToggle']), {
+        onClick: function onClick(e) {
+            this.contextualMenuToggle({ event: e, el: this.data });
         }
     })
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -40798,20 +41084,28 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _vm.node ? _c("nav", {
-    staticClass: "uk-dropdown uk-dropdown-small uk-dropdown-flip uk-dropdown-bottom"
-  }, [_vm._m(0, false, false), _vm._v(" "), _vm._m(1, false, false)]) : _vm._e();
+  return _c("nav", {
+    ref: "contextMenu",
+    staticClass: "ctx-menu-container uk-dropdown uk-dropdown-small uk-dropdown-flip uk-dropdown-bottom",
+    style: _vm.ctxStyle,
+    on: {
+      click: function click($event) {
+        $event.stopPropagation();
+      },
+      contextmenu: function contextmenu($event) {
+        $event.stopPropagation();
+      }
+    }
+  }, [_vm._m(0, false, false)]);
 };
 var staticRenderFns = [function () {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "vertical-nodetype" }, [_c("p", { staticClass: "text" }, [_vm._v("Page")])]);
-}, function () {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "uk-nav uk-nav-dropdown" }, [_c("p", { staticClass: "add-child" }, [_c("a", {
+  return _c("div", {
+    staticClass: "ctx open",
+    staticStyle: { "background-color": "transparent" }
+  }, [_c("div", { staticClass: "vertical-nodetype" }, [_c("p", { staticClass: "text" }, [_vm._v("Page")])]), _vm._v(" "), _c("div", { staticClass: "uk-nav uk-nav-dropdown" }, [_c("p", { staticClass: "add-child" }, [_c("a", {
     attrs: {
       title: "Ajouter un nœud enfant à «bonjour-roadiz»",
       href: "/dev.php/rz-admin/nodes/add-child/4"
@@ -40824,10 +41118,10 @@ var staticRenderFns = [function () {
   }, [_c("i", { staticClass: "uk-icon-rz-pencil" }), _vm._v(" Éditer le nœud")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "move-node-first-position smaller-text",
     attrs: { title: "Déplacer en début de liste", href: "#" }
-  }, [_c("i", { staticClass: "uk-icon-arrow-up" }), _vm._v(" Déplacer en début de liste\n                ")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_c("i", { staticClass: "uk-icon-arrow-up" }), _vm._v(" Déplacer en début de liste\n                    ")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "move-node-last-position smaller-text",
     attrs: { title: "Déplacer en fin de liste", href: "#" }
-  }, [_c("i", { staticClass: "uk-icon-arrow-down" }), _vm._v(" Déplacer en fin de liste\n                ")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_c("i", { staticClass: "uk-icon-arrow-down" }), _vm._v(" Déplacer en fin de liste\n                    ")])]), _vm._v(" "), _c("p", [_c("a", {
     attrs: {
       title: "Supprimer le nœud «bonjour-roadiz»",
       href: "/dev.php/rz-admin/nodes/delete/4?referer=http%3A//roadiz.local/dev.php/rz-admin/nodes/edit/9/source/1"
@@ -40863,7 +41157,7 @@ var staticRenderFns = [function () {
       title: "Dupliquer",
       href: "#"
     }
-  }, [_c("i", { staticClass: "uk-icon-rz-duplicate" }), _vm._v(" Dupliquer")])])])]);
+  }, [_c("i", { staticClass: "uk-icon-rz-duplicate" }), _vm._v(" Dupliquer")])])])])]);
 }];
 render._withStripped = true;
 var esExports = { render: render, staticRenderFns: staticRenderFns };
@@ -41511,7 +41805,7 @@ var render = function render() {
   return _c("div", [_c("transition", { attrs: { name: "fade" } }, [_vm.list.length > 0 ? _c("node-tree-list-component", {
     attrs: { name: "tree-list", data: _vm.list, "is-child": false },
     on: { change: _vm.onChange }
-  }) : _vm._e()], 1), _vm._v(" "), _c("contextual-menu-component")], 1);
+  }) : _vm._e()], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -61494,7 +61788,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.uk-dropdown[data-v-44725cde] {\n  position: fixed;\n  display: block !important;\n}\n", ""]);
+exports.push([module.i, "/*.uk-dropdown {*/\n/*position: fixed;*/\n/*display: block !important;*/\n/*}*/\n.ctx[data-v-44725cde] {\n  position: relative;\n}\n.ctx-menu[data-v-44725cde] {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 160px;\n  padding: 5px 0;\n  margin: 2px 0 0;\n  font-size: .9rem;\n  color: #373a3c;\n  text-align: left;\n  list-style: none;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: .25rem;\n  -webkit-box-shadow: 0 0 5px #CCC;\n  box-shadow: 0 0 5px #CCC;\n}\n.ctx-divider[data-v-44725cde] {\n  height: 1px;\n  margin: .5rem 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n.ctx-item[data-v-44725cde] {\n  display: block;\n  /*width: 100%;*/\n  padding: 3px 20px;\n  clear: both;\n  font-weight: normal;\n  line-height: 1.5;\n  color: #373a3c;\n  text-align: inherit;\n  white-space: nowrap;\n  background: none;\n  border: 0;\n  cursor: default;\n}\n.ctx-item[data-v-44725cde]:focus,\n.ctx-item[data-v-44725cde]:hover {\n  color: #2b2d2f;\n  text-decoration: none;\n  background-color: #f5f5f5;\n  cursor: normal;\n}\n.ctx-item.active[data-v-44725cde],\n.ctx-item.active[data-v-44725cde]:focus,\n.ctx-item.active[data-v-44725cde]:hover {\n  color: #fff;\n  text-decoration: none;\n  background-color: #0275d8;\n  outline: 0;\n}\n.ctx-item.disabled[data-v-44725cde],\n.ctx-item.disabled[data-v-44725cde]:focus,\n.ctx-item.disabled[data-v-44725cde]:hover {\n  color: #818a91;\n}\n.ctx-item.disabled[data-v-44725cde]:focus,\n.ctx-item.disabled[data-v-44725cde]:hover {\n  text-decoration: none;\n  cursor: not-allowed;\n  background-color: transparent;\n  background-image: none;\n  filter: \"progid:DXImageTransform.Microsoft.gradient(enabled = false)\";\n}\n.open > .ctx-menu[data-v-44725cde] {\n  display: block;\n}\n.open > a[data-v-44725cde] {\n  outline: 0;\n}\n.ctx-menu-right[data-v-44725cde] {\n  right: 0;\n  left: auto;\n}\n.ctx-menu-left[data-v-44725cde] {\n  right: auto;\n  left: 0;\n}\n.ctx-header[data-v-44725cde] {\n  display: block;\n  padding: 3px 20px;\n  font-size: .9rem;\n  line-height: 1.5;\n  color: #818a91;\n  white-space: nowrap;\n}\n.ctx-backdrop[data-v-44725cde] {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 990;\n}\n.pull-right > .ctx-menu[data-v-44725cde] {\n  right: 0;\n  left: auto;\n}\n.ctx-menu-container[data-v-44725cde] {\n  position: fixed;\n  padding: 0;\n  border: 1px solid #bbb;\n  background-color: whitesmoke;\n  z-index: 99999;\n  max-width: 220px;\n  -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);\n          box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);\n}\n", ""]);
 
 // exports
 
