@@ -27,14 +27,18 @@
   -->
 
 <template>
-    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isHover }">
-        <div class="tree-contextualmenu-button uk-button uk-button-mini" v-if="isHover" @click="onClick">
+    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isItem() }">
+        <div class="tree-contextualmenu-button uk-button uk-button-mini"
+             :class="{ 'disabled': isItem() }"
+             v-if="isHover"
+             @click.stop="onClick"
+             ref="button">
             <i class="uk-icon-caret-down"></i>
         </div>
     </div>
 </template>
 <script>
-    import { mapActions } from 'vuex'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         name: 'node-tree-contextual-menu-component',
@@ -51,11 +55,26 @@
         },
         methods: {
             ...mapActions([
-                'contextualMenuToggle'
+                'contextualMenuOpen',
+                'contextualMenuClose',
+                'contextualMenuReset'
             ]),
             onClick (e) {
-                this.contextualMenuToggle({ event: e, el: this.data })
+                this.contextualMenuOpen({
+                    event: e,
+                    data: this.data,
+                    el: this.$refs.button
+                })
+            },
+            isItem () {
+                return this.ctxMenuVisible && this.ctxMenuData && this.ctxMenuData.id === this.data.id
             }
+        },
+        computed: {
+            ...mapState({
+                ctxMenuVisible: state => state.contextMenu.isOpen,
+                ctxMenuData: state => state.contextMenu.obj.data
+            })
         }
     }
 </script>
@@ -64,10 +83,18 @@
         position: absolute;
         right: 22px;
         top: 3px;
-        opacity: 1;
+        opacity: 0;
+
+        &:hover {
+            opacity: 1;
+        }
     }
 
     .context-menu-open {
-        z-index: 22;
+        opacity: 1;
+    }
+
+    .disabled {
+        pointer-events: none;
     }
 </style>

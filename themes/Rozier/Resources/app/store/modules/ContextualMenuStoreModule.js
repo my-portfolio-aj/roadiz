@@ -27,7 +27,7 @@
  */
 
 import {
-    CONTEXTUAL_MENU_TOGGLE,
+    CONTEXTUAL_MENU_OPEN,
     CONTEXTUAL_MENU_CLOSE
 } from '../../types/mutationTypes'
 
@@ -36,18 +36,17 @@ import {
  */
 const state = {
     isOpen: false,
-    data: {
-        event: null,
-        el: null
-    }
+    obj: {}
 }
 
 /**
  *  Actions
  */
 const actions = {
-    contextualMenuToggle ({ commit }, { event, el }) {
-        commit(CONTEXTUAL_MENU_TOGGLE, { event, el })
+    contextualMenuOpen ({ commit }, { event, el, data }) {
+        if (event && el && data) {
+            commit(CONTEXTUAL_MENU_OPEN, { event, el, data })
+        }
     },
     contextualMenuClose ({ commit }) {
         commit(CONTEXTUAL_MENU_CLOSE)
@@ -58,24 +57,16 @@ const actions = {
  *  Mutations
  */
 const mutations = {
-    [CONTEXTUAL_MENU_TOGGLE] (state, { event, el }) {
-        if (event) {
-            state.data.event = event
-        } else {
-            state.data.event = null
+    [CONTEXTUAL_MENU_OPEN] (state, { event, el, data }) {
+        state.obj = {
+            event,
+            el,
+            data
         }
 
-        if (el) {
-            state.data.el = el
-        } else {
-            state.data.el = null
-        }
-
-        state.isOpen = !!(event || el)
+        state.isOpen = true
     },
     [CONTEXTUAL_MENU_CLOSE] (state) {
-        state.data.event = null
-        state.data.el = null
         state.isOpen = false
     }
 }

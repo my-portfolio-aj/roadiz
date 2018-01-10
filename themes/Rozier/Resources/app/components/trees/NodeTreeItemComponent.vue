@@ -102,6 +102,15 @@
         }
     }
 
+    .rz-nestable-panel {
+        &:hover {
+            .nodetree-contextualmenu {
+                opacity: 1;
+            }
+        }
+    }
+
+
     .nodetree-element-inner {
         position: relative;
         z-index: 2;
