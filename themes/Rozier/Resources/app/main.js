@@ -36,9 +36,18 @@ import $ from 'jquery'
 import Rozier from './Rozier'
 import GeotagField from './widgets/GeotagField'
 import MultiGeotagField from './widgets/MultiGeotagField'
+import Api from './api'
+import Promise from 'bluebird'
 
+// Translations
+import Translator from 'bazinga-translator'
+
+// Set globals
 window.CodeMirror = CodeMirror
 window.UIkit = UIkit
+
+// Config Translator
+Translator.locale = window.temp.locale || 'fr'
 
 // eslint-disable-next-line
 window.initializeGeotagFields = () => {
@@ -55,7 +64,6 @@ window.initializeGeotagFields = () => {
  * Rozier entry point
  * ============================================================================
  */
-
 window.Rozier = new Rozier()
 
 /*
@@ -63,6 +71,24 @@ window.Rozier = new Rozier()
  * Plug into jQuery standard events
  * ============================================================================
  */
-$(document).ready(() => {
-    window.Rozier.onDocumentReady()
-})
+const onLoad = () => {
+    return new Promise(resolve => {
+        $(document).ready(() => {
+            resolve()
+        })
+    })
+}
+
+// Waiting for translations and document ready
+Promise
+    .all([onLoad(), Api.getTranslations()])
+    .then(results => {
+        // Set translations
+        if (results[1]) {
+            Translator.fromJSON(results[1])
+        }
+
+        // Build Rozier
+        window.Rozier.onDocumentReady()
+    })
+    .catch(err => console.error(err.message))

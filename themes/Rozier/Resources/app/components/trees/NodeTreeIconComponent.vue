@@ -27,10 +27,54 @@
   -->
 
 <template>
-    <div class="uk-nestable-handle rz-handle"></div>
+    <div class="rz-handle">
+        <tree-icon-unpublished-component :color="getColor" v-if="!data.statuses.published" />
+        <tree-icon-normal-component :color="getColor" v-else />
+    </div>
 </template>
 <script>
+    import TreeIconUnpublishedComponent from '../tree-icon/TreeIconUnpublishedComponent.vue'
+    import TreeIconNormalComponent from '../tree-icon/TreeIconNormalComponent.vue'
+
     export default {
-        name: 'node-tree-icon-component'
+        name: 'node-tree-icon-component',
+        components: {
+            TreeIconUnpublishedComponent,
+            TreeIconNormalComponent
+        },
+        props: {
+            data: {
+                type: Object,
+                required: true
+            }
+        },
+        computed: {
+            getColor () {
+                if (this.data && this.data.type && this.data.type.color) {
+                    return this.data.type.color
+                }
+
+                return '#000'
+            }
+        }
     }
 </script>
+<style lang="scss">
+    .rz-handle {
+        position: relative;
+        display: inline-block;
+        touch-action: none;
+
+        &:hover {
+            cursor: move;
+
+            .rz-tree-icon {
+                background-color: #D3D3D3;
+            }
+        }
+
+        .rz-tree-icon {
+            background-color: #fff;
+        }
+    }
+</style>

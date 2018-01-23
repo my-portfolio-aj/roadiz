@@ -37,8 +37,8 @@
             <div class="ctx-menu-wrapper" v-if="ctxData && ctxVisible">
                 <contextual-menu-vertical-component :data="ctxData" />
                 <div class="ctx-menu-sections-wrapper">
-                    <contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" label="Actions" />
-                    <!--<contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" label="Actions" />-->
+                    <contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" :label="trans.actions" />
+                    <!--<contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" :label="trans.statuses" />-->
                 </div>
             </div>
         </transition>
@@ -53,7 +53,7 @@
         position: fixed;
         padding: 0;
         border: 1px solid #bbb;
-        background-color: whitesmoke;
+        background-color: #F5F5F5;
         z-index: 99999;
         width: 220px;
         min-height: 200px;
@@ -62,10 +62,12 @@
 
     .ctx-menu-wrapper {
         display: flex;
+        width: 100%;
     }
 
     .ctx-menu-sections-wrapper {
         display: flex;
         flex-flow: column;
+        width: 100%;
     }
 </style>

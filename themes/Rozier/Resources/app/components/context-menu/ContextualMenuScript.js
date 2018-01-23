@@ -30,6 +30,7 @@ import { createBodyClickListener } from '../../utils'
 import { mapState, mapActions } from 'vuex'
 import ContextualMenuVerticalComponent from './ContextualMenuVerticalComponent.vue'
 import ContextualMenuSectionComponent from './ContextualMenuSectionComponent.vue'
+import Translator from 'bazinga-translator'
 
 export const ContextualMenu = {
     name: 'contextual-menu-component',
@@ -56,6 +57,10 @@ export const ContextualMenu = {
         return {
             ctxTop: 0,
             ctxLeft: 0,
+            trans: {
+                statuses: Translator.trans('statuses'),
+                actions: Translator.trans('actions')
+            },
             bodyClickListener: createBodyClickListener(
                 (e) => {
                     let isOpen = !!this.ctxVisible

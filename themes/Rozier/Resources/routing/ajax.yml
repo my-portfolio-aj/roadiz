@@ -195,3 +195,10 @@ customFormFieldAjaxEdit:
         _controller: Themes\Rozier\AjaxControllers\AjaxCustomFormFieldsController::editAction
         _format: json
     requirements: { customFormFieldId : "[0-9]+" }
+## Translations
+ajaxTranslations:
+    path:     /translations/list
+    methods: [GET]
+    defaults:
+        _controller: Themes\Rozier\AjaxControllers\AjaxTranslationsController::listAction
+        _format: json

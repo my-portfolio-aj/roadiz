@@ -40,6 +40,7 @@
     import AjaxLink from '../AjaxLink.vue'
 
     export default {
+        name: 'contextual-menu-section-component',
         components: {
             AjaxLink
         },
@@ -63,16 +64,23 @@
     }
 </script>
 <style lang="scss" scoped>
+    @import '../../scss/variables';
+
     .rz-ctx-menu-section {
         padding: 0 0 0 15px;
+        border-top: 1px dashed #CCCCCC;
+
+        &:first-of-type {
+            border-top: 0;
+        }
 
         &-header {
             font-size: 11px;
             line-height: 14px;
             margin: 0;
-            padding: 7px 0 3px;
+            padding: 9px 0 5px;
             text-transform: capitalize;
-            color: #333333;
+            color: $grayDarken;
             font-weight: 700;
         }
 
@@ -80,8 +88,12 @@
             border-bottom: 1px solid #CCCCCC;
             margin: 0;
 
+            &:last-of-type {
+                border-bottom: 0;
+            }
+
             a {
-                padding: 7px 13px 4px 13px;
+                padding: 4px 10px 0 10px;
                 display: flex;
                 flex-flow: row-reverse;
                 align-items: center;
@@ -89,8 +101,8 @@
                 min-height: 30px;
                 text-decoration: none;
                 font-weight: bold;
-                font-size: 12px;
-                color: #666666;
+                font-size: 11px;
+                color: $gray;
                 border-top: 1px solid #fff;
                 background-color: #EBEBEB;
                 transition: background ease 0.2s, color ease 0.2s;

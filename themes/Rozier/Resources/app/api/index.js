@@ -5,6 +5,7 @@ import * as DrawerApi from './DrawerApi'
 import * as TagApi from './TagApi'
 import * as SplashScreenApi from './SplashScreenApi'
 import * as ExplorerProviderApi from './ExplorerProviderApi'
+import * as TranslationsApi from './TranslationsApi'
 
 const api = {
     ...NodesSourceSearchApi,
@@ -13,7 +14,8 @@ const api = {
     ...DrawerApi,
     ...TagApi,
     ...SplashScreenApi,
-    ...ExplorerProviderApi
+    ...ExplorerProviderApi,
+    ...TranslationsApi
 }
 
 export default api

@@ -28,7 +28,7 @@
 
 <template>
     <div class="tree-element-name nodetree-element-name">
-        <ajax-link :title="title" :href="url" />
+        <ajax-link :title="data.title" :href="data.url" />
     </div>
 </template>
 <script>
@@ -40,11 +40,9 @@
             AjaxLink
         },
         props: {
-            title: {
-                type: String
-            },
-            url: {
-                type: String
+            data: {
+                type: Object,
+                required: true
             }
         }
     }

@@ -28,11 +28,11 @@
 
 <template>
     <div
-        class="page nodetree-element rz-nestable-item"
-        :class="{ 'has-children rz-parent': data.children }">
-        <div class="nodetree-element-inner rz-nestable-panel">
-            <node-tree-icon-component />
-            <node-tree-link-component :title="data.title" :url="data.url" />
+        class="nodetree-element rz-nestable-item"
+        :class="getNodeTreeClass">
+        <div class="nodetree-element-inner rz-nestable-panel" :class="getNodeTreeInnerClass">
+            <node-tree-icon-component :data="data" />
+            <node-tree-link-component :data="data" />
             <node-tree-contextual-menu-component :data="data" />
         </div>
         <node-tree-list-component name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
@@ -59,10 +59,24 @@
             onChange () {
                 this.$emit('change')
             }
+        },
+        computed: {
+            getNodeTreeClass () {
+                return [{
+                    'has-children rz-parent': this.data.children
+                },
+                    this.data.type && this.data.type.name ? this.data.type.name.toLowerCase() : null
+                ]
+            },
+            getNodeTreeInnerClass () {
+                return {
+                    'hidden-node': !this.data.statuses.visible
+                }
+            }
         }
     }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
     .rz-nestable-item {
         position: relative;
         margin-left: -6px;
@@ -100,22 +114,26 @@
             width: 13px;
             background-color: #aaa;
         }
-    }
 
-    .rz-nestable-panel {
-        &:hover {
-            .nodetree-contextualmenu {
-                opacity: 1;
+        .nodetree-element-inner {
+            position: relative;
+            z-index: 2;
+            margin-left: 13px;
+            height: 18px;
+            padding-top: 4px;
+        }
+
+        .rz-nestable-panel {
+            &:hover {
+                .nodetree-contextualmenu {
+                    opacity: 1;
+                }
+            }
+
+            &.hidden-node > .nodetree-element-name a {
+                text-decoration: line-through;
+                opacity: 0.8;
             }
         }
-    }
-
-
-    .nodetree-element-inner {
-        position: relative;
-        z-index: 2;
-        margin-left: 13px;
-        height: 18px;
-        padding-top: 4px;
     }
 </style>

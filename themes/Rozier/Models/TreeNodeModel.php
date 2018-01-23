@@ -74,7 +74,8 @@ class TreeNodeModel extends NodeModel
                 [
                     'icon'=> 'rz-plus',
                     'url'=> $urlGenerator->generate('nodesAddChildPage', ['nodeId' => $this->node->getId()]),
-                    'label'=> $trans->trans("add.node.%name%.child", ['%name%' => $source->getTitle()]),
+                    'title'=> $trans->trans("add.node.%name%.child", ['%name%' => $source->getTitle()]),
+                    'label'=> $trans->trans("add.a.child.node"),
                 ],
                 [
                     'icon'=> 'rz-pencil',
@@ -82,7 +83,8 @@ class TreeNodeModel extends NodeModel
                         'nodeId' => $this->node->getId(),
                         'translationId' => $source->getTranslation()->getId(),
                     ]),
-                    'label'=> $trans->trans("edit.node.%name%", ['%name%' => $source->getTitle()]),
+                    'title'=> $trans->trans("edit.node.%name%", ['%name%' => $source->getTitle()]),
+                    'label'=> $trans->trans("edit.node"),
                 ],
             ]
         ];
@@ -93,6 +95,7 @@ class TreeNodeModel extends NodeModel
                 'url'=> $urlGenerator->generate('nodesPublishAllAction', [
                     'nodeId' => $this->node->getId()
                 ]),
+                'title'=> $trans->trans("publish_node_offspring"),
                 'label'=> $trans->trans("publish_node_offspring"),
             ];
         }
@@ -102,7 +105,8 @@ class TreeNodeModel extends NodeModel
             $nodeArray['actions'][] = [
                 'icon'=> 'rz-trash-o',
                 'url'=> $urlGenerator->generate('nodesDeletePage', ['nodeId' => $this->node->getId()]),
-                'label'=> $trans->trans("delete.node.%name%", ['%name%' => $source->getTitle()]),
+                'title'=> $trans->trans("delete.node.%name%", ['%name%' => $source->getTitle()]),
+                'label'=> $trans->trans("delete.node"),
             ];
         }
 

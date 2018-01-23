@@ -96,6 +96,7 @@
 
         <script type="text/javascript">
             var temp = {
+                'locale':         '{{ request.locale }}',
                 'baseUrl':        '{{ head.baseUrl }}',
                 'resourcesUrl':   '{{ head.resourcesUrl }}',
                 'ajaxToken':      '{{ head.ajaxToken }}',
@@ -220,7 +221,8 @@
                     'tagAjaxSearch':              '{{ path('tagAjaxSearch') }}',
                     'foldersAjaxSearch':          '{{ path('foldersAjaxSearch') }}',
                     'ajaxSessionMessages':        '{{ path('ajaxSessionMessages') }}',
-                    'nodesTreeJson':              '{{ path('nodesTreeJson') }}'
+                    'nodesTreeJson':              '{{ path('nodesTreeJson') }}',
+                    'ajaxTranslations':           '{{ path('ajaxTranslations') }}'
                 }
             };
 

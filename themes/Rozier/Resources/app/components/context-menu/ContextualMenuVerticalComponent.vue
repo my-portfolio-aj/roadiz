@@ -28,7 +28,9 @@
 
 <template>
     <div class="rz-context-menu-vertical" :style="style">
-        <div class="type">{{ data.type.name }}</div>
+        <i class="uk-icon-rz-lock" v-if="data.statuses && data.statuses.locked"></i>
+        <i class="uk-icon-eye-slash" v-if="data.statuses && !data.statuses.visible"></i>
+        <div class="type" v-if="data.type && data.type.name">{{ data.type.name }}</div>
     </div>
 </template>
 <script>
@@ -57,7 +59,7 @@
         .type {
             position: absolute;
             bottom: -8px;
-            left: 5px;
+            left: 7px;
             transform-origin: 0 0;
             transform: rotate(-90deg);
             text-transform: uppercase;
@@ -65,6 +67,14 @@
             font-weight: bold;
             color: #fff;
             letter-spacing: 1px;
+        }
+
+        i {
+            color: rgba(255, 255, 255, 0.75);
+            margin: 10px 5px;
+            display: block;
+            width: 16px;
+            font-size: 16px;
         }
     }
 </style>
