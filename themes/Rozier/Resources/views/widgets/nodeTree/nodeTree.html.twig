@@ -68,7 +68,7 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <node-tree-component data-vuejs-persistent></node-tree-component>
+                <tree-component url="{{ path('nodesTreeJson') }}" data-vuejs-persistent></tree-component>
             {% if mainNodeTree %}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import NodeTreeContextActions from '../components/trees/NodeTreeContextActions'
+import NodesTreeContextActions from '../components/nodes-tree/NodesTreeContextActions'
 
 /**
  * Children nodes field
@@ -147,7 +147,7 @@ export default class ChildrenNodesField {
                             this.init()
 
                             window.Rozier.lazyload.canvasLoader.hide()
-                            window.Rozier.lazyload.nodeTreeContextActions = new NodeTreeContextActions()
+                            window.Rozier.lazyload.nodeTreeContextActions = new NodesTreeContextActions()
                         })
                     }
                 })

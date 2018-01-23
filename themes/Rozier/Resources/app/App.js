@@ -47,16 +47,15 @@ import ModalContainer from './containers/ModalContainer.vue'
 
 // Components
 import Overlay from './components/Overlay.vue'
-import NodeTreeComponent from './components/trees/NodeTreeComponent.vue'
+import TreeComponent from './components/tree/TreeComponent.vue'
 import ContextualMenuComponent from './components/context-menu/ContextualMenuComponent.vue'
+import TreeListComponent from './components/tree/TreeListComponent.vue'
 
 import {
     KEYBOARD_EVENT_ESCAPE
 } from './types/mutationTypes'
 
-import NodeTreeListComponent from './components/trees/NodeTreeListComponent.vue'
-
-Vue.component('node-tree-list-component', NodeTreeListComponent)
+Vue.component('tree-list-component', TreeListComponent)
 
 /**
  * Root entry for VueJS App.
@@ -83,7 +82,7 @@ export default class AppVue {
 
         this.registeredComponents = {
             Overlay,
-            NodeTreeComponent
+            TreeComponent
         }
 
         this.vuejsElements = {

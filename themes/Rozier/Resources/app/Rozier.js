@@ -38,7 +38,7 @@ import {
     TweenLite,
     Expo
 } from 'gsap'
-import NodeTreeContextActions from './components/trees/NodeTreeContextActions'
+import NodesTreeContextActions from './components/nodes-tree/NodesTreeContextActions'
 import RozierMobile from './RozierMobile'
 
 /**
@@ -327,7 +327,7 @@ export default class Rozier {
                             this.bindMainTrees()
                             this.resize()
                             this.lazyload.bindAjaxLink()
-                            this.lazyload.nodeTreeContextActions = new NodeTreeContextActions()
+                            this.lazyload.nodeTreeContextActions = new NodesTreeContextActions()
                         })
                     }
                 })

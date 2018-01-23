@@ -27,10 +27,11 @@
   -->
 
 <template>
-    <div class="rz-tree-icon normal"></div>
+    <div class="rz-tree-icon normal" v-bind:style="{ border: `1px solid ${color}` }"></div>
 </template>
 <script>
     export default {
+        name: 'tree-icon-normal-component',
         props: {
             color: {
                 type: String,
@@ -52,5 +53,10 @@
         height: 10px;
         top: 1px;
         transition: border ease 0.2s, background ease 0.2s;
+        background-color: #fff;
+
+        &:hover {
+            background-color: #D3D3D3;
+        }
     }
 </style>

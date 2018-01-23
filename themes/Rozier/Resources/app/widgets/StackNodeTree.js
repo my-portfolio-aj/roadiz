@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import NodesBulk from '../components/bulk-edits/NodesBulk'
-import NodeTreeContextActions from '../components/trees/NodeTreeContextActions'
+import NodeTreeContextActions from '../components/tree/NodeTreeContextActions'
 
 export default class StackNodeTree {
     constructor () {

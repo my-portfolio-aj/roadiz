@@ -8,8 +8,8 @@ export const CONTEXTUAL_MENU_RESET = 'CONTEXTUAL_MENU_RESET'
 /**
  * Nodes Tree
  */
-export const NODES_TREE_UPDATE_LIST = 'NODES_TREE_UPDATE_LIST'
-export const NODES_TREE_SELECT_NODE = 'NODES_TREE_SELECT_NODE'
+export const TREES_INIT = 'TREES_INIT'
+export const TREES_UPDATE_LIST = 'TREES_UPDATE_LIST'
 
 /**
  * Nodes Search Widget

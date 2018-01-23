@@ -40,7 +40,7 @@ import filterExplorer from './modules/FilterExplorerStoreModule'
 import tags from './modules/TagsStoreModule'
 import documentPreview from './modules/DocumentPreviewStoreModule'
 import blanchetteEditor from './modules/BlanchetteEditorStoreModule'
-import nodesTree from './modules/NodesTreeStoreModule'
+import trees from './modules/TreesStoreModule'
 import contextMenu from './modules/ContextualMenuStoreModule'
 
 export default new Vuex.Store({
@@ -52,7 +52,7 @@ export default new Vuex.Store({
         tags,
         documentPreview,
         blanchetteEditor,
-        nodesTree,
+        trees,
         contextMenu
     },
     state: {

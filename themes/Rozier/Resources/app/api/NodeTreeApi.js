@@ -33,7 +33,7 @@ import request from 'axios'
  *
  * @return Promise
  */
-export function getNodesTree () {
+export function getTree (url) {
     const postData = {
         query: {
             translate_id: null,
@@ -44,7 +44,7 @@ export function getNodesTree () {
 
     return request({
         method: 'GET',
-        url: window.RozierRoot.routes.nodesTreeJson,
+        url: url,
         params: postData
     })
         .then(response => {

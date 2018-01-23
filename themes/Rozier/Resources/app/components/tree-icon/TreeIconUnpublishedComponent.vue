@@ -31,6 +31,7 @@
 </template>
 <script>
     export default {
+        name: 'tree-icon-unpublish-component',
         props: {
             color: {
                 type: String,
@@ -54,6 +55,11 @@
         border: 1px solid #999999;
         display: inline-block;
         transition: border ease 0.2s, background ease 0.2s;
+        background-color: #fff;
         margin-right: 1px;
+
+        &:hover {
+            background-color: #D3D3D3;
+        }
     }
 </style>
