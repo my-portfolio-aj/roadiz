@@ -32,15 +32,7 @@ import {
     TREES_INIT
 } from '../../types/mutationTypes'
 import Vue from 'vue'
-
-const getters = {
-    treesGetListItems: state => uid => {
-        return state.items[uid] ? state.items[uid].items : []
-    },
-    treesGetList: state => uid => {
-        return state.items[uid] ? state.items[uid] : {}
-    }
-}
+import Promise from 'bluebird'
 
 /**
  * Module state
@@ -50,17 +42,27 @@ const state = {
 }
 
 /**
+ * Getters
+ */
+const getters = {
+    treesGetTreeItemsById: state => uid => {
+        return state.items[uid] && state.items[uid].items ? state.items[uid].items : null
+    },
+    treesGetTreeById: state => uid => {
+        return state.items[uid] ? state.items[uid] : null
+    }
+}
+
+/**
  * Actions
  */
 const actions = {
     treesInit ({ commit }, { url, uid }) {
         commit(TREES_INIT, uid)
 
-        NodeTreeApi
-            .getTree(url)
-            .then(data => {
-                commit(TREES_UPDATE_LIST, { data, uid })
-            })
+        Promise
+            .all([Promise.delay(1500), NodeTreeApi.getTree(url)])
+            .then(results => commit(TREES_UPDATE_LIST, { data: results[1], uid }))
     },
     treesUpdateList ({ commit }, { data, uid }) {
         commit(TREES_UPDATE_LIST, { data, uid })

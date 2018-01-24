@@ -27,21 +27,26 @@
   -->
 
 <template>
-    <div>
-        <transition name="fade">
+    <div class="tree-component">
+        <transition name="fade" key="tree-list">
             <tree-list-component
-                v-if="treesGetListItems(uid)"
-                :data="treesGetListItems(uid)"
+                v-if="treesGetTreeItemsById(uid)"
+                :data="treesGetTreeItemsById(uid)"
                 :is-child="false"
                 @change="onChange" />
+            <tree-loading-component v-else class="tree-loading-component" key="tree-loading" />
         </transition>
     </div>
 </template>
 <script>
     import uniqid from 'uniqid'
-    import TreeListComponent from './TreeListComponent.vue'
     import { mapActions, mapGetters } from 'vuex'
 
+    // Components
+    import TreeListComponent from './TreeListComponent.vue'
+    import TreeLoadingComponent from './TreeLoadingComponent.vue'
+
+    // Create a uniqued ID to identify the list
     const uid = uniqid()
 
     export default {
@@ -58,14 +63,16 @@
         },
         computed: {
             ...mapGetters([
-                'treesGetListItems',
-                'treesGetList'
+                'treesGetTreeItemsById',
+                'treesGetTreeById'
             ])
         },
         components: {
-            TreeListComponent
+            TreeListComponent,
+            TreeLoadingComponent
         },
         beforeMount () {
+            // Init a new Tree
             this.treesInit({ url: this.url, uid: this.uid })
         },
         methods: {
@@ -74,8 +81,21 @@
                 'treesUpdateList'
             ]),
             onChange () {
-                this.treesUpdateList({ data: this.treesGetList(this.uid), uid: this.uid })
+                this.treesUpdateList({ data: this.treesGetTreeById(this.uid), uid: this.uid })
             }
         }
     }
 </script>
+<style lang="scss" scoped>
+    .tree-component {
+        position: relative;
+        padding: 16px 0;
+
+        .tree-loading-component {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+        }
+    }
+</style>
