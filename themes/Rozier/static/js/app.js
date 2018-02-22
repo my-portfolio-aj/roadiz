@@ -39824,7 +39824,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 
 exports.default = {
     name: 'tree-component',
@@ -43497,13 +43496,13 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "tree-component-wrapper" }, [_c("transition", { key: "tree-list", attrs: { name: "fade" } }, [_vm.treesGetTreeItemsById(_vm.uid) && !_vm.treesGetIsLoading(_vm.uid) ? _c("div", { staticClass: "tree-component" }, [_vm.treesGetTreeItemsById(_vm.uid).length > 0 ? _c("tree-list-component", {
+  return _c("div", { staticClass: "tree-component-wrapper" }, [_c("transition", { key: "tree-list", attrs: { name: "fade" } }, [_vm.treesGetTreeItemsById(_vm.uid) && !_vm.treesGetIsLoading(_vm.uid) ? _c("div", { staticClass: "tree-component" }, [_c("tree-list-component", {
     attrs: {
       data: _vm.treesGetTreeItemsById(_vm.uid),
       "is-child": false
     },
     on: { change: _vm.onChange }
-  }) : _vm._e()], 1) : _c("tree-loading-component", { key: "tree-loading" })], 1)], 1);
+  })], 1) : _c("tree-loading-component", { key: "tree-loading" })], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
