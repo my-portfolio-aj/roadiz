@@ -75,9 +75,6 @@ export default class ChildrenNodesField {
                         })
                     })
                     .fail(data => {
-                        console.log('error')
-                        console.log(data)
-
                         data = JSON.parse(data.responseText)
 
                         window.UIkit.notify({

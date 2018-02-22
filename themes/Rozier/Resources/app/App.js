@@ -51,6 +51,7 @@ import ModalContainer from './containers/ModalContainer.vue'
 // Components
 import Overlay from './components/Overlay.vue'
 import TreeComponent from './components/tree/TreeComponent.vue'
+import LangSelectorComponent from './components/lang/LangSelectorComponent.vue'
 import ContextualMenuComponent from './components/context-menu/ContextualMenuComponent.vue'
 import TreeListComponent from './components/tree/TreeListComponent.vue'
 
@@ -90,7 +91,8 @@ export default class AppVue {
 
         this.registeredComponents = {
             Overlay,
-            TreeComponent
+            TreeComponent,
+            LangSelectorComponent
         }
 
         this.vuejsElements = {

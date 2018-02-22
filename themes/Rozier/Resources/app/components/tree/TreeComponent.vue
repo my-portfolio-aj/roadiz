@@ -29,7 +29,7 @@
 <template>
     <div class="tree-component-wrapper">
         <transition name="fade" key="tree-list">
-            <div class="tree-component" v-if="treesGetTreeItemsById(uid)">
+            <div class="tree-component" v-if="treesGetTreeItemsById(uid) && !treesGetIsLoading(uid)">
                 <tree-list-component
                     v-if="treesGetTreeItemsById(uid).length > 0"
                     :data="treesGetTreeItemsById(uid)"
@@ -58,6 +58,7 @@
         computed: {
             ...mapGetters([
                 'treesGetTreeItemsById',
+                'treesGetIsLoading',
                 'treesGetTreeById'
             ])
         },

@@ -42,6 +42,7 @@ import documentPreview from './modules/DocumentPreviewStoreModule'
 import blanchetteEditor from './modules/BlanchetteEditorStoreModule'
 import trees from './modules/TreesStoreModule'
 import contextMenu from './modules/ContextualMenuStoreModule'
+import langs from './modules/LangsStoreModule'
 
 export default new Vuex.Store({
     modules: {
@@ -53,7 +54,8 @@ export default new Vuex.Store({
         documentPreview,
         blanchetteEditor,
         trees,
-        contextMenu
+        contextMenu,
+        langs
     },
     state: {
         translations: window.RozierRoot.messages,

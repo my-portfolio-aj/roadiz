@@ -33,13 +33,11 @@ import request from 'axios'
  *
  * @return Promise
  */
-export function getTree (url) {
+export function getTree (url, { translateId = null } = {}) {
     const postData = {
-        query: {
-            translate_id: null,
-            tag_id: null,
-            parent_id: null
-        }
+        translation_id: translateId,
+        tag_id: null,
+        parent_id: null
     }
 
     return request({

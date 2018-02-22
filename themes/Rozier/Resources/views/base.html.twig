@@ -226,6 +226,16 @@
                 }
             };
 
+            temp.langs = []
+
+            {% for lang in themeServices.availableTranslations if lang.id %}
+                temp.langs.push({
+                    id: {{ lang.id }},
+                    locale: '{{ lang.preferredLocale }}',
+                    selected: {% if request.locale == lang.preferredLocale %}true{% else %}false{% endif %}
+                })
+            {% endfor %}
+
             var RozierRoot = temp;
         </script>
 

@@ -50,6 +50,7 @@
             'request':request,
         } only %}
         <nav class="tree-widget nodetree-widget">
+            <lang-selector-component data-vuejs></lang-selector-component>
             <tree-component
                 data-vuejs
                 url="{{ path('nodesTreeJson', { 'parent_id': node.id }) }}">

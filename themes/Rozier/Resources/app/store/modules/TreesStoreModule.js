@@ -29,7 +29,9 @@
 import * as NodeTreeApi from '../../api/NodeTreeApi'
 import {
     TREES_UPDATE_LIST,
-    TREES_INIT
+    TREES_INIT,
+    TREES_LOADING,
+    TREES_UPDATE_LANG
 } from '../../types/mutationTypes'
 import Vue from 'vue'
 import Promise from 'bluebird'
@@ -38,6 +40,7 @@ import Promise from 'bluebird'
  * Module state
  */
 const state = {
+    currentLang: null,
     items: {}
 }
 
@@ -50,6 +53,9 @@ const getters = {
     },
     treesGetTreeById: state => uid => {
         return state.items[uid] ? state.items[uid] : null
+    },
+    treesGetIsLoading: state => uid => {
+        return state.items[uid] ? state.items[uid].isLoading : false
     }
 }
 
@@ -57,15 +63,37 @@ const getters = {
  * Actions
  */
 const actions = {
-    treesInit ({ commit }, { url, uid }) {
-        commit(TREES_INIT, uid)
-
-        Promise
-            .all([Promise.delay(500), NodeTreeApi.getTree(url)])
-            .then(results => commit(TREES_UPDATE_LIST, { data: results[1], uid }))
+    treesInit ({ commit, dispatch }, { url, uid, locale }) {
+        commit(TREES_INIT, { uid, url })
+        commit(TREES_UPDATE_LANG, { locale })
+        dispatch('treesMakeRequest', { url, uid })
     },
     treesUpdateList ({ commit }, { data, uid }) {
         commit(TREES_UPDATE_LIST, { data, uid })
+    },
+    langsSelected ({ commit, dispatch }, lang) {
+        commit(TREES_UPDATE_LANG, lang)
+
+        for (let key in state.items) {
+            if (state.items.hasOwnProperty(key) && state.items[key].url) {
+                dispatch('treesMakeRequest', {
+                    url: state.items[key].url,
+                    uid: key
+                })
+            }
+        }
+    },
+    treesMakeRequest ({ commit, state }, { url, uid }) {
+        commit(TREES_LOADING, { isLoading: true, uid })
+
+        const translateId = state.currentLang && state.currentLang.id ? state.currentLang.id : null
+
+        Promise
+            .all([Promise.delay(500), NodeTreeApi.getTree(url, { translateId })])
+            .then(results => {
+                commit(TREES_LOADING, { isLoading: false, uid })
+                commit(TREES_UPDATE_LIST, { data: results[1], uid })
+            })
     }
 }
 
@@ -73,11 +101,19 @@ const actions = {
  * Mutations
  */
 const mutations = {
-    [TREES_INIT] (state, uid) {
-        Vue.set(state.items, uid)
+    [TREES_INIT] (state, { uid, url }) {
+        Vue.set(state.items, uid, {})
+        Vue.set(state.items[uid], 'url', url)
+        Vue.set(state.items[uid], 'isLoading', false)
     },
     [TREES_UPDATE_LIST] (state, { data, uid }) {
-        state.items[uid] = data
+        state.items[uid] = { ...state.items[uid], ...data }
+    },
+    [TREES_LOADING] (state, { isLoading, uid }) {
+        state.items[uid].isLoading = isLoading
+    },
+    [TREES_UPDATE_LANG] (state, lang) {
+        state.currentLang = lang
     }
 }
 

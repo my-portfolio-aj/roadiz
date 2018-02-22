@@ -1,4 +1,9 @@
 /**
+ * Langs selector
+ */
+export const LANG_SELECTED = 'LANG_SELECTED'
+
+/**
  * Contextual Menu
  */
 export const CONTEXTUAL_MENU_OPEN = 'CONTEXTUAL_MENU_OPEN'
@@ -10,6 +15,8 @@ export const CONTEXTUAL_MENU_RESET = 'CONTEXTUAL_MENU_RESET'
  */
 export const TREES_INIT = 'TREES_INIT'
 export const TREES_UPDATE_LIST = 'TREES_UPDATE_LIST'
+export const TREES_LOADING = 'TREES_LOADING'
+export const TREES_UPDATE_LANG = 'TREES_UPDATE_LANG'
 
 /**
  * Nodes Search Widget

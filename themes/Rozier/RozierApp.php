@@ -87,6 +87,10 @@ class RozierApp extends BackendController
         $this->assignation['head']['googleClientId'] = $this->get('settingsBag')->get('google_client_id') ? $this->get('settingsBag')->get('google_client_id') : "";
         $this->assignation['head']['themeName'] = static::$themeName;
 
+        $this->themeContainer['availableTranslations'] = $this->get('em')
+            ->getRepository('RZ\Roadiz\Core\Entities\Translation')
+            ->findAllAvailable();
+
         $this->themeContainer['nodeTree'] = function () {
             if (null !== $this->getUser()) {
                 $parent = $this->getUser()->getChroot();
