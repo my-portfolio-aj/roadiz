@@ -90,5 +90,7 @@ Promise
 
         // Build Rozier
         window.Rozier.onDocumentReady()
+
+        return null
     })
     .catch(err => console.error(err.message))

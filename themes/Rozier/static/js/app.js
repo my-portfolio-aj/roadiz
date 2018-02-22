@@ -8336,6 +8336,65 @@ if (false) {(function () {
 
 /***/ }),
 
+/***/ "../Resources/app/components/tree/TreeNestableComponent.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeNestableComponent_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeNestableComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeNestableComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_1603e29f_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeNestableComponent_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1603e29f\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_1603e29f_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeNestableComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_1603e29f_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeNestableComponent_vue__);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue")
+}
+var normalizeComponent = __webpack_require__("../node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1603e29f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeNestableComponent_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_1603e29f_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeNestableComponent_vue___default.a,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "Resources/app/components/tree/TreeNestableComponent.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1603e29f", Component.options)
+  } else {
+    hotAPI.reload("data-v-1603e29f", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "../Resources/app/containers/BlanchetteEditorContainer.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9477,6 +9536,8 @@ _bluebird2.default.all([onLoad(), _api2.default.getTranslations()]).then(functio
 
     // Build Rozier
     window.Rozier.onDocumentReady();
+
+    return null;
 }).catch(function (err) {
     return console.error(err.message);
 });
@@ -39452,17 +39513,64 @@ var _TreeLinkComponent = __webpack_require__("../Resources/app/components/tree/T
 
 var _TreeLinkComponent2 = _interopRequireDefault(_TreeLinkComponent);
 
+var _TreeNestableComponent = __webpack_require__("../Resources/app/components/tree/TreeNestableComponent.vue");
+
+var _TreeNestableComponent2 = _interopRequireDefault(_TreeNestableComponent);
+
 var _TreeContextualMenuComponent = __webpack_require__("../Resources/app/components/tree/TreeContextualMenuComponent.vue");
 
 var _TreeContextualMenuComponent2 = _interopRequireDefault(_TreeContextualMenuComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
     name: 'tree-item-component',
     components: {
         TreeIconComponent: _TreeIconComponent2.default,
         TreeLinkComponent: _TreeLinkComponent2.default,
+        TreeNestableComponent: _TreeNestableComponent2.default,
         TreeContextualMenuComponent: _TreeContextualMenuComponent2.default
     },
     props: {
@@ -39470,9 +39578,18 @@ exports.default = {
             type: Object
         }
     },
+    data: function data() {
+        return {
+            isActive: true
+        };
+    },
+
     methods: {
         onChange: function onChange() {
             this.$emit('change');
+        },
+        onTreeNestableChange: function onTreeNestableChange() {
+            this.isActive = !this.isActive;
         }
     },
     computed: {
@@ -39487,46 +39604,7 @@ exports.default = {
             };
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 
@@ -39623,21 +39701,6 @@ exports.default = {
         draggable: _vuedraggable2.default,
         TreeItemComponent: _TreeItemComponent2.default
     },
-    data: function data() {
-        return {
-            // options: {
-            //     animation: 150,
-            //     handle: '.rz-handle',
-            //     filter: '.disabled',
-            //     sort: true,
-            //     group: {
-            //         name: 'node-tree',
-            //         put: true
-            //     }
-            // }
-        };
-    },
-
     props: {
         data: {
             type: Array,
@@ -39795,6 +39858,64 @@ exports.default = {
 //
 //
 //
+
+/***/ }),
+
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+    methods: {
+        onClick: function onClick() {
+            this.isActive = !this.isActive;
+            this.$emit('change', this.isActive);
+        }
+    }
+};
 
 /***/ }),
 
@@ -41522,6 +41643,39 @@ if (false) {
 
 /***/ }),
 
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1603e29f\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var render = function render() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", {
+    staticClass: "nodetree-minus",
+    class: { active: _vm.isActive },
+    on: { click: _vm.onClick }
+  });
+};
+var staticRenderFns = [];
+render._withStripped = true;
+var esExports = { render: render, staticRenderFns: staticRenderFns };
+exports.default = esExports;
+
+if (false) {
+  module.hot.accept();
+  if (module.hot.data) {
+    require("vue-hot-reload-api").rerender("data-v-1603e29f", esExports);
+  }
+}
+
+/***/ }),
+
 /***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1776a190\",\"hasScoped\":false,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/LoadMoreButton.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43236,7 +43390,15 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "nodetree-element-inner rz-nestable-panel",
     class: _vm.getNodeTreeInnerClass
-  }, [_c("tree-icon-component", { attrs: { data: _vm.data } }), _vm._v(" "), _c("tree-link-component", { attrs: { data: _vm.data } }), _vm._v(" "), _c("tree-contextual-menu-component", { attrs: { data: _vm.data } })], 1), _vm._v(" "), _c("tree-list-component", {
+  }, [_c("tree-icon-component", { attrs: { data: _vm.data } }), _vm._v(" "), _c("tree-link-component", { attrs: { data: _vm.data } }), _vm._v(" "), _vm.data.children && _vm.data.children.length > 0 ? _c("tree-nestable-component", {
+    on: { change: _vm.onTreeNestableChange }
+  }) : _vm._e(), _vm._v(" "), _c("tree-contextual-menu-component", { attrs: { data: _vm.data } })], 1), _vm._v(" "), _c("tree-list-component", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.isActive,
+      expression: "isActive"
+    }],
     attrs: {
       name: "sub-tree-list",
       "is-child": true,
@@ -69385,6 +69547,21 @@ exports.push([module.i, "\n.nodetree-contextualmenu[data-v-0b3ce47e] {\n  positi
 
 /***/ }),
 
+/***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.nodetree-minus[data-v-1603e29f] {\n  position: absolute;\n  right: 2px;\n  top: 6px;\n  width: 17px;\n  height: 17px;\n  -webkit-font-smoothing: antialiased;\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.nodetree-minus[data-v-1603e29f]::before, .nodetree-minus[data-v-1603e29f]::after {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    display: block;\n    content: '';\n    height: 1px;\n    width: 9px;\n    margin-top: -1px;\n    margin-left: -4px;\n    background-color: #A0A0A0;\n    border-bottom: 1px solid rgba(255, 255, 255, 0.7);\n}\n.nodetree-minus[data-v-1603e29f]::after {\n    border-bottom: none;\n    -webkit-transform: rotate(90deg);\n            transform: rotate(90deg);\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    display: none;\n}\n.nodetree-minus.active[data-v-1603e29f]::after {\n    display: block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-183a0d85\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree-icon/TreeIconNormalComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -92256,6 +92433,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b3ce47e\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeContextualMenuComponent.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b3ce47e\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeContextualMenuComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeNestableComponent.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/vue-style-loader/lib/addStylesClient.js")("175d29a8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeNestableComponent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1603e29f\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeNestableComponent.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

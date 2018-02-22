@@ -55,20 +55,6 @@
             draggable,
             TreeItemComponent
         },
-        data () {
-            return {
-                // options: {
-                //     animation: 150,
-                //     handle: '.rz-handle',
-                //     filter: '.disabled',
-                //     sort: true,
-                //     group: {
-                //         name: 'node-tree',
-                //         put: true
-                //     }
-                // }
-            }
-        },
         props: {
             data: {
                 type: Array,

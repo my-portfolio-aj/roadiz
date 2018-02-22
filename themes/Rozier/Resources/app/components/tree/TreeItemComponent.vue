@@ -33,14 +33,16 @@
         <div class="nodetree-element-inner rz-nestable-panel" :class="getNodeTreeInnerClass">
             <tree-icon-component :data="data" />
             <tree-link-component :data="data" />
+            <tree-nestable-component @change="onTreeNestableChange" v-if="data.children && data.children.length > 0" />
             <tree-contextual-menu-component :data="data" />
         </div>
-        <tree-list-component name="sub-tree-list" :is-child="true" :data="data.children" @change="onChange" />
+        <tree-list-component name="sub-tree-list" v-show="isActive" :is-child="true" :data="data.children" @change="onChange" />
     </div>
 </template>
 <script>
     import TreeIconComponent from './TreeIconComponent.vue'
     import TreeLinkComponent from './TreeLinkComponent.vue'
+    import TreeNestableComponent from './TreeNestableComponent.vue'
     import TreeContextualMenuComponent from './TreeContextualMenuComponent.vue'
 
     export default {
@@ -48,6 +50,7 @@
         components: {
             TreeIconComponent,
             TreeLinkComponent,
+            TreeNestableComponent,
             TreeContextualMenuComponent
         },
         props: {
@@ -55,9 +58,17 @@
                 type: Object
             }
         },
+        data () {
+            return {
+                isActive: true
+            }
+        },
         methods: {
             onChange () {
                 this.$emit('change')
+            },
+            onTreeNestableChange () {
+                this.isActive = !this.isActive
             }
         },
         computed: {
