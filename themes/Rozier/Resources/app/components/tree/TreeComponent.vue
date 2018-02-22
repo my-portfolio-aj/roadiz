@@ -27,14 +27,16 @@
   -->
 
 <template>
-    <div class="tree-component">
+    <div class="tree-component-wrapper">
         <transition name="fade" key="tree-list">
-            <tree-list-component
-                v-if="treesGetTreeItemsById(uid)"
-                :data="treesGetTreeItemsById(uid)"
-                :is-child="false"
-                @change="onChange" />
-            <tree-loading-component v-else class="tree-loading-component" key="tree-loading" />
+            <div class="tree-component" v-if="treesGetTreeItemsById(uid)">
+                <tree-list-component
+                    v-if="treesGetTreeItemsById(uid).length > 0"
+                    :data="treesGetTreeItemsById(uid)"
+                    :is-child="false"
+                    @change="onChange" />
+            </div>
+            <tree-loading-component v-else key="tree-loading" />
         </transition>
     </div>
 </template>
@@ -46,19 +48,11 @@
     import TreeListComponent from './TreeListComponent.vue'
     import TreeLoadingComponent from './TreeLoadingComponent.vue'
 
-    // Create a uniqued ID to identify the list
-    const uid = uniqid()
-
     export default {
         name: 'tree-component',
         props: {
             url: {
                 type: String
-            }
-        },
-        data () {
-            return {
-                uid
             }
         },
         computed: {
@@ -70,6 +64,10 @@
         components: {
             TreeListComponent,
             TreeLoadingComponent
+        },
+        created () {
+            // Create a uniqued ID to identify the list
+            this.uid = uniqid()
         },
         beforeMount () {
             // Init a new Tree
@@ -87,15 +85,15 @@
     }
 </script>
 <style lang="scss" scoped>
+    .tree-component-wrapper {
+        position: relative;
+    }
+
     .tree-component {
         position: relative;
-        padding: 16px 0;
 
-        .tree-loading-component {
-            position: absolute;
-            top: 24px;
-            left: 0;
-            right: 0;
+        #main-content-scrollable & {
+            background: #F0F0F0;
         }
     }
 </style>

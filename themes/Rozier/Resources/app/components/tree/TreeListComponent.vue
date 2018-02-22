@@ -98,17 +98,23 @@
     }
 </script>
 <style lang="scss" scoped>
+    .root-tree {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
     .root-tree > .nodetree-element {
-        border-left: 0;
         border-top: 1px solid #BDBDBD;
-        padding-top: 9px;
-        margin-top: 14px;
+        padding: 11px 0;
         margin-left: 0;
 
+        #main-content-scrollable & {
+            border-color: #D2D2D2;
+        }
+
+        &.sortable-ghost,
         &:first-of-type {
             border-top: 0;
-            padding-top: 0;
-            margin-top: 0;
         }
 
         &:before,
@@ -142,7 +148,7 @@
     }
 
     .sortable-ghost {
-        position: relative;
+        position: relative !important;
         background: #aaa !important;
         border: 0;
 
@@ -154,6 +160,7 @@
             height: 100% !important;
             width: 100% !important;
             border: 1px dashed #ddd !important;
+            display: block !important;
         }
 
         &:before,

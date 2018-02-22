@@ -61,7 +61,7 @@ const actions = {
         commit(TREES_INIT, uid)
 
         Promise
-            .all([Promise.delay(1500), NodeTreeApi.getTree(url)])
+            .all([Promise.delay(500), NodeTreeApi.getTree(url)])
             .then(results => commit(TREES_UPDATE_LIST, { data: results[1], uid }))
     },
     treesUpdateList ({ commit }, { data, uid }) {

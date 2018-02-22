@@ -70,9 +70,6 @@
 <script>
     import { mapActions } from 'vuex'
 
-    // Filters
-    import filters from '../filters'
-
     // Components
     import AjaxLink from '../components/AjaxLink.vue'
 
@@ -89,7 +86,6 @@
         directives: {
             DynamicImg
         },
-        filters: filters,
         methods: {
             ...mapActions([
                 'documentPreviewInit',

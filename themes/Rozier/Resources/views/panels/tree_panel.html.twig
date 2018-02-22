@@ -46,14 +46,17 @@
                 </li>
             {% else %}
                 <li class="uk-active">
-                {% include '@Rozier/widgets/nodeTree/nodeTree.html.twig' with {
-                    "nodeTree":themeServices.nodeTree,
-                    "node":themeServices.nodeTree.getRootNode,
-                    'mainNodeTree':true,
-                    "authorizationChecker":authorizationChecker,
-                    "nodeStatuses":nodeStatuses,
-                    "request":request,
-                } only %}
+                    <div class="scrolling-content">
+                        {% include '@Rozier/widgets/nodeTree/nodeTree.html.twig' with {
+                            "nodeTree":themeServices.nodeTree,
+                            "node":themeServices.nodeTree.getRootNode,
+                            'mainNodeTree':true,
+                            "authorizationChecker":authorizationChecker,
+                            "nodeStatuses":nodeStatuses,
+                            "request":request,
+                        } only %}
+                        <tree-component url="{{ path('nodesTreeJson') }}" data-vuejs-persistent></tree-component>
+                    </div>
                 </li>
             {% endif %}
             {% endif %}

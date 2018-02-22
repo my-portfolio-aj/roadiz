@@ -31,7 +31,9 @@
         class="nodetree-element rz-nestable-item"
         :class="getNodeTreeClass">
         <div class="nodetree-element-inner rz-nestable-panel" :class="getNodeTreeInnerClass">
-            <tree-icon-component :data="data" />
+            <tree-label-component :data="data">
+                <tree-icon-component :data="data" />
+            </tree-label-component>
             <tree-link-component :data="data" />
             <tree-nestable-component @change="onTreeNestableChange" v-if="data.children && data.children.length > 0" />
             <tree-contextual-menu-component :data="data" />
@@ -40,6 +42,7 @@
     </div>
 </template>
 <script>
+    import TreeLabelComponent from './TreeLabelComponent.vue'
     import TreeIconComponent from './TreeIconComponent.vue'
     import TreeLinkComponent from './TreeLinkComponent.vue'
     import TreeNestableComponent from './TreeNestableComponent.vue'
@@ -48,6 +51,7 @@
     export default {
         name: 'tree-item-component',
         components: {
+            TreeLabelComponent,
             TreeIconComponent,
             TreeLinkComponent,
             TreeNestableComponent,

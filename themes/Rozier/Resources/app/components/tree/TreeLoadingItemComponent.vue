@@ -63,7 +63,7 @@
     }
 
     .background-masker-children {
-        margin-left: 30px;
+        margin-left: 18px;
 
         &::before {
             content: '';
@@ -73,6 +73,10 @@
             left: -30px;
             width: 30px;
             background-color: $backgroundMaskerColor;
+
+            #main-content-scrollable & {
+                background: #F0F0F0;
+            }
         }
 
         .background-masker.header-right {
@@ -90,12 +94,20 @@
         background: $backgroundMaskerColor;
         position: absolute;
 
+        #main-content-scrollable & {
+            background: #F0F0F0;
+        }
+
         &.rounded {
             height: 12px;
             width: 12px;
             left: 0;
             top: 0;
             background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, $backgroundMaskerColor);
+
+            #main-content-scrollable & {
+                background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, #F0F0F0);
+            }
         }
 
         &.footer-bottom {

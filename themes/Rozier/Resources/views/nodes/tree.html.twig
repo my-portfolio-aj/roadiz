@@ -49,6 +49,12 @@
             "nodeStatuses":nodeStatuses,
             'request':request,
         } only %}
+        <nav class="tree-widget nodetree-widget">
+            <tree-component
+                data-vuejs
+                url="{{ path('nodesTreeJson', { 'parent_id': node.id }) }}">
+            </tree-component>
+        </nav>
     </article>
     {% if node %}
         {% include '@Rozier/nodes/actionsMenu.html.twig' %}

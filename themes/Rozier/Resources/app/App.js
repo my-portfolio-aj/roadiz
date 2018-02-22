@@ -30,6 +30,9 @@ import Vue from 'vue'
 import store from './store'
 import $ from 'jquery'
 
+// Custom filters
+import filters from './filters'
+
 // Services
 import KeyboardEventService from './services/KeyboardEventService'
 import LoginCheckService from './services/LoginCheckService'
@@ -56,6 +59,11 @@ import {
 } from './types/mutationTypes'
 
 Vue.component('tree-list-component', TreeListComponent)
+
+// Add filters
+for (let filterName in filters) {
+    Vue.filter(filterName, filters[filterName])
+}
 
 /**
  * Root entry for VueJS App.

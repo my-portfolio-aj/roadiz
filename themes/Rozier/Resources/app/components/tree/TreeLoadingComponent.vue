@@ -27,7 +27,7 @@
   -->
 
 <template>
-    <div class="timeline-wrapper">
+    <div class="timeline-wrapper tree-loading-component">
         <div class="timeline-item">
             <div class="animated-background">
                 <tree-loading-item-component>
@@ -57,9 +57,27 @@
 <style lang="scss" scoped>
     @import '../../scss/variables';
 
+    .tree-loading-component {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+    }
+
+    .timeline-wrapper {
+        min-height: 128px;
+        padding: 20px 0;
+
+        #main-content-scrollable & {
+            background-color: #F0F0F0;
+        }
+    }
+
     .timeline-item {
-        padding: 0 23px;
-        margin: 0 auto;
+        padding: 0 14px;
+        margin: 0;
+        max-width: 370px;
     }
 
     @keyframes placeHolderShimmer{
@@ -81,79 +99,10 @@
         background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
         background-size: 800px 104px;
         position: relative;
-    }
 
-    .background-masker-container {
-        position: relative;
-        height: 16px;
-    }
-
-    .background-masker-inner {
-        position: relative;
-        height: 12px;
-    }
-
-    .background-masker-children {
-        margin-left: 30px;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: -30px;
-            width: 30px;
-            background-color: $silver;
-        }
-    }
-
-    .background-masker {
-        background: $silver;
-        position: absolute;
-
-        &.rounded {
-            height: 12px;
-            width: 12px;
-            left: 0;
-            top: 0;
-            background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, $silver);
-        }
-
-        &.footer-bottom {
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-
-        &.header-top {
-            top: 0;
-            left: 12px;
-            right: 0;
-            height: 3px;
-        }
-
-        &.header-bottom {
-            bottom: 0;
-            left: 12px;
-            right: 0;
-            height: 3px;
-        }
-
-        &.header-left {
-            top: 0;
-            bottom: 0;
-            left: 12px;
-            height: 12px;
-            width: 6px;
-        }
-
-        &.header-right {
-            top: 0;
-            bottom: 0;
-            right: 0;
-            height: 12px;
-            width: 35%;
+        #main-content-scrollable & {
+            background: linear-gradient(to right, $silver 8%, #bababa 18%, $silver 33%);
+            background-size: 800px 104px;
         }
     }
 </style>
