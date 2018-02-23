@@ -40,7 +40,7 @@
             <tree-link-component :data="data" />
             <div class="nodetree-element-right-content">
                 <div><tree-bulk-selection :data="data" :visible="isHover" v-if="bulkEnable" /></div>
-                <div><tree-contextual-menu-component :data="data" v-show="isHover" /></div>
+                <div><tree-contextual-menu-component :data="data" :visible="isHover" /></div>
                 <div><tree-nestable-component @change="onTreeNestableChange" v-if="data.children && data.children.length > 0" /></div>
             </div>
         </div>

@@ -27,10 +27,12 @@
   -->
 
 <template>
-    <div class="tree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isItem() }">
+    <div
+        v-show="visible || isItem()"
+        class="tree-contextualmenu uk-button-dropdown"
+        :class="{ 'context-menu-open': isItem() }">
         <div class="tree-contextualmenu-button uk-button uk-button-mini"
              :class="{ 'disabled': isItem() }"
-             v-if="isHover"
              @click.stop="onClick"
              ref="button">
             <i class="uk-icon-caret-down"></i>
@@ -42,15 +44,13 @@
 
     export default {
         name: 'tree-contextual-menu-component',
-        data () {
-            return {
-                isHover: true,
-                selected: false
-            }
-        },
         props: {
             data: {
                 type: Object
+            },
+            visible: {
+                type: Boolean,
+                default: false
             }
         },
         methods: {
@@ -80,11 +80,6 @@
 </script>
 <style lang="scss" scoped>
     .tree-contextualmenu {
-        /*position: absolute;*/
-        /*right: 22px;*/
-        /*top: 3px;*/
-        /*opacity: 0;*/
-
         &:hover {
             opacity: 1;
         }
