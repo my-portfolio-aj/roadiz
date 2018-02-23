@@ -37,7 +37,7 @@ import filters from './filters'
 import KeyboardEventService from './services/KeyboardEventService'
 import LoginCheckService from './services/LoginCheckService'
 
-// Containers
+// Components
 import NodeTypeFieldFormContainer from './containers/NodeTypeFieldFormContainer.vue'
 import NodesSearchContainer from './containers/NodesSearchContainer.vue'
 import DrawerContainer from './containers/DrawerContainer.vue'
@@ -47,8 +47,6 @@ import TagsEditorContainer from './containers/TagsEditorContainer.vue'
 import DocumentPreviewContainer from './containers/DocumentPreviewContainer.vue'
 import BlanchetteEditorContainer from './containers/BlanchetteEditorContainer.vue'
 import ModalContainer from './containers/ModalContainer.vue'
-
-// Components
 import Overlay from './components/Overlay.vue'
 import TreeComponent from './components/tree/TreeComponent.vue'
 import LangSelectorComponent from './components/lang/LangSelectorComponent.vue'
@@ -76,7 +74,7 @@ export default class AppVue {
         this.containers = null
         this.documentExplorer = null
         this.mainContentComponents = []
-        this.registeredContainers = {
+        this.vuejsElements = {
             NodeTypeFieldFormContainer,
             NodesSearchContainer,
             DrawerContainer,
@@ -86,18 +84,10 @@ export default class AppVue {
             DocumentPreviewContainer,
             BlanchetteEditorContainer,
             ModalContainer,
-            ContextualMenuComponent
-        }
-
-        this.registeredComponents = {
+            ContextualMenuComponent,
             Overlay,
             TreeComponent,
             LangSelectorComponent
-        }
-
-        this.vuejsElements = {
-            ...this.registeredComponents,
-            ...this.registeredContainers
         }
 
         this.init()

@@ -31,7 +31,8 @@ import {
     TREES_UPDATE_LIST,
     TREES_INIT,
     TREES_LOADING,
-    TREES_UPDATE_LANG
+    TREES_UPDATE_LANG,
+    TREES_DESTROY
 } from '../../types/mutationTypes'
 import Vue from 'vue'
 import Promise from 'bluebird'
@@ -67,6 +68,9 @@ const actions = {
         commit(TREES_INIT, { uid, url })
         commit(TREES_UPDATE_LANG, { locale })
         dispatch('treesMakeRequest', { url, uid })
+    },
+    treesDestroy ({ commit }, { uid }) {
+        commit(TREES_DESTROY, { uid })
     },
     treesUpdateList ({ commit }, { data, uid }) {
         commit(TREES_UPDATE_LIST, { data, uid })
@@ -114,6 +118,9 @@ const mutations = {
     },
     [TREES_UPDATE_LANG] (state, lang) {
         state.currentLang = lang
+    },
+    [TREES_DESTROY] (state, { uid }) {
+        Vue.delete(state.items, uid)
     }
 }
 

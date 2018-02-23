@@ -73,9 +73,13 @@
             // Init a new Tree
             this.treesInit({ url: this.url, uid: this.uid })
         },
+        beforeDestroy () {
+            this.treesDestroy({ uid: this.uid })
+        },
         methods: {
             ...mapActions([
                 'treesInit',
+                'treesDestroy',
                 'treesUpdateList'
             ]),
             onChange () {

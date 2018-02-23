@@ -75,10 +75,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = __webpack_require__("../node_modules/babel-runtime/helpers/classCallCheck.js");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -171,16 +167,13 @@ var _mutationTypes = __webpack_require__("../Resources/app/types/mutationTypes.j
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Components
-
-
 // Custom filters
 _vue2.default.component('tree-list-component', _TreeListComponent2.default);
 
 // Add filters
 
 
-// Containers
+// Components
 
 
 // Services
@@ -229,7 +222,7 @@ var AppVue = function () {
         this.containers = null;
         this.documentExplorer = null;
         this.mainContentComponents = [];
-        this.registeredContainers = {
+        this.vuejsElements = {
             NodeTypeFieldFormContainer: _NodeTypeFieldFormContainer2.default,
             NodesSearchContainer: _NodesSearchContainer2.default,
             DrawerContainer: _DrawerContainer2.default,
@@ -239,16 +232,11 @@ var AppVue = function () {
             DocumentPreviewContainer: _DocumentPreviewContainer2.default,
             BlanchetteEditorContainer: _BlanchetteEditorContainer2.default,
             ModalContainer: _ModalContainer2.default,
-            ContextualMenuComponent: _ContextualMenuComponent2.default
-        };
-
-        this.registeredComponents = {
+            ContextualMenuComponent: _ContextualMenuComponent2.default,
             Overlay: _Overlay2.default,
             TreeComponent: _TreeComponent2.default,
             LangSelectorComponent: _LangSelectorComponent2.default
         };
-
-        this.vuejsElements = (0, _extends3.default)({}, this.registeredComponents, this.registeredContainers);
 
         this.init();
         this.initListeners();
@@ -11845,16 +11833,22 @@ var state = {
         commit(_mutationTypes.TREES_UPDATE_LANG, { locale: locale });
         dispatch('treesMakeRequest', { url: url, uid: uid });
     },
-    treesUpdateList: function treesUpdateList(_ref3, _ref4) {
+    treesDestroy: function treesDestroy(_ref3, _ref4) {
         var commit = _ref3.commit;
-        var data = _ref4.data,
-            uid = _ref4.uid;
+        var uid = _ref4.uid;
+
+        commit(_mutationTypes.TREES_DESTROY, { uid: uid });
+    },
+    treesUpdateList: function treesUpdateList(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var data = _ref6.data,
+            uid = _ref6.uid;
 
         commit(_mutationTypes.TREES_UPDATE_LIST, { data: data, uid: uid });
     },
-    langsSelected: function langsSelected(_ref5, lang) {
-        var commit = _ref5.commit,
-            dispatch = _ref5.dispatch;
+    langsSelected: function langsSelected(_ref7, lang) {
+        var commit = _ref7.commit,
+            dispatch = _ref7.dispatch;
 
         commit(_mutationTypes.TREES_UPDATE_LANG, lang);
 
@@ -11867,11 +11861,11 @@ var state = {
             }
         }
     },
-    treesMakeRequest: function treesMakeRequest(_ref6, _ref7) {
-        var commit = _ref6.commit,
-            state = _ref6.state;
-        var url = _ref7.url,
-            uid = _ref7.uid;
+    treesMakeRequest: function treesMakeRequest(_ref8, _ref9) {
+        var commit = _ref8.commit,
+            state = _ref8.state;
+        var url = _ref9.url,
+            uid = _ref9.uid;
 
         commit(_mutationTypes.TREES_LOADING, { isLoading: true, uid: uid });
 
@@ -11887,25 +11881,29 @@ var state = {
 /**
  * Mutations
  */
-var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_INIT, function (state, _ref8) {
-    var uid = _ref8.uid,
-        url = _ref8.url;
+var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_INIT, function (state, _ref10) {
+    var uid = _ref10.uid,
+        url = _ref10.url;
 
     _vue2.default.set(state.items, uid, {});
     _vue2.default.set(state.items[uid], 'url', url);
     _vue2.default.set(state.items[uid], 'isLoading', false);
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_UPDATE_LIST, function (state, _ref9) {
-    var data = _ref9.data,
-        uid = _ref9.uid;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_UPDATE_LIST, function (state, _ref11) {
+    var data = _ref11.data,
+        uid = _ref11.uid;
 
     state.items[uid] = (0, _extends3.default)({}, state.items[uid], data);
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_LOADING, function (state, _ref10) {
-    var isLoading = _ref10.isLoading,
-        uid = _ref10.uid;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_LOADING, function (state, _ref12) {
+    var isLoading = _ref12.isLoading,
+        uid = _ref12.uid;
 
     state.items[uid].isLoading = isLoading;
 }), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_UPDATE_LANG, function (state, lang) {
     state.currentLang = lang;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_DESTROY, function (state, _ref13) {
+    var uid = _ref13.uid;
+
+    _vue2.default.delete(state.items, uid);
 }), _mutations);
 
 exports.default = {
@@ -11964,6 +11962,7 @@ var TREES_INIT = exports.TREES_INIT = 'TREES_INIT';
 var TREES_UPDATE_LIST = exports.TREES_UPDATE_LIST = 'TREES_UPDATE_LIST';
 var TREES_LOADING = exports.TREES_LOADING = 'TREES_LOADING';
 var TREES_UPDATE_LANG = exports.TREES_UPDATE_LANG = 'TREES_UPDATE_LANG';
+var TREES_DESTROY = exports.TREES_DESTROY = 'TREES_DESTROY';
 
 /**
  * Nodes Search Widget
@@ -39845,8 +39844,11 @@ exports.default = {
         // Init a new Tree
         this.treesInit({ url: this.url, uid: this.uid });
     },
+    beforeDestroy: function beforeDestroy() {
+        this.treesDestroy({ uid: this.uid });
+    },
 
-    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['treesInit', 'treesUpdateList']), {
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['treesInit', 'treesDestroy', 'treesUpdateList']), {
         onChange: function onChange() {
             this.treesUpdateList({ data: this.treesGetTreeById(this.uid), uid: this.uid });
         }
