@@ -22,87 +22,77 @@
   - be used in advertising or otherwise to promote the sale, use or other dealings
   - in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
   -
-  - @file NodeTree.vue
+  - @file TreeBulkSelection.vue
   - @author Adrien Scholaert <adrien@rezo-zero.com>
   -->
 
 <template>
-    <div class="tree-component-wrapper">
-        <transition name="fade" key="tree-list">
-            <div class="tree-component" v-if="treesGetTreeItemsById(uid) && !treesGetIsLoading(uid)">
-                <tree-list-component
-                    :data="treesGetTreeItemsById(uid)"
-                    :is-child="false"
-                    :bulkEnable="bulkEnable"
-                    @change="onChange" />
-            </div>
-            <tree-loading-component v-else key="tree-loading" />
-        </transition>
-    </div>
+    <input
+        type="checkbox"
+        class="checkbox"
+        v-show="visible || isChecked"
+        @click="onClick">
 </template>
 <script>
-    import uniqid from 'uniqid'
-    import { mapActions, mapGetters } from 'vuex'
-
-    // Components
-    import TreeListComponent from './TreeListComponent.vue'
-    import TreeLoadingComponent from './TreeLoadingComponent.vue'
+    import { mapActions } from 'vuex'
 
     export default {
-        name: 'tree-component',
         props: {
-            url: {
-                type: String
+            data: {
+                type: Object
             },
-            bulkEnable: {
+            visible: {
                 type: Boolean,
                 default: false
             }
         },
-        computed: {
-            ...mapGetters([
-                'treesGetTreeItemsById',
-                'treesGetIsLoading',
-                'treesGetTreeById'
-            ])
-        },
-        components: {
-            TreeListComponent,
-            TreeLoadingComponent
-        },
-        created () {
-            // Create a uniqued ID to identify the list
-            this.uid = uniqid()
-        },
-        beforeMount () {
-            // Init a new Tree
-            this.treesInit({ url: this.url, uid: this.uid })
+        data () {
+            return {
+                isChecked: false
+            }
         },
         beforeDestroy () {
-            this.treesDestroy({ uid: this.uid })
+            if (this.isChecked) {
+                this.bulkActionsRemove({ item: this.data })
+            }
         },
         methods: {
             ...mapActions([
-                'treesInit',
-                'treesDestroy',
-                'treesUpdateList'
+                'bulkActionsAdd',
+                'bulkActionsRemove'
             ]),
-            onChange () {
-                this.treesUpdateList({ data: this.treesGetTreeById(this.uid), uid: this.uid })
+            onClick () {
+                this.isChecked = !this.isChecked
+
+                if (this.isChecked) {
+                    this.bulkActionsAdd({ item: this.data })
+                } else {
+                    this.bulkActionsRemove({ item: this.data })
+                }
             }
         }
     }
 </script>
 <style lang="scss" scoped>
-    .tree-component-wrapper {
-        position: relative;
-    }
+    .checkbox {
+        width: 14px;
+        height: 14px;
+        line-height: 12px;
+        border: 1px solid #aaa;
+        overflow: hidden;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        outline: 0;
+        background: #fff;
 
-    .tree-component {
-        position: relative;
-
-        #main-content-scrollable & {
-            background: #F0F0F0;
+        &:checked:before {
+            content: "\F00C";
+            font-family: 'FontAwesome';
+            font-size: 12px;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+            line-height: 12px;
+            color: #00ab84;
         }
     }
 </style>

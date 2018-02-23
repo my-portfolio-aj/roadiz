@@ -1,4 +1,10 @@
 /**
+ * Bulk actions
+ */
+export const BULK_ACTIONS_ADD = 'BULK_ACTIONS_ADD'
+export const BULK_ACTIONS_REMOVE = 'BULK_ACTIONS_REMOVE'
+
+/**
  * Langs selector
  */
 export const LANG_SELECTED = 'LANG_SELECTED'

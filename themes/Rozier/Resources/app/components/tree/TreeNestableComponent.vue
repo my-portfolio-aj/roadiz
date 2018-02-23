@@ -46,10 +46,8 @@
 </script>
 <style lang="scss" scoped>
     .nodetree-minus {
-        position: absolute;
-        right: 2px;
-        top: 6px;
-        width: 17px;
+        position: relative;
+        width: 16px;
         height: 17px;
         -webkit-font-smoothing: antialiased;
         cursor: pointer;
@@ -65,7 +63,7 @@
             height: 1px;
             width: 9px;
             margin-top: -1px;
-            margin-left: -4px;
+            margin-left: -5px;
             background-color: #A0A0A0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.7);
         }

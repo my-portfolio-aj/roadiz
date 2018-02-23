@@ -41,6 +41,7 @@
             v-for="item in list"
             :key="item.id"
             @change="onEnd"
+            :bulkEnable="bulkEnable"
             :data="item" />
     </draggable>
 </template>
@@ -61,6 +62,9 @@
                 required: true
             },
             isChild: {
+                type: Boolean
+            },
+            bulkEnable: {
                 type: Boolean
             }
         },

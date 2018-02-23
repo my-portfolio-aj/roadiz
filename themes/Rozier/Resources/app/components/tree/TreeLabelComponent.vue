@@ -49,6 +49,7 @@
 <style lang="scss" scoped>
     .tree-label {
         display: inline-block;
+        margin-right: 6px;
 
         &,
         &-badge,

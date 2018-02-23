@@ -30,15 +30,27 @@
     <div
         class="nodetree-element rz-nestable-item"
         :class="getNodeTreeClass">
-        <div class="nodetree-element-inner rz-nestable-panel" :class="getNodeTreeInnerClass">
+        <div class="nodetree-element-inner rz-nestable-panel"
+             @mouseover="onMouseover"
+             @mouseleave="onMouseleave"
+             :class="getNodeTreeInnerClass">
             <tree-label-component :data="data">
                 <tree-icon-component :data="data" />
             </tree-label-component>
             <tree-link-component :data="data" />
-            <tree-nestable-component @change="onTreeNestableChange" v-if="data.children && data.children.length > 0" />
-            <tree-contextual-menu-component :data="data" />
+            <div class="nodetree-element-right-content">
+                <div><tree-bulk-selection :data="data" :visible="isHover" v-if="bulkEnable" /></div>
+                <div><tree-contextual-menu-component :data="data" v-show="isHover" /></div>
+                <div><tree-nestable-component @change="onTreeNestableChange" v-if="data.children && data.children.length > 0" /></div>
+            </div>
         </div>
-        <tree-list-component name="sub-tree-list" v-show="isActive" :is-child="true" :data="data.children" @change="onChange" />
+        <tree-list-component
+            name="sub-tree-list"
+            v-show="isActive"
+            :is-child="true"
+            :data="data.children"
+            :bulkEnable="bulkEnable"
+            @change="onChange" />
     </div>
 </template>
 <script>
@@ -47,6 +59,7 @@
     import TreeLinkComponent from './TreeLinkComponent.vue'
     import TreeNestableComponent from './TreeNestableComponent.vue'
     import TreeContextualMenuComponent from './TreeContextualMenuComponent.vue'
+    import TreeBulkSelection from './TreeBulkSelection.vue'
 
     export default {
         name: 'tree-item-component',
@@ -55,16 +68,21 @@
             TreeIconComponent,
             TreeLinkComponent,
             TreeNestableComponent,
-            TreeContextualMenuComponent
+            TreeContextualMenuComponent,
+            TreeBulkSelection
         },
         props: {
             data: {
                 type: Object
+            },
+            bulkEnable: {
+                type: Boolean
             }
         },
         data () {
             return {
-                isActive: true
+                isActive: true,
+                isHover: false
             }
         },
         methods: {
@@ -73,6 +91,12 @@
             },
             onTreeNestableChange () {
                 this.isActive = !this.isActive
+            },
+            onMouseover () {
+                this.isHover = true
+            },
+            onMouseleave () {
+                this.isHover = false
             }
         },
         computed: {
@@ -136,12 +160,29 @@
             margin-left: 13px;
             height: 18px;
             padding-top: 4px;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .nodetree-element-right-content {
+            float: right;
+            display: grid;
+            grid-template-columns: repeat(3, 17px);
+            grid-auto-rows: minmax(17px, auto);
+            grid-template-areas: ". . .";
+            grid-gap: 3px;
+            align-items: center;
         }
 
         .rz-nestable-panel {
             &:hover {
                 .nodetree-contextualmenu {
                     opacity: 1;
+                }
+
+                .checkbox {
+                    display: block;
                 }
             }
 

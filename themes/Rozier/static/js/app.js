@@ -7992,6 +7992,65 @@ if (false) {(function () {
 
 /***/ }),
 
+/***/ "../Resources/app/components/tree/TreeBulkSelection.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeBulkSelection_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeBulkSelection_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeBulkSelection_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_65453764_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeBulkSelection_vue__ = __webpack_require__("../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-65453764\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_65453764_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeBulkSelection_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_65453764_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeBulkSelection_vue__);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue")
+}
+var normalizeComponent = __webpack_require__("../node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-65453764"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_TreeBulkSelection_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__babel_loader_node_modules_vue_loader_lib_template_compiler_index_id_data_v_65453764_hasScoped_true_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_TreeBulkSelection_vue___default.a,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "Resources/app/components/tree/TreeBulkSelection.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65453764", Component.options)
+  } else {
+    hotAPI.reload("data-v-65453764", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "../Resources/app/components/tree/TreeComponent.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10057,7 +10116,41 @@ var _LangsStoreModule = __webpack_require__("../Resources/app/store/modules/Lang
 
 var _LangsStoreModule2 = _interopRequireDefault(_LangsStoreModule);
 
+var _BulkActionsStoreModule = __webpack_require__("../Resources/app/store/modules/BulkActionsStoreModule.js");
+
+var _BulkActionsStoreModule2 = _interopRequireDefault(_BulkActionsStoreModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = new _vuex2.default.Store({
+    modules: {
+        nodesSourceSearch: _NodesSourceSearchStoreModule2.default,
+        explorer: _ExplorerStoreModule2.default,
+        filterExplorer: _FilterExplorerStoreModule2.default,
+        drawers: _DrawersStoreModule2.default,
+        tags: _TagsStoreModule2.default,
+        documentPreview: _DocumentPreviewStoreModule2.default,
+        blanchetteEditor: _BlanchetteEditorStoreModule2.default,
+        trees: _TreesStoreModule2.default,
+        contextMenu: _ContextualMenuStoreModule2.default,
+        langs: _LangsStoreModule2.default,
+        bulkActions: _BulkActionsStoreModule2.default
+    },
+    state: {
+        translations: window.RozierRoot.messages,
+        connected: true
+    },
+    mutations: (0, _defineProperty3.default)({}, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
+        state.connected = false;
+    }),
+    actions: {
+        escape: function escape(_ref) {
+            var commit = _ref.commit;
+
+            commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
+        }
+    }
+});
 
 // Modules
 /*
@@ -10087,35 +10180,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @file index.js
  * @author Adrien Scholaert <adrien@rezo-zero.com>
  */
-
-exports.default = new _vuex2.default.Store({
-    modules: {
-        nodesSourceSearch: _NodesSourceSearchStoreModule2.default,
-        explorer: _ExplorerStoreModule2.default,
-        filterExplorer: _FilterExplorerStoreModule2.default,
-        drawers: _DrawersStoreModule2.default,
-        tags: _TagsStoreModule2.default,
-        documentPreview: _DocumentPreviewStoreModule2.default,
-        blanchetteEditor: _BlanchetteEditorStoreModule2.default,
-        trees: _TreesStoreModule2.default,
-        contextMenu: _ContextualMenuStoreModule2.default,
-        langs: _LangsStoreModule2.default
-    },
-    state: {
-        translations: window.RozierRoot.messages,
-        connected: true
-    },
-    mutations: (0, _defineProperty3.default)({}, _mutationTypes.LOGIN_CHECK_DISCONNECTED, function (state) {
-        state.connected = false;
-    }),
-    actions: {
-        escape: function escape(_ref) {
-            var commit = _ref.commit;
-
-            commit(_mutationTypes.KEYBOARD_EVENT_ESCAPE);
-        }
-    }
-});
 
 /***/ }),
 
@@ -10268,6 +10332,107 @@ var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mut
 
 exports.default = {
     state: state,
+    actions: actions,
+    mutations: mutations
+};
+
+/***/ }),
+
+/***/ "../Resources/app/store/modules/BulkActionsStoreModule.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = __webpack_require__("../node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _mutations; /*
+                 * Copyright (c) 2017. Ambroise Maupate and Julien Blanchet
+                 *
+                 * Permission is hereby granted, free of charge, to any person obtaining a copy
+                 * of this software and associated documentation files (the "Software"), to deal
+                 * in the Software without restriction, including without limitation the rights
+                 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                 * copies of the Software, and to permit persons to whom the Software is furnished
+                 * to do so, subject to the following conditions:
+                 * The above copyright notice and this permission notice shall be included in all
+                 * copies or substantial portions of the Software.
+                 *
+                 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+                 * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+                 * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+                 * IN THE SOFTWARE.
+                 *
+                 * Except as contained in this notice, the name of the ROADIZ shall not
+                 * be used in advertising or otherwise to promote the sale, use or other dealings
+                 * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
+                 *
+                 * @file BulkStoreModule.js
+                 * @author Adrien Scholaert <adrien@rezo-zero.com>
+                 */
+
+var _mutationTypes = __webpack_require__("../Resources/app/types/mutationTypes.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ *  State
+ */
+var state = {
+    items: []
+
+    /**
+     * Getters
+     */
+};var getters = {};
+
+/**
+ *  Actions
+ */
+var actions = {
+    bulkActionsAdd: function bulkActionsAdd(_ref, _ref2) {
+        var commit = _ref.commit;
+        var item = _ref2.item;
+
+        commit(_mutationTypes.BULK_ACTIONS_ADD, { item: item });
+    },
+    bulkActionsRemove: function bulkActionsRemove(_ref3, _ref4) {
+        var commit = _ref3.commit;
+        var item = _ref4.item;
+
+        commit(_mutationTypes.BULK_ACTIONS_REMOVE, { item: item });
+    }
+};
+
+/**
+ *  Mutations
+ */
+var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.BULK_ACTIONS_ADD, function (state, _ref5) {
+    var item = _ref5.item;
+
+    state.items.push(item);
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.BULK_ACTIONS_REMOVE, function (state, _ref6) {
+    var item = _ref6.item;
+
+    var index = state.items.indexOf(item);
+
+    if (index >= 0) {
+        state.items.splice(index, 1);
+    }
+}), _mutations);
+
+exports.default = {
+    state: state,
+    getters: getters,
     actions: actions,
     mutations: mutations
 };
@@ -11943,6 +12108,12 @@ var TAG_ENTITY = exports.TAG_ENTITY = 'tag';
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+/**
+ * Bulk actions
+ */
+var BULK_ACTIONS_ADD = exports.BULK_ACTIONS_ADD = 'BULK_ACTIONS_ADD';
+var BULK_ACTIONS_REMOVE = exports.BULK_ACTIONS_REMOVE = 'BULK_ACTIONS_REMOVE';
+
 /**
  * Langs selector
  */
@@ -39751,6 +39922,94 @@ exports.default = {
 
 /***/ }),
 
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends2 = __webpack_require__("../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__("vuex");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    props: {
+        data: {
+            type: Object
+        },
+        visible: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function data() {
+        return {
+            isChecked: false
+        };
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (this.isChecked) {
+            this.bulkActionsRemove({ item: this.data });
+        }
+    },
+
+    methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['bulkActionsAdd', 'bulkActionsRemove']), {
+        onClick: function onClick() {
+            this.isChecked = !this.isChecked;
+
+            if (this.isChecked) {
+                this.bulkActionsAdd({ item: this.data });
+            } else {
+                this.bulkActionsRemove({ item: this.data });
+            }
+        }
+    })
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+
 /***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/selector.js?type=script&index=0&bustCache!../Resources/app/components/tree/TreeComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39823,12 +40082,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     name: 'tree-component',
     props: {
         url: {
             type: String
+        },
+        bulkEnable: {
+            type: Boolean,
+            default: false
         }
     },
     computed: (0, _extends3.default)({}, (0, _vuex.mapGetters)(['treesGetTreeItemsById', 'treesGetIsLoading', 'treesGetTreeById'])),
@@ -40073,7 +40337,67 @@ var _TreeContextualMenuComponent = __webpack_require__("../Resources/app/compone
 
 var _TreeContextualMenuComponent2 = _interopRequireDefault(_TreeContextualMenuComponent);
 
+var _TreeBulkSelection = __webpack_require__("../Resources/app/components/tree/TreeBulkSelection.vue");
+
+var _TreeBulkSelection2 = _interopRequireDefault(_TreeBulkSelection);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     name: 'tree-item-component',
@@ -40082,16 +40406,21 @@ exports.default = {
         TreeIconComponent: _TreeIconComponent2.default,
         TreeLinkComponent: _TreeLinkComponent2.default,
         TreeNestableComponent: _TreeNestableComponent2.default,
-        TreeContextualMenuComponent: _TreeContextualMenuComponent2.default
+        TreeContextualMenuComponent: _TreeContextualMenuComponent2.default,
+        TreeBulkSelection: _TreeBulkSelection2.default
     },
     props: {
         data: {
             type: Object
+        },
+        bulkEnable: {
+            type: Boolean
         }
     },
     data: function data() {
         return {
-            isActive: true
+            isActive: true,
+            isHover: false
         };
     },
 
@@ -40101,6 +40430,12 @@ exports.default = {
         },
         onTreeNestableChange: function onTreeNestableChange() {
             this.isActive = !this.isActive;
+        },
+        onMouseover: function onMouseover() {
+            this.isHover = true;
+        },
+        onMouseleave: function onMouseleave() {
+            this.isHover = false;
         }
     },
     computed: {
@@ -40115,49 +40450,7 @@ exports.default = {
             };
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 
@@ -40320,6 +40613,9 @@ exports.default = {
         },
         isChild: {
             type: Boolean
+        },
+        bulkEnable: {
+            type: Boolean
         }
     },
     computed: {
@@ -40355,6 +40651,7 @@ exports.default = {
         }
     }
 }; //
+//
 //
 //
 //
@@ -42185,7 +42482,7 @@ var render = function render() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", {
-    staticClass: "tree-contextualmenu nodetree-contextualmenu uk-button-dropdown",
+    staticClass: "tree-contextualmenu uk-button-dropdown",
     class: { "context-menu-open": _vm.isItem() }
   }, [_vm.isHover ? _c("div", {
     ref: "button",
@@ -42534,7 +42831,7 @@ var render = function render() {
   }, _vm._l(_vm.list, function (item) {
     return _c("tree-item-component", {
       key: item.id,
-      attrs: { data: item },
+      attrs: { bulkEnable: _vm.bulkEnable, data: item },
       on: { change: _vm.onEnd }
     });
   }));
@@ -43501,7 +43798,8 @@ var render = function render() {
   return _c("div", { staticClass: "tree-component-wrapper" }, [_c("transition", { key: "tree-list", attrs: { name: "fade" } }, [_vm.treesGetTreeItemsById(_vm.uid) && !_vm.treesGetIsLoading(_vm.uid) ? _c("div", { staticClass: "tree-component" }, [_c("tree-list-component", {
     attrs: {
       data: _vm.treesGetTreeItemsById(_vm.uid),
-      "is-child": false
+      "is-child": false,
+      bulkEnable: _vm.bulkEnable
     },
     on: { change: _vm.onChange }
   })], 1) : _c("tree-loading-component", { key: "tree-loading" })], 1)], 1);
@@ -43547,6 +43845,45 @@ if (false) {
   module.hot.accept();
   if (module.hot.data) {
     require("vue-hot-reload-api").rerender("data-v-635e63e9", esExports);
+  }
+}
+
+/***/ }),
+
+/***/ "../node_modules/babel-loader/lib/index.js!../node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-65453764\",\"hasScoped\":true,\"transformToRequire\":{\"video\":[\"src\",\"poster\"],\"source\":\"src\",\"img\":\"src\",\"image\":\"xlink:href\"},\"buble\":{\"transforms\":{}}}!../node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var render = function render() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("input", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.visible || _vm.isChecked,
+      expression: "visible || isChecked"
+    }],
+    staticClass: "checkbox",
+    attrs: { type: "checkbox" },
+    on: { click: _vm.onClick }
+  });
+};
+var staticRenderFns = [];
+render._withStripped = true;
+var esExports = { render: render, staticRenderFns: staticRenderFns };
+exports.default = esExports;
+
+if (false) {
+  module.hot.accept();
+  if (module.hot.data) {
+    require("vue-hot-reload-api").rerender("data-v-65453764", esExports);
   }
 }
 
@@ -44094,10 +44431,21 @@ var render = function render() {
     class: _vm.getNodeTreeClass
   }, [_c("div", {
     staticClass: "nodetree-element-inner rz-nestable-panel",
-    class: _vm.getNodeTreeInnerClass
-  }, [_c("tree-label-component", { attrs: { data: _vm.data } }, [_c("tree-icon-component", { attrs: { data: _vm.data } })], 1), _vm._v(" "), _c("tree-link-component", { attrs: { data: _vm.data } }), _vm._v(" "), _vm.data.children && _vm.data.children.length > 0 ? _c("tree-nestable-component", {
+    class: _vm.getNodeTreeInnerClass,
+    on: { mouseover: _vm.onMouseover, mouseleave: _vm.onMouseleave }
+  }, [_c("tree-label-component", { attrs: { data: _vm.data } }, [_c("tree-icon-component", { attrs: { data: _vm.data } })], 1), _vm._v(" "), _c("tree-link-component", { attrs: { data: _vm.data } }), _vm._v(" "), _c("div", { staticClass: "nodetree-element-right-content" }, [_c("div", [_vm.bulkEnable ? _c("tree-bulk-selection", {
+    attrs: { data: _vm.data, visible: _vm.isHover }
+  }) : _vm._e()], 1), _vm._v(" "), _c("div", [_c("tree-contextual-menu-component", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.isHover,
+      expression: "isHover"
+    }],
+    attrs: { data: _vm.data }
+  })], 1), _vm._v(" "), _c("div", [_vm.data.children && _vm.data.children.length > 0 ? _c("tree-nestable-component", {
     on: { change: _vm.onTreeNestableChange }
-  }) : _vm._e(), _vm._v(" "), _c("tree-contextual-menu-component", { attrs: { data: _vm.data } })], 1), _vm._v(" "), _c("tree-list-component", {
+  }) : _vm._e()], 1)])], 1), _vm._v(" "), _c("tree-list-component", {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -44107,7 +44455,8 @@ var render = function render() {
     attrs: {
       name: "sub-tree-list",
       "is-child": true,
-      data: _vm.data.children
+      data: _vm.data.children,
+      bulkEnable: _vm.bulkEnable
     },
     on: { change: _vm.onChange }
   })], 1);
@@ -70230,7 +70579,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.rz-handle {\n  position: relative;\n  display: inline-block;\n  -ms-touch-action: none;\n      touch-action: none;\n}\n.rz-handle:hover {\n    cursor: move;\n}\n", ""]);
+exports.push([module.i, "\n.rz-handle {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  -ms-touch-action: none;\n      touch-action: none;\n}\n.rz-handle:hover {\n    cursor: move;\n}\n", ""]);
 
 // exports
 
@@ -70245,7 +70594,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.nodetree-contextualmenu[data-v-0b3ce47e] {\n  position: absolute;\n  right: 22px;\n  top: 3px;\n  opacity: 0;\n}\n.nodetree-contextualmenu[data-v-0b3ce47e]:hover {\n    opacity: 1;\n}\n.context-menu-open[data-v-0b3ce47e] {\n  opacity: 1;\n}\n.disabled[data-v-0b3ce47e] {\n  pointer-events: none;\n}\n", ""]);
+exports.push([module.i, "\n.tree-contextualmenu[data-v-0b3ce47e] {\n  /*position: absolute;*/\n  /*right: 22px;*/\n  /*top: 3px;*/\n  /*opacity: 0;*/\n}\n.tree-contextualmenu[data-v-0b3ce47e]:hover {\n    opacity: 1;\n}\n.tree-contextualmenu .uk-icon-caret-down[data-v-0b3ce47e] {\n    font-size: 10px;\n    margin: 0 0 0 1px;\n}\n.context-menu-open[data-v-0b3ce47e] {\n  opacity: 1;\n}\n.disabled[data-v-0b3ce47e] {\n  pointer-events: none;\n}\n", ""]);
 
 // exports
 
@@ -70260,7 +70609,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.nodetree-minus[data-v-1603e29f] {\n  position: absolute;\n  right: 2px;\n  top: 6px;\n  width: 17px;\n  height: 17px;\n  -webkit-font-smoothing: antialiased;\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.nodetree-minus[data-v-1603e29f]::before, .nodetree-minus[data-v-1603e29f]::after {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    display: block;\n    content: '';\n    height: 1px;\n    width: 9px;\n    margin-top: -1px;\n    margin-left: -4px;\n    background-color: #A0A0A0;\n    border-bottom: 1px solid rgba(255, 255, 255, 0.7);\n}\n.nodetree-minus[data-v-1603e29f]::after {\n    border-bottom: none;\n    -webkit-transform: rotate(90deg);\n            transform: rotate(90deg);\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    display: none;\n}\n.nodetree-minus.active[data-v-1603e29f]::after {\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.nodetree-minus[data-v-1603e29f] {\n  position: relative;\n  width: 16px;\n  height: 17px;\n  -webkit-font-smoothing: antialiased;\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.nodetree-minus[data-v-1603e29f]::before, .nodetree-minus[data-v-1603e29f]::after {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    display: block;\n    content: '';\n    height: 1px;\n    width: 9px;\n    margin-top: -1px;\n    margin-left: -5px;\n    background-color: #A0A0A0;\n    border-bottom: 1px solid rgba(255, 255, 255, 0.7);\n}\n.nodetree-minus[data-v-1603e29f]::after {\n    border-bottom: none;\n    -webkit-transform: rotate(90deg);\n            transform: rotate(90deg);\n    -webkit-transform-origin: 50% 50%;\n            transform-origin: 50% 50%;\n    display: none;\n}\n.nodetree-minus.active[data-v-1603e29f]::after {\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -70305,7 +70654,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.tree-label[data-v-2030a036] {\n  display: inline-block;\n}\n.tree-label[data-v-2030a036], .tree-label-badge[data-v-2030a036], .tree-label-inner[data-v-2030a036] {\n    position: relative;\n}\n.tree-label-inner[data-v-2030a036] {\n    z-index: 2;\n    display: inline-block;\n}\n.tree-label-badge[data-v-2030a036] {\n    top: -1px;\n    z-index: 1;\n    line-height: 0;\n    margin-left: -21px;\n    border-radius: 20px 0 0 20px;\n    padding-left: 22px;\n    background-color: #cacaca;\n    color: #fff;\n    text-shadow: 0 -1px 0 #9a9a9a;\n}\n", ""]);
+exports.push([module.i, "\n.tree-label[data-v-2030a036] {\n  display: inline-block;\n  margin-right: 6px;\n}\n.tree-label[data-v-2030a036], .tree-label-badge[data-v-2030a036], .tree-label-inner[data-v-2030a036] {\n    position: relative;\n}\n.tree-label-inner[data-v-2030a036] {\n    z-index: 2;\n    display: inline-block;\n}\n.tree-label-badge[data-v-2030a036] {\n    top: -1px;\n    z-index: 1;\n    line-height: 0;\n    margin-left: -21px;\n    border-radius: 20px 0 0 20px;\n    padding-left: 22px;\n    background-color: #cacaca;\n    color: #fff;\n    text-shadow: 0 -1px 0 #9a9a9a;\n}\n", ""]);
 
 // exports
 
@@ -70440,7 +70789,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.tree-element-name a[data-v-3ca20957] {\n  color: #4D4D4D;\n  padding: 0;\n}\n", ""]);
+exports.push([module.i, "\n.tree-element-name[data-v-3ca20957] {\n  position: relative;\n  top: 2px;\n  width: 100%;\n  max-width: none;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n.tree-element-name a[data-v-3ca20957] {\n  color: #4D4D4D;\n  padding: 0;\n}\n", ""]);
 
 // exports
 
@@ -70522,6 +70871,21 @@ exports.push([module.i, "\n.unpublish[data-v-635e63e9] {\n  width: 9px;\n  heigh
 
 /***/ }),
 
+/***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.checkbox[data-v-65453764] {\n  width: 14px;\n  height: 14px;\n  line-height: 12px;\n  border: 1px solid #aaa;\n  overflow: hidden;\n  vertical-align: middle;\n  -webkit-appearance: none;\n  outline: 0;\n  background: #fff;\n}\n.checkbox[data-v-65453764]:checked:before {\n    content: \"\\F00C\";\n    font-family: 'FontAwesome';\n    font-size: 12px;\n    -webkit-font-smoothing: antialiased;\n    text-align: center;\n    line-height: 12px;\n    color: #00ab84;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-70e79c08\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/context-menu/ContextualMenuVerticalComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -70590,7 +70954,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.rz-nestable-item {\n  position: relative;\n  margin-left: -6px;\n}\n.rz-nestable-item:before {\n    content: '';\n    position: absolute;\n    top: -3px;\n    left: 0;\n    bottom: 0;\n    width: 1px;\n    background-color: #aaa;\n}\n.rz-nestable-item:last-of-type {\n    border-left: none;\n}\n.rz-nestable-item:last-of-type:before {\n      content: '';\n      position: absolute;\n      top: -3px;\n      left: 0;\n      height: 17px;\n      width: 1px;\n      background-color: #aaa;\n}\n.rz-nestable-item:after {\n    content: '';\n    position: absolute;\n    top: 13px;\n    left: 0;\n    height: 1px;\n    width: 13px;\n    background-color: #aaa;\n}\n.rz-nestable-item .nodetree-element-inner {\n    position: relative;\n    z-index: 2;\n    margin-left: 13px;\n    height: 18px;\n    padding-top: 4px;\n}\n.rz-nestable-item .rz-nestable-panel:hover .nodetree-contextualmenu {\n    opacity: 1;\n}\n.rz-nestable-item .rz-nestable-panel.hidden-node > .nodetree-element-name a {\n    text-decoration: line-through;\n    opacity: 0.8;\n}\n", ""]);
+exports.push([module.i, "\n.rz-nestable-item {\n  position: relative;\n  margin-left: -6px;\n}\n.rz-nestable-item:before {\n    content: '';\n    position: absolute;\n    top: -3px;\n    left: 0;\n    bottom: 0;\n    width: 1px;\n    background-color: #aaa;\n}\n.rz-nestable-item:last-of-type {\n    border-left: none;\n}\n.rz-nestable-item:last-of-type:before {\n      content: '';\n      position: absolute;\n      top: -3px;\n      left: 0;\n      height: 17px;\n      width: 1px;\n      background-color: #aaa;\n}\n.rz-nestable-item:after {\n    content: '';\n    position: absolute;\n    top: 13px;\n    left: 0;\n    height: 1px;\n    width: 13px;\n    background-color: #aaa;\n}\n.rz-nestable-item .nodetree-element-inner {\n    position: relative;\n    z-index: 2;\n    margin-left: 13px;\n    height: 18px;\n    padding-top: 4px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n}\n.rz-nestable-item .nodetree-element-right-content {\n    float: right;\n    display: grid;\n    grid-template-columns: repeat(3, 17px);\n    grid-auto-rows: minmax(17px, auto);\n    grid-template-areas: \". . .\";\n    grid-gap: 3px;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.rz-nestable-item .rz-nestable-panel:hover .nodetree-contextualmenu {\n    opacity: 1;\n}\n.rz-nestable-item .rz-nestable-panel:hover .checkbox {\n    display: block;\n}\n.rz-nestable-item .rz-nestable-panel.hidden-node > .nodetree-element-name a {\n    text-decoration: line-through;\n    opacity: 0.8;\n}\n", ""]);
 
 // exports
 
@@ -98212,6 +98576,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-635e63e9\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeIconUnpublishedComponent.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-635e63e9\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeIconUnpublishedComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/sass-loader/lib/loader.js!../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!../Resources/app/components/tree/TreeBulkSelection.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("../node_modules/vue-style-loader/lib/addStylesClient.js")("3b78759d", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeBulkSelection.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-65453764\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./TreeBulkSelection.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

@@ -48,6 +48,14 @@
     }
 </script>
 <style lang="scss" scoped>
+    .tree-element-name {
+        position: relative;
+        top: 2px;
+        width: 100%;
+        max-width: none;
+        flex: 1;
+    }
+
     .tree-element-name a {
         color: #4D4D4D;
         padding: 0;

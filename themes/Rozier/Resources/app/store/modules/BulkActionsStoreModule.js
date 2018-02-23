@@ -22,55 +22,58 @@
  * be used in advertising or otherwise to promote the sale, use or other dealings
  * in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
  *
- * @file index.js
+ * @file BulkStoreModule.js
  * @author Adrien Scholaert <adrien@rezo-zero.com>
  */
 
-import Vuex from 'vuex'
 import {
-    KEYBOARD_EVENT_ESCAPE,
-    LOGIN_CHECK_DISCONNECTED
-} from '../types/mutationTypes'
+    BULK_ACTIONS_ADD,
+    BULK_ACTIONS_REMOVE
+} from '../../types/mutationTypes'
 
-// Modules
-import nodesSourceSearch from './modules/NodesSourceSearchStoreModule'
-import explorer from './modules/ExplorerStoreModule'
-import drawers from './modules/DrawersStoreModule'
-import filterExplorer from './modules/FilterExplorerStoreModule'
-import tags from './modules/TagsStoreModule'
-import documentPreview from './modules/DocumentPreviewStoreModule'
-import blanchetteEditor from './modules/BlanchetteEditorStoreModule'
-import trees from './modules/TreesStoreModule'
-import contextMenu from './modules/ContextualMenuStoreModule'
-import langs from './modules/LangsStoreModule'
-import bulkActions from './modules/BulkActionsStoreModule'
+/**
+ *  State
+ */
+const state = {
+    items: []
+}
 
-export default new Vuex.Store({
-    modules: {
-        nodesSourceSearch,
-        explorer,
-        filterExplorer,
-        drawers,
-        tags,
-        documentPreview,
-        blanchetteEditor,
-        trees,
-        contextMenu,
-        langs,
-        bulkActions
+/**
+ * Getters
+ */
+const getters = {}
+
+/**
+ *  Actions
+ */
+const actions = {
+    bulkActionsAdd ({ commit }, { item }) {
+        commit(BULK_ACTIONS_ADD, { item })
     },
-    state: {
-        translations: window.RozierRoot.messages,
-        connected: true
+    bulkActionsRemove ({ commit }, { item }) {
+        commit(BULK_ACTIONS_REMOVE, { item })
+    }
+}
+
+/**
+ *  Mutations
+ */
+const mutations = {
+    [BULK_ACTIONS_ADD] (state, { item }) {
+        state.items.push(item)
     },
-    mutations: {
-        [LOGIN_CHECK_DISCONNECTED] (state) {
-            state.connected = false
-        }
-    },
-    actions: {
-        escape ({ commit }) {
-            commit(KEYBOARD_EVENT_ESCAPE)
+    [BULK_ACTIONS_REMOVE] (state, { item }) {
+        const index = state.items.indexOf(item)
+
+        if (index >= 0) {
+            state.items.splice(index, 1)
         }
     }
-})
+}
+
+export default {
+    state,
+    getters,
+    actions,
+    mutations
+}

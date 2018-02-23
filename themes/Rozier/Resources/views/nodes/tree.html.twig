@@ -53,6 +53,7 @@
             <lang-selector-component data-vuejs></lang-selector-component>
             <tree-component
                 data-vuejs
+                :bulk-enable="true"
                 url="{{ path('nodesTreeJson', { 'parent_id': node.id }) }}">
             </tree-component>
         </nav>

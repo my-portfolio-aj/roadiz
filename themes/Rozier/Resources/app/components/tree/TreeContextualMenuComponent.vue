@@ -27,7 +27,7 @@
   -->
 
 <template>
-    <div class="tree-contextualmenu nodetree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isItem() }">
+    <div class="tree-contextualmenu uk-button-dropdown" :class="{ 'context-menu-open': isItem() }">
         <div class="tree-contextualmenu-button uk-button uk-button-mini"
              :class="{ 'disabled': isItem() }"
              v-if="isHover"
@@ -79,14 +79,19 @@
     }
 </script>
 <style lang="scss" scoped>
-    .nodetree-contextualmenu {
-        position: absolute;
-        right: 22px;
-        top: 3px;
-        opacity: 0;
+    .tree-contextualmenu {
+        /*position: absolute;*/
+        /*right: 22px;*/
+        /*top: 3px;*/
+        /*opacity: 0;*/
 
         &:hover {
             opacity: 1;
+        }
+
+        .uk-icon-caret-down {
+            font-size: 10px;
+            margin: 0 0 0 1px;
         }
     }
 

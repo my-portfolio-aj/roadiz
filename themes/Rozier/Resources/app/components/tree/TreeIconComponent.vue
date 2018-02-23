@@ -68,6 +68,7 @@
 <style lang="scss">
     .rz-handle {
         position: relative;
+        top: 2px;
         display: inline-block;
         touch-action: none;
 
