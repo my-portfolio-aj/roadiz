@@ -25,7 +25,9 @@ export default class NodesBulk {
 
         this.onCheckboxChange = this.onCheckboxChange.bind(this)
         this.nodesFolderButtonClick = this.nodesFolderButtonClick.bind(this)
+        this.nodesStatusButtonClick = this.nodesStatusButtonClick.bind(this)
         this.onSelectAll = this.onSelectAll.bind(this)
+        this.onDeselectAll = this.onDeselectAll.bind(this)
 
         if (this.$nodesCheckboxes.length) {
             this.init()
