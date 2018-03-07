@@ -31,7 +31,6 @@ import {
     TREES_UPDATE_LIST,
     TREES_INIT,
     TREES_LOADING,
-    TREES_UPDATE_LANG,
     TREES_DESTROY
 } from '../../types/mutationTypes'
 import Vue from 'vue'
@@ -41,7 +40,6 @@ import Promise from 'bluebird'
  * Module state
  */
 const state = {
-    currentLang: null,
     items: {}
 }
 
@@ -64,9 +62,8 @@ const getters = {
  * Actions
  */
 const actions = {
-    treesInit ({ commit, dispatch }, { url, uid, locale }) {
+    treesInit ({ commit, dispatch }, { url, uid }) {
         commit(TREES_INIT, { uid, url })
-        commit(TREES_UPDATE_LANG, { locale })
         dispatch('treesMakeRequest', { url, uid })
     },
     treesDestroy ({ commit }, { uid }) {
@@ -75,9 +72,7 @@ const actions = {
     treesUpdateList ({ commit }, { data, uid }) {
         commit(TREES_UPDATE_LIST, { data, uid })
     },
-    langsSelected ({ commit, dispatch }, lang) {
-        commit(TREES_UPDATE_LANG, lang)
-
+    langsUpdated ({ dispatch }) {
         for (let key in state.items) {
             if (state.items.hasOwnProperty(key) && state.items[key].url) {
                 dispatch('treesMakeRequest', {
@@ -87,13 +82,13 @@ const actions = {
             }
         }
     },
-    treesMakeRequest ({ commit, state }, { url, uid }) {
+    treesMakeRequest ({ commit, rootGetters }, { url, uid }) {
         commit(TREES_LOADING, { isLoading: true, uid })
 
-        const translateId = state.currentLang && state.currentLang.id ? state.currentLang.id : null
+        const lang = rootGetters.langsGetCurrentLang
 
         Promise
-            .all([Promise.delay(500), NodeTreeApi.getTree(url, { translateId })])
+            .all([Promise.delay(500), NodeTreeApi.getTree(url, { translateId: lang.id })])
             .then(results => {
                 commit(TREES_LOADING, { isLoading: false, uid })
                 commit(TREES_UPDATE_LIST, { data: results[1], uid })
@@ -115,9 +110,6 @@ const mutations = {
     },
     [TREES_LOADING] (state, { isLoading, uid }) {
         state.items[uid].isLoading = isLoading
-    },
-    [TREES_UPDATE_LANG] (state, lang) {
-        state.currentLang = lang
     },
     [TREES_DESTROY] (state, { uid }) {
         Vue.delete(state.items, uid)

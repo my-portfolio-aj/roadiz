@@ -52,6 +52,7 @@ import TreeComponent from './components/tree/TreeComponent.vue'
 import LangSelectorComponent from './components/lang/LangSelectorComponent.vue'
 import ContextualMenuComponent from './components/context-menu/ContextualMenuComponent.vue'
 import TreeListComponent from './components/tree/TreeListComponent.vue'
+import BulkActionsComponent from './components/bulk-edits/BulkActionsComponent.vue'
 
 import {
     KEYBOARD_EVENT_ESCAPE
@@ -87,7 +88,8 @@ export default class AppVue {
             ContextualMenuComponent,
             Overlay,
             TreeComponent,
-            LangSelectorComponent
+            LangSelectorComponent,
+            BulkActionsComponent
         }
 
         this.init()

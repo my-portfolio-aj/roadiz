@@ -38,7 +38,7 @@
                 <contextual-menu-vertical-component :data="ctxData" />
                 <div class="ctx-menu-sections-wrapper">
                     <contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" :label="trans.actions" />
-                    <!--<contextual-menu-section-component v-if="ctxData.actions" :items="ctxData.actions" :label="trans.statuses" />-->
+                    <!--<contextual-menu-section-component v-if="ctxData.statuses" :items="ctxData.statuses" :label="trans.statuses" />-->
                 </div>
             </div>
         </transition>

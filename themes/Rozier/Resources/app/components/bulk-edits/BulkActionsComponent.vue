@@ -22,66 +22,14 @@
   - be used in advertising or otherwise to promote the sale, use or other dealings
   - in this Software without prior written authorization from Ambroise Maupate and Julien Blanchet.
   -
-  - @file LangSelectorItemComponent.vue
+  - @file BulkActionsComponent.vue
   - @author Adrien Scholaert <adrien@rezo-zero.com>
   -->
 
 <template>
-    <li class="lang-selector-item"
-        @click="onClick"
-        :class="{ active: lang.selected }">
-        {{ lang.locale }}
-    </li>
+    <div class="bulk-actions">
+        <div class="bulk-actions-title-cont">
+            <h3 class="bulk-actions-title tags-bulk-actions-title">{{ 'bulk.actions'|trans }}</h3>
+        </div>
+    </div>
 </template>
-<script>
-    export default {
-        props: {
-            lang: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-            onClick () {
-                this.$store.dispatch('langsSelected', this.lang)
-            }
-        }
-    }
-</script>
-<style lang="scss" scoped>
-    .lang-selector-item {
-        position: relative;
-        font-size: 11px;
-        color: #555;
-        display: inline-block;
-        border-left: 1px solid #BBB;
-        padding: 2px 10px 3px 10px;
-        box-sizing: border-box;
-        text-decoration: none;
-        margin: 0;
-        outline: none;
-        cursor: pointer;
-        text-transform: capitalize;
-
-        &:first-child {
-            border-left: 0 none;
-        }
-
-        &::after {
-            position: absolute;
-            display: block;
-            content: '';
-            right: 8px;
-            bottom: 1px;
-            left: 8px;
-            height: 2px;
-            background-color: transparent;
-            transition: 0.4s background-color cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.active::after,
-        &:hover::after {
-            background-color: #777;
-        }
-    }
-</style>

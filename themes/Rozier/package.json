@@ -46,6 +46,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "mousetrap": "^1.6.0",
+    "store": "^2.0.12",
     "uniqid": "^4.1.1",
     "vue-cropperjs": "^2.1.0",
     "vue-js-modal": "^1.2.3",

@@ -26,6 +26,7 @@
  * @author Adrien Scholaert <adrien@rezo-zero.com>
  */
 
+import store from 'store'
 import {
     LANG_SELECTED
 } from '../../types/mutationTypes'
@@ -37,19 +38,37 @@ const state = {
     list: window.RozierRoot.langs
 }
 
+// Change default lang if in localStorage
+if (store.get('lang')) {
+    const newLang = store.get('lang')
+    for (const lang of state.list) {
+        lang.selected = lang.locale === newLang.locale
+    }
+}
+
 /**
  * Getters
  */
 const getters = {
-    langsGetList: (state) => state.list
+    langsGetList: (state) => state.list,
+    langsGetCurrentLang: (state) => {
+        for (const lang of state.list) {
+            if (lang.selected) {
+                return lang
+            }
+        }
+
+        return null
+    }
 }
 
 /**
  * Actions
  */
 const actions = {
-    langsSelected ({ commit }, lang) {
+    langsSelected ({ commit, dispatch }, lang) {
         commit(LANG_SELECTED, lang)
+        dispatch('langsUpdated')
     }
 }
 
@@ -60,6 +79,7 @@ const mutations = {
     [LANG_SELECTED] (state, newLang) {
         for (let lang of state.list) {
             lang.selected = lang.locale === newLang.locale
+            store.set('lang', newLang)
         }
     }
 }
