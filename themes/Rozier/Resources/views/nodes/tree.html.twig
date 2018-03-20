@@ -54,6 +54,7 @@
             <tree-component
                 data-vuejs
                 :bulk-enable="true"
+                :parent-id="{{ node.id }}"
                 url="{{ path('nodesTreeJson', { 'parent_id': node.id }) }}">
             </tree-component>
         </nav>

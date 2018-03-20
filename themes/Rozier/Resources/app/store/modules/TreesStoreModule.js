@@ -31,7 +31,8 @@ import {
     TREES_UPDATE_LIST,
     TREES_INIT,
     TREES_LOADING,
-    TREES_DESTROY
+    TREES_DESTROY,
+    TREES_FORBIDDEN_IDS
 } from '../../types/mutationTypes'
 import Vue from 'vue'
 import Promise from 'bluebird'
@@ -40,6 +41,7 @@ import Promise from 'bluebird'
  * Module state
  */
 const state = {
+    forbiddenIds: [],
     items: {}
 }
 
@@ -93,6 +95,9 @@ const actions = {
                 commit(TREES_LOADING, { isLoading: false, uid })
                 commit(TREES_UPDATE_LIST, { data: results[1], uid })
             })
+    },
+    treesForbiddenIds ({ commit }, ids) {
+        commit(TREES_FORBIDDEN_IDS, ids)
     }
 }
 
@@ -113,6 +118,9 @@ const mutations = {
     },
     [TREES_DESTROY] (state, { uid }) {
         Vue.delete(state.items, uid)
+    },
+    [TREES_FORBIDDEN_IDS] (state, ids) {
+        state.forbiddenIds = ids
     }
 }
 

@@ -30,6 +30,7 @@
     <draggable
         :list="list"
         :options="options"
+        :move="onMove"
         :class="{
             'nodetree root-tree rz-nestable': !isChild,
             'rz-nestable-list': isChild
@@ -76,7 +77,7 @@
             },
             options () {
                 return {
-                    animation: 150,
+                    animation: 0,
                     handle: '.rz-handle',
                     filter: '.disabled',
                     sort: true,
@@ -97,6 +98,10 @@
             },
             onDragStart () {
                 this.$body.addClass('on-drag')
+            },
+            onMove (e) {
+                console.log(e.draggedContext.element)
+                // this.treesForbiddenIds([e.draggedContext.element.id, this.parentId])
             }
         }
     }

@@ -54,6 +54,7 @@
     </div>
 </template>
 <script>
+    // import { mapState } from 'vuex'
     import TreeLabelComponent from './TreeLabelComponent.vue'
     import TreeIconComponent from './TreeIconComponent.vue'
     import TreeLinkComponent from './TreeLinkComponent.vue'

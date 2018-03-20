@@ -12140,6 +12140,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Module state
  */
 var state = {
+    forbiddenIds: [],
     items: {}
 
     /**
@@ -12214,33 +12215,40 @@ var state = {
             commit(_mutationTypes.TREES_LOADING, { isLoading: false, uid: uid });
             commit(_mutationTypes.TREES_UPDATE_LIST, { data: results[1], uid: uid });
         });
+    },
+    treesForbiddenIds: function treesForbiddenIds(_ref10, ids) {
+        var commit = _ref10.commit;
+
+        commit(_mutationTypes.TREES_FORBIDDEN_IDS, ids);
     }
 };
 
 /**
  * Mutations
  */
-var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_INIT, function (state, _ref10) {
-    var uid = _ref10.uid,
-        url = _ref10.url;
+var mutations = (_mutations = {}, (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_INIT, function (state, _ref11) {
+    var uid = _ref11.uid,
+        url = _ref11.url;
 
     _vue2.default.set(state.items, uid, {});
     _vue2.default.set(state.items[uid], 'url', url);
     _vue2.default.set(state.items[uid], 'isLoading', false);
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_UPDATE_LIST, function (state, _ref11) {
-    var data = _ref11.data,
-        uid = _ref11.uid;
-
-    state.items[uid] = (0, _extends3.default)({}, state.items[uid], data);
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_LOADING, function (state, _ref12) {
-    var isLoading = _ref12.isLoading,
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_UPDATE_LIST, function (state, _ref12) {
+    var data = _ref12.data,
         uid = _ref12.uid;
 
+    state.items[uid] = (0, _extends3.default)({}, state.items[uid], data);
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_LOADING, function (state, _ref13) {
+    var isLoading = _ref13.isLoading,
+        uid = _ref13.uid;
+
     state.items[uid].isLoading = isLoading;
-}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_DESTROY, function (state, _ref13) {
-    var uid = _ref13.uid;
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_DESTROY, function (state, _ref14) {
+    var uid = _ref14.uid;
 
     _vue2.default.delete(state.items, uid);
+}), (0, _defineProperty3.default)(_mutations, _mutationTypes.TREES_FORBIDDEN_IDS, function (state, ids) {
+    state.forbiddenIds = ids;
 }), _mutations);
 
 exports.default = {
@@ -12304,8 +12312,8 @@ var CONTEXTUAL_MENU_RESET = exports.CONTEXTUAL_MENU_RESET = 'CONTEXTUAL_MENU_RES
 var TREES_INIT = exports.TREES_INIT = 'TREES_INIT';
 var TREES_UPDATE_LIST = exports.TREES_UPDATE_LIST = 'TREES_UPDATE_LIST';
 var TREES_LOADING = exports.TREES_LOADING = 'TREES_LOADING';
-var TREES_UPDATE_LANG = exports.TREES_UPDATE_LANG = 'TREES_UPDATE_LANG';
 var TREES_DESTROY = exports.TREES_DESTROY = 'TREES_DESTROY';
+var TREES_FORBIDDEN_IDS = exports.TREES_FORBIDDEN_IDS = 'TREES_FORBIDDEN_IDS';
 
 /**
  * Nodes Search Widget
@@ -40568,6 +40576,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
+// import { mapState } from 'vuex'
 exports.default = {
     name: 'tree-item-component',
     components: {
@@ -40670,12 +40679,36 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     props: {
         data: {
             type: Object,
             required: true
+        }
+    },
+    computed: {
+        getClass: function getClass() {
+            return {
+                'in-future': this.publishedInFuture()
+            };
+        }
+    },
+    methods: {
+        publishedInFuture: function publishedInFuture() {
+            if (this.data.published_at) {
+                var current = new Date().getTime();
+                var publishedAt = new Date(this.data.published_at).getTime();
+
+                if (publishedAt > current) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 };
@@ -40795,7 +40828,7 @@ exports.default = {
         },
         options: function options() {
             return {
-                animation: 150,
+                animation: 0,
                 handle: '.rz-handle',
                 filter: '.disabled',
                 sort: true,
@@ -40817,9 +40850,14 @@ exports.default = {
         },
         onDragStart: function onDragStart() {
             this.$body.addClass('on-drag');
+        },
+        onMove: function onMove(e) {
+            console.log(e.draggedContext.element);
+            // this.treesForbiddenIds([e.draggedContext.element.id, this.parentId])
         }
     }
 }; //
+//
 //
 //
 //
@@ -42925,7 +42963,10 @@ var render = function render() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "tree-label" }, [_c("div", { staticClass: "tree-label-inner" }, [_vm._t("default")], 2), _vm._v(" "), _vm.data.statuses.publishable && _vm.data.published_at ? _c("div", { staticClass: "nodetree-published-at uk-badge tree-label-badge" }, [_c("i", { staticClass: "uk-icon-clock-o" }), _vm._v(" " + _vm._s(_vm._f("formatDate")(_vm.data.published_at, "DD/MM/Y")) + "\n    ")]) : _vm._e()]);
+  return _c("div", { staticClass: "tree-label" }, [_c("div", { staticClass: "tree-label-inner" }, [_vm._t("default")], 2), _vm._v(" "), _vm.data.statuses.publishable && _vm.data.published_at ? _c("div", {
+    staticClass: "nodetree-published-at uk-badge tree-label-badge",
+    class: _vm.getClass
+  }, [_c("i", { staticClass: "uk-icon-clock-o" }), _vm._v(" " + _vm._s(_vm._f("formatDate")(_vm.data.published_at, "DD/MM/Y")) + "\n    ")]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -43001,7 +43042,7 @@ var render = function render() {
       "nodetree root-tree rz-nestable": !_vm.isChild,
       "rz-nestable-list": _vm.isChild
     },
-    attrs: { list: _vm.list, options: _vm.options },
+    attrs: { list: _vm.list, options: _vm.options, move: _vm.onMove },
     on: { end: _vm.onEnd, start: _vm.onDragStart }
   }, _vm._l(_vm.list, function (item) {
     return _c("tree-item-component", {
@@ -70852,7 +70893,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "\n.tree-label[data-v-2030a036] {\n  display: inline-block;\n  margin-right: 6px;\n}\n.tree-label[data-v-2030a036], .tree-label-badge[data-v-2030a036], .tree-label-inner[data-v-2030a036] {\n    position: relative;\n}\n.tree-label-inner[data-v-2030a036] {\n    z-index: 2;\n    display: inline-block;\n}\n.tree-label-badge[data-v-2030a036] {\n    top: -1px;\n    z-index: 1;\n    line-height: 0;\n    margin-left: -21px;\n    border-radius: 20px 0 0 20px;\n    padding-left: 22px;\n    background-color: #cacaca;\n    color: #fff;\n    text-shadow: 0 -1px 0 #9a9a9a;\n}\n", ""]);
+exports.push([module.i, "\n.tree-label[data-v-2030a036] {\n  display: inline-block;\n  margin-right: 6px;\n}\n.tree-label[data-v-2030a036], .tree-label-badge[data-v-2030a036], .tree-label-inner[data-v-2030a036] {\n    position: relative;\n}\n.tree-label-inner[data-v-2030a036] {\n    z-index: 2;\n    display: inline-block;\n}\n.tree-label-badge[data-v-2030a036] {\n    top: 1px;\n    z-index: 1;\n    line-height: 1;\n    margin-left: -21px;\n    border-radius: 20px 0 0 20px;\n    padding-left: 22px;\n    background-color: #cacaca;\n    color: #fff;\n    text-shadow: 0 -1px 0 #9a9a9a;\n    display: inline-block;\n    padding-top: 6px;\n}\n.tree-label-badge i[data-v-2030a036] {\n      display: none;\n}\n.tree-label-badge.in-future[data-v-2030a036] {\n      background-color: #ca8776;\n      text-shadow: 0 -1px 0 #855143;\n}\n.tree-label-badge.in-future i[data-v-2030a036] {\n        display: inline-block;\n}\n", ""]);
 
 // exports
 
