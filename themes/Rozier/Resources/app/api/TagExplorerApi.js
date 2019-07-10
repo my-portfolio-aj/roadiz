@@ -77,18 +77,18 @@ export function getParentTags () {
         url: window.RozierRoot.routes.tagsAjaxExplorer,
         params: postData
     })
-    .then((response) => {
-        if (typeof response.data !== 'undefined' && response.data.tags) {
-            return {
-                items: response.data.tags
+        .then((response) => {
+            if (typeof response.data !== 'undefined' && response.data.tags) {
+                return {
+                    items: response.data.tags
+                }
+            } else {
+                return {}
             }
-        } else {
-            return {}
-        }
-    })
-    .catch((error) => {
+        })
+        .catch((error) => {
         // TODO
         // Log request error or display a message
-        throw new Error(error)
-    })
+            throw new Error(error)
+        })
 }

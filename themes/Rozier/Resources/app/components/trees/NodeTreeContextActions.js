@@ -73,22 +73,22 @@ export default class NodeTreeContextActions {
                 dataType: 'json',
                 data: postData
             })
-            .done(() => {
-                window.Rozier.refreshAllNodeTrees()
-                window.Rozier.getMessages()
-            })
-            .fail(data => {
-                data = JSON.parse(data.responseText)
-                window.UIkit.notify({
-                    message: data.message,
-                    status: 'danger',
-                    timeout: 3000,
-                    pos: 'top-center'
+                .done(() => {
+                    window.Rozier.refreshAllNodeTrees()
+                    window.Rozier.getMessages()
                 })
-            })
-            .always(() => {
-                window.Rozier.lazyload.canvasLoader.hide()
-            })
+                .fail(data => {
+                    data = JSON.parse(data.responseText)
+                    window.UIkit.notify({
+                        message: data.message,
+                        status: 'danger',
+                        timeout: 3000,
+                        pos: 'top-center'
+                    })
+                })
+                .always(() => {
+                    window.Rozier.lazyload.canvasLoader.hide()
+                })
         }, 100)
     }
 
@@ -115,22 +115,22 @@ export default class NodeTreeContextActions {
                 dataType: 'json',
                 data: postData
             })
-            .done(() => {
-                window.Rozier.refreshAllNodeTrees()
-                window.Rozier.getMessages()
-            })
-            .fail(data => {
-                data = JSON.parse(data.responseText)
-                window.UIkit.notify({
-                    message: data.error_message,
-                    status: 'danger',
-                    timeout: 3000,
-                    pos: 'top-center'
+                .done(() => {
+                    window.Rozier.refreshAllNodeTrees()
+                    window.Rozier.getMessages()
                 })
-            })
-            .always(() => {
-                window.Rozier.lazyload.canvasLoader.hide()
-            })
+                .fail(data => {
+                    data = JSON.parse(data.responseText)
+                    window.UIkit.notify({
+                        message: data.error_message,
+                        status: 'danger',
+                        timeout: 3000,
+                        pos: 'top-center'
+                    })
+                })
+                .always(() => {
+                    window.Rozier.lazyload.canvasLoader.hide()
+                })
         }, 100)
     }
 
@@ -177,21 +177,21 @@ export default class NodeTreeContextActions {
             dataType: 'json',
             data: postData
         })
-        .done(() => {
-            window.Rozier.refreshAllNodeTrees()
-            window.Rozier.getMessages()
-        })
-        .fail(data => {
-            data = JSON.parse(data.responseText)
-            window.UIkit.notify({
-                message: data.error_message,
-                status: 'danger',
-                timeout: 3000,
-                pos: 'top-center'
+            .done(() => {
+                window.Rozier.refreshAllNodeTrees()
+                window.Rozier.getMessages()
             })
-        })
-        .always(() => {
-            window.Rozier.lazyload.canvasLoader.hide()
-        })
+            .fail(data => {
+                data = JSON.parse(data.responseText)
+                window.UIkit.notify({
+                    message: data.error_message,
+                    status: 'danger',
+                    timeout: 3000,
+                    pos: 'top-center'
+                })
+            })
+            .always(() => {
+                window.Rozier.lazyload.canvasLoader.hide()
+            })
     }
 }

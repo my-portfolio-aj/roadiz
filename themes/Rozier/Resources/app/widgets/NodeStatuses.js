@@ -101,22 +101,22 @@ export default class NodeStatuses {
                     cache: false,
                     data: postData
                 })
-                .done(() => {
-                    window.Rozier.refreshMainNodeTree()
-                    window.Rozier.getMessages()
-                })
-                .fail(data => {
-                    data = JSON.parse(data.responseText)
-                    window.UIkit.notify({
-                        message: data.error_message,
-                        status: 'danger',
-                        timeout: 3000,
-                        pos: 'top-center'
+                    .done(() => {
+                        window.Rozier.refreshMainNodeTree()
+                        window.Rozier.getMessages()
                     })
-                })
-                .always(() => {
-                    this.locked = false
-                })
+                    .fail(data => {
+                        data = JSON.parse(data.responseText)
+                        window.UIkit.notify({
+                            message: data.error_message,
+                            status: 'danger',
+                            timeout: 3000,
+                            pos: 'top-center'
+                        })
+                    })
+                    .always(() => {
+                        this.locked = false
+                    })
             }
         }
     }

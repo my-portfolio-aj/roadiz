@@ -152,7 +152,7 @@
                 const key = e.keyCode
 
                 switch (key) {
-                    // Undo crop (Key: Ctrl + Z)
+                // Undo crop (Key: Ctrl + Z)
                 case 90:
                     if (this.undo) {
                         e.preventDefault()

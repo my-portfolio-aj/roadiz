@@ -299,7 +299,7 @@ export default class LeafletGeotagField {
             iconSize: [22, 30], // size of the icon
             shadowSize: [25, 22], // size of the shadow
             iconAnchor: [11, 30], // point of the icon which will correspond to marker's location
-            shadowAnchor: [2, 22]  // the same for the shadow
+            shadowAnchor: [2, 22] // the same for the shadow
         })
     }
 }

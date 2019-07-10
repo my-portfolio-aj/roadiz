@@ -368,7 +368,6 @@ export default class Rozier {
 
     /**
      * Toggle user panel
-     * @param  {[type]} event [description]
      * @return {[type]}       [description]
      */
     toggleUserPanel () {
@@ -595,7 +594,8 @@ export default class Rozier {
     /**
      *
      * @param event
-     * @param element
+     * @param rootEl
+     * @param el
      * @param status
      * @returns {boolean}
      */

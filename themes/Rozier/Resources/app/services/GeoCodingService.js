@@ -40,16 +40,16 @@ class GeoCodingService {
                 q: query
             }
         })
-        .then((response) => {
-            if (typeof response.data !== 'undefined' && response.data.length > 0) {
-                return response.data[0]
-            } else {
-                return null
-            }
-        })
-        .catch((error) => {
-            throw new Error(error)
-        })
+            .then((response) => {
+                if (typeof response.data !== 'undefined' && response.data.length > 0) {
+                    return response.data[0]
+                } else {
+                    return null
+                }
+            })
+            .catch((error) => {
+                throw new Error(error)
+            })
     }
 }
 

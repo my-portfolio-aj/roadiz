@@ -21,17 +21,17 @@ import request from 'axios'
             withCredentials: true,
             responseType: 'json'
         })
-        .then((response) => {
-            if (typeof response.data !== 'undefined' &&
+            .then((response) => {
+                if (typeof response.data !== 'undefined' &&
                 typeof response.data.url !== 'undefined') {
-                let myImage = new Image(window.width, window.height)
-                myImage.src = response.data.url
-                myImage.onload = $.proxy(onLoad, this, response.data)
-            }
-        })
-        .catch((error) => {
-            throw new Error(error.response.data.humanMessage)
-        })
+                    let myImage = new Image(window.width, window.height)
+                    myImage.src = response.data.url
+                    myImage.onload = $.proxy(onLoad, this, response.data)
+                }
+            })
+            .catch((error) => {
+                throw new Error(error.response.data.humanMessage)
+            })
     }
 
     if (typeof window.RozierRoot.routes.splashRequest !== 'undefined' && !isMobile.any()) {
