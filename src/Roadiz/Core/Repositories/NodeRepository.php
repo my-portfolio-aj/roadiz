@@ -32,6 +32,8 @@ namespace RZ\Roadiz\Core\Repositories;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use RZ\Roadiz\Core\AbstractEntities\PersistableInterface;
@@ -1302,5 +1304,31 @@ class NodeRepository extends StatusAwareRepository
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getAncestors(int $nodeId, ?int $chroot = null)
+    {
+        $rsm = new ResultSetMappingBuilder($this->_em);
+        $rsm->addEntityResult(Node::class, static::NODE_ALIAS);
+        $query = $this->_em->createNativeQuery(sprintf('
+with recursive cte as (
+    SELECT n.id, ARRAY[]::INTEGER[] AS ancestors
+    FROM %s n
+    WHERE n.parent_node_id IS NULL
+    UNION ALL
+
+    SELECT c.id, cte.ancestors || c.parent_node_id
+    FROM %s as c, cte
+    WHERE c.parent_node_id = cte.id
+)
+SELECT n FROM %s AS n WHERE n.id IN (SELECT ancestors FROM cte WHERE id = ?);',
+            $this->getClassMetadata()->getTableName(),
+            $this->getClassMetadata()->getTableName(),
+            $this->getClassMetadata()->getTableName()
+        ), $rsm);
+
+        $query->setParameter(1, $nodeId);
+        //$query->setParameter(2, $chroot);
+        return $query->getResult();
     }
 }

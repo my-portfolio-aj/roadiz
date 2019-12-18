@@ -81,6 +81,8 @@ class PageController extends DefaultThemeApp
     ) {
         $this->prepareThemeAssignation($node, $translation);
 
+        dump($this->get('em')->getRepository(Node::class)->getAncestors($node->getId()));
+
 
         if ($request->query->has('404') && $request->query->get('404') == true) {
             throw $this->createNotFoundException('This is a 404 page manually triggered via ' . ResourceNotFoundException::class);
