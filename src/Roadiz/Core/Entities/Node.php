@@ -35,15 +35,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Loggable\Loggable;
+use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use RZ\Roadiz\Attribute\Model\AttributableInterface;
 use RZ\Roadiz\Attribute\Model\AttributableTrait;
 use RZ\Roadiz\Attribute\Model\AttributeValueInterface;
 use RZ\Roadiz\Core\AbstractEntities\AbstractDateTimedPositioned;
 use RZ\Roadiz\Core\AbstractEntities\LeafInterface;
 use RZ\Roadiz\Core\AbstractEntities\LeafTrait;
-use RZ\Roadiz\Utils\StringHandler;
-use JMS\Serializer\Annotation as Serializer;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * Node entities are the central feature of Roadiz,
@@ -130,7 +130,8 @@ class Node extends AbstractDateTimedPositioned implements LeafInterface, Attribu
      */
     public function setNodeName($nodeName): Node
     {
-        $this->nodeName = StringHandler::slugify($nodeName);
+        $slugger = new AsciiSlugger();
+        $this->nodeName = $slugger->slug($nodeName)->lower()->toString();
         return $this;
     }
 

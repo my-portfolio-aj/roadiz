@@ -34,13 +34,13 @@ use Doctrine\ORM\EntityManager;
 use RZ\Roadiz\Core\Entities\Node;
 use RZ\Roadiz\Core\Entities\Translation;
 use RZ\Roadiz\Utils\Node\NodeNameChecker;
-use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * Class NodesCleanNamesCommand
@@ -108,7 +108,8 @@ class NodesCleanNamesCommand extends Command
                         $nodeSource->getTitle() :
                         $node->getNodeName();
 
-                    $prefixNameSlug = StringHandler::slugify($prefixName);
+                    $slugger = new AsciiSlugger();
+                    $prefixNameSlug = $slugger->slug($prefixName)->lower()->toString();
                     /*
                      * Proceed to rename only if best name is not the current
                      * node-name AND if it is not ALREADY suffixed with a unique ID.

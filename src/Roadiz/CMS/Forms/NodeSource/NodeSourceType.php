@@ -42,7 +42,6 @@ use RZ\Roadiz\Core\Entities\NodesSources;
 use RZ\Roadiz\Core\Entities\NodeType;
 use RZ\Roadiz\Core\Entities\NodeTypeField;
 use RZ\Roadiz\Core\Entities\Translation;
-use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -60,6 +59,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Yaml\Yaml;
 use Themes\Rozier\Forms\NodeTreeType;
+use function Symfony\Component\String\u;
 
 class NodeSourceType extends AbstractType
 {
@@ -464,7 +464,8 @@ class NodeSourceType extends AbstractType
     public function getDefaultOptions(NodesSources $nodeSource, NodeTypeField $field, array &$formOptions)
     {
         $label = $field->getLabel();
-        $devName = '{{ nodeSource.' . StringHandler::camelCase($field->getName()) . ' }}';
+
+        $devName = '{{ nodeSource.' . u($field->getName())->camel() . ' }}';
         $options = [
             'label' => $label,
             'required' => false,

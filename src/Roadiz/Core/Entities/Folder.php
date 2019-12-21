@@ -33,12 +33,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use RZ\Roadiz\Core\AbstractEntities\AbstractDateTimedPositioned;
 use RZ\Roadiz\Core\AbstractEntities\LeafTrait;
 use RZ\Roadiz\Core\Models\DocumentInterface;
 use RZ\Roadiz\Core\Models\FolderInterface;
-use RZ\Roadiz\Utils\StringHandler;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * Folders entity represent a directory on server with datetime and naming.
@@ -217,7 +217,8 @@ class Folder extends AbstractDateTimedPositioned implements FolderInterface
     public function setFolderName($folderName)
     {
         $this->dirtyFolderName = $folderName;
-        $this->folderName = StringHandler::slugify($folderName);
+        $slugger = new AsciiSlugger();
+        $this->folderName = $slugger->slug($folderName)->lower()->toString();
         return $this;
     }
 

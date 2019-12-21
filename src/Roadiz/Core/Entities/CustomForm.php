@@ -34,7 +34,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use RZ\Roadiz\Core\AbstractEntities\AbstractDateTimed;
-use RZ\Roadiz\Utils\StringHandler;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * CustomForms describe each node structure family,
@@ -352,7 +352,8 @@ class CustomForm extends AbstractDateTimed
      */
     public function setName(string $name): CustomForm
     {
-        $this->name = StringHandler::slugify($name);
+        $slugger = new AsciiSlugger();
+        $this->name = $slugger->slug($name)->lower()->toString();
         return $this;
     }
 

@@ -30,7 +30,6 @@
 namespace RZ\Roadiz\CMS\Forms\NodeSource;
 
 use RZ\Roadiz\Core\Entities\Translation;
-use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,7 +49,7 @@ class NodeSourceBaseType extends AbstractType
             'label' => 'title',
             'required' => false,
             'attr' => [
-                'data-dev-name' => '{{ nodeSource.' . StringHandler::camelCase('title') . ' }}',
+                'data-dev-name' => '{{ nodeSource.title }}',
                 'lang' => strtolower(str_replace('_', '-', $options['translation']->getLocale())),
                 'dir' => $options['translation']->isRtl() ? 'rtl' : 'ltr',
             ],
@@ -67,7 +66,7 @@ class NodeSourceBaseType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'rz-datetime-field',
-                    'data-dev-name' => '{{ nodeSource.' . StringHandler::camelCase('publishedAt') . ' }}',
+                    'data-dev-name' => '{{ nodeSource.publishedAt }}',
                 ],
                 'date_widget' => 'single_text',
                 'date_format' => 'yyyy-MM-dd',

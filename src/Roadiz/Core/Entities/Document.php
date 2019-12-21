@@ -33,12 +33,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use RZ\Roadiz\Core\Models\AbstractDocument;
 use RZ\Roadiz\Core\Models\AdvancedDocumentInterface;
 use RZ\Roadiz\Core\Models\DocumentInterface;
 use RZ\Roadiz\Core\Models\FolderInterface;
-use RZ\Roadiz\Utils\StringHandler;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use function Symfony\Component\String\u;
 
 /**
  * Documents entity represent a file on server with datetime and naming.
@@ -193,7 +194,10 @@ class Document extends AbstractDocument implements AdvancedDocumentInterface
      */
     public function setFilename($filename)
     {
-        $this->filename = StringHandler::cleanForFilename($filename);
+        $slugger = new AsciiSlugger();
+        $tokens = u($filename)->split('.');
+        $extension = \array_pop($tokens);
+        $this->filename = $slugger->slug(u('_')->join($tokens), '_') . '.' . $extension;
 
         return $this;
     }

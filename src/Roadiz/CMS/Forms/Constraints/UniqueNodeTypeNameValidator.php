@@ -30,15 +30,15 @@
 namespace RZ\Roadiz\CMS\Forms\Constraints;
 
 use RZ\Roadiz\Core\Entities\NodeType;
-use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use function Symfony\Component\String\u;
 
 class UniqueNodeTypeNameValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $value = StringHandler::classify($value);
+        $value = u($value)->camel()->title()->toString();
 
         /*
          * If value is already the node name

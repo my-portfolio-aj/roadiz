@@ -34,7 +34,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use RZ\Roadiz\Core\AbstractEntities\AbstractEntity;
-use RZ\Roadiz\Utils\StringHandler;
+use function Symfony\Component\String\u;
 
 /**
  * NodeType describes each node structure family,
@@ -72,7 +72,7 @@ class NodeType extends AbstractEntity
      */
     public function setName(string $name): NodeType
     {
-        $this->name = StringHandler::classify($name);
+        $this->name = u($name)->camel()->title()->toString();
         return $this;
     }
 

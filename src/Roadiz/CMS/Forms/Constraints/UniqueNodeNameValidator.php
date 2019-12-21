@@ -34,7 +34,7 @@ use Doctrine\ORM\EntityManager;
 use RZ\Roadiz\Core\Entities\Node;
 use RZ\Roadiz\Core\Entities\UrlAlias;
 use RZ\Roadiz\Core\Repositories\NodeRepository;
-use RZ\Roadiz\Utils\StringHandler;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -46,7 +46,8 @@ class UniqueNodeNameValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $value = StringHandler::slugify($value);
+        $slugger = new AsciiSlugger();
+        $value = $slugger->slug($value)->lower()->toString();
 
         /*
          * If value is already the node name

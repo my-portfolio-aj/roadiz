@@ -30,7 +30,7 @@
 namespace RZ\Roadiz\CMS\Forms\Constraints;
 
 use RZ\Roadiz\Core\Entities\Tag;
-use RZ\Roadiz\Utils\StringHandler;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -59,7 +59,8 @@ class UniqueTagNameValidator extends ConstraintValidator
      */
     protected function testSingleValue($value, Constraint $constraint)
     {
-        $value = StringHandler::slugify($value);
+        $slugger = new AsciiSlugger();
+        $value = $slugger->slug($value)->lower()->toString();
 
         /*
          * If value is already the node name

@@ -31,7 +31,7 @@ namespace RZ\Roadiz\CMS\Forms\Constraints;
 
 use Doctrine\ORM\EntityManager;
 use RZ\Roadiz\Core\Entities\CustomForm;
-use RZ\Roadiz\Utils\StringHandler;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -39,7 +39,8 @@ class UniqueCustomFormNameValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $value = StringHandler::slugify($value);
+        $slugger = new AsciiSlugger();
+        $value = $slugger->slug($value)->lower()->toString();
 
         if ($constraint instanceof UniqueCustomFormName) {
             /*

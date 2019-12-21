@@ -35,13 +35,13 @@ use RZ\Roadiz\Core\AbstractEntities\AbstractField;
 use RZ\Roadiz\Core\Entities\CustomForm;
 use RZ\Roadiz\Core\Entities\CustomFormField;
 use RZ\Roadiz\Core\HttpFoundation\Request;
-use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -64,7 +64,8 @@ class CustomFormsType extends AbstractType
             if ($field instanceof CustomFormField) {
                 $this->addSingleField($builder, $field, $options);
             } elseif (is_array($field)) {
-                $groupCanonical = StringHandler::slugify($group);
+                $slugger = new AsciiSlugger();
+                $groupCanonical = $slugger->slug($group)->toString();
                 $subBuilder = $builder->create($groupCanonical, FormType::class, [
                     'label' => $group,
                     'inherit_data' => true,
