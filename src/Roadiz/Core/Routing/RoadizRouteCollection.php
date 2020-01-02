@@ -89,46 +89,45 @@ class RoadizRouteCollection extends DeferredRouteCollection
         }
 
         $resources = $this->getResources();
-        if (empty($resources)) {
-            /*
-             * Adding Backend routes
-             */
-            $this->addBackendCollection();
+        /*
+         * Adding Backend routes
+         */
+        $this->addBackendCollection();
 
+        /*
+         * Add Assets controller routes
+         */
+        $assets = AssetsController::getRoutes();
+        $staticDomain = $this->settingsBag->get('static_domain_name');
+        if (false === $this->isPreview &&
+            false !== $staticDomain &&
+            '' != $staticDomain) {
             /*
-             * Add Assets controller routes
+             * Only use CDN if no preview mode and CDN domain is well set
+             * Remove protocol (https, http and protocol-less) information from domain.
              */
-            $assets = AssetsController::getRoutes();
-            $staticDomain = $this->settingsBag->get('static_domain_name');
-            if (false === $this->isPreview &&
-                false !== $staticDomain &&
-                '' != $staticDomain) {
-                /*
-                 * Only use CDN if no preview mode and CDN domain is well set
-                 * Remove protocol (https, http and protocol-less) information from domain.
-                 */
-                $host = parse_url($staticDomain, PHP_URL_HOST);
-                if (false !== $host && null !== $host) {
-                    $assets->setHost($host);
-                } else {
-                    $assets->setHost($staticDomain);
-                }
-                /*
-                 * ~~Use same scheme as static domain.~~
-                 *
-                 * DO NOT use setSchemes method as it need a special UrlMatcher
-                 * only available on Symfony full-stack
-                 */
+            $host = parse_url($staticDomain, PHP_URL_HOST);
+            if (false !== $host && null !== $host) {
+                $assets->setHost($host);
+            } else {
+                $assets->setHost($staticDomain);
             }
-            $this->addCollection($assets);
-
             /*
-             * Add Frontend routes
+             * ~~Use same scheme as static domain.~~
              *
-             * return 'RZ\Roadiz\CMS\Controllers\FrontendController';
+             * DO NOT use setSchemes method as it need a special UrlMatcher
+             * only available on Symfony full-stack
              */
-            $this->addThemesCollections();
         }
+        $this->addCollection($assets);
+
+        /*
+         * Add Frontend routes
+         *
+         * return 'RZ\Roadiz\CMS\Controllers\FrontendController';
+         */
+        $this->addThemesCollections();
+
         if (null !== $this->stopwatch) {
             $this->stopwatch->stop('routeCollection');
         }

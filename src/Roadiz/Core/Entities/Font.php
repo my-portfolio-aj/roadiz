@@ -33,6 +33,7 @@ use Doctrine\ORM\Mapping as ORM;
 use RZ\Roadiz\Core\AbstractEntities\AbstractDateTimed;
 use RZ\Roadiz\Utils\StringHandler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use GraphQL\Doctrine\Annotation as GraphQL;
 
 /**
  * Fonts are entities which store each webfont file for a
@@ -203,6 +204,7 @@ class Font extends AbstractDateTimed
      *
      * @see https://developer.mozilla.org/fr/docs/Web/CSS/font-weight
      * @return array
+     * @GraphQL\Exclude()
      */
     public function getFontVariantInfos(): array
     {
@@ -529,6 +531,7 @@ class Font extends AbstractDateTimed
      * Gets the value of eotFile.
      *
      * @return UploadedFile
+     * @GraphQL\Exclude()
      */
     public function getEotFile(): ?UploadedFile
     {
@@ -551,6 +554,7 @@ class Font extends AbstractDateTimed
      * Gets the value of woffFile.
      *
      * @return UploadedFile
+     * @GraphQL\Exclude()
      */
     public function getWoffFile(): ?UploadedFile
     {
@@ -573,6 +577,7 @@ class Font extends AbstractDateTimed
      * Gets the value of woff2File.
      *
      * @return UploadedFile
+     * @GraphQL\Exclude()
      */
     public function getWoff2File(): ?UploadedFile
     {
@@ -595,6 +600,7 @@ class Font extends AbstractDateTimed
      * Gets the value of otfFile.
      *
      * @return UploadedFile
+     * @GraphQL\Exclude()
      */
     public function getOtfFile(): ?UploadedFile
     {
@@ -617,6 +623,7 @@ class Font extends AbstractDateTimed
      * Gets the value of svgFile.
      *
      * @return UploadedFile
+     * @GraphQL\Exclude()
      */
     public function getSvgFile(): ?UploadedFile
     {

@@ -1,0 +1,12 @@
+graphqlRoot:
+    path:     /graphql
+    methods: ['POST']
+    defaults:
+        _controller: \RZ\Roadiz\GraphQL\Controllers\GraphQLController::defaultAction
+
+
+graphqlSchema:
+    path:     /graphql/schema
+    methods: ['GET']
+    defaults:
+        _controller: \RZ\Roadiz\GraphQL\Controllers\GraphQLController::schemaAction

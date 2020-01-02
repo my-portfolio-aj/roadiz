@@ -75,6 +75,7 @@ use RZ\Roadiz\Core\Services\TranslationServiceProvider;
 use RZ\Roadiz\Core\Services\TwigServiceProvider;
 use RZ\Roadiz\Core\Services\YamlConfigurationServiceProvider;
 use RZ\Roadiz\Core\Viewers\ExceptionViewer;
+use RZ\Roadiz\GraphQL\GraphQLServiceProvider;
 use RZ\Roadiz\Markdown\MarkdownInterface;
 use RZ\Roadiz\Markdown\Services\MarkdownServiceProvider;
 use RZ\Roadiz\Utils\Clearer\EventListener\AppCacheEventSubscriber;
@@ -419,6 +420,7 @@ class Kernel implements ServiceProviderInterface, KernelInterface, RebootableInt
         $container->register(new CryptoServiceProvider());
         $container->register(new NodeServiceProvider());
         $container->register(new MarkdownServiceProvider());
+        $container->register(new GraphQLServiceProvider());
 
         if ($this->isDebug()) {
             $container->register(new DebugServiceProvider());
