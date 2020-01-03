@@ -18,7 +18,7 @@ final class GraphQLController extends AppController
         $query = $input['query'];
 
         $variableValues = isset($input['variables']) ? $input['variables'] : null;
-        $result = GraphQL::executeQuery($this->get(Schema::class), $query, null, null, $variableValues);
+        $result = GraphQL::executeQuery($this->get(Schema::class), $query, null, $request, $variableValues);
 
         return new JsonResponse($result->toArray());
     }

@@ -90,7 +90,6 @@ final class GraphQLServiceProvider implements ServiceProviderInterface
                             ],
                             'resolve' => function ($root, $args) use ($types) {
                                 $queryBuilder = $types->createFilteredQueryBuilder(Font::class, $args['filter'] ?? [], $args['sorting'] ?? []);
-                                dump($queryBuilder->getQuery()->getDQL());
                                 return $queryBuilder->getQuery()->getResult();
                             },
                         ],
